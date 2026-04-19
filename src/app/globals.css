@@ -1,0 +1,273 @@
+:root {
+  /* Brand palette */
+  --palette-white: #ffffff;
+  --palette-violet: #5f01fb;
+  --palette-slate: #514a85;
+  --palette-ink: #0b0d1b;
+
+  /* Colors - Light Theme */
+  --bg-primary: var(--palette-white);
+  --bg-secondary: #f5f4fb;
+  --bg-accent: hsla(258, 22%, 94%, 0.95);
+
+  --fg-primary: var(--palette-ink);
+  --fg-secondary: color-mix(in srgb, var(--palette-slate) 85%, var(--palette-ink));
+  --fg-accent: color-mix(in srgb, var(--palette-slate) 65%, var(--palette-ink));
+
+  --brand-primary: var(--palette-violet);
+  --brand-secondary: var(--palette-slate);
+  --brand-on-primary: var(--palette-white);
+
+  /* Role Brand Palette */
+  --blue-athracite: #272B36;
+  --wood: #917E71;
+  --cinereous: #A68E8E;
+  --alaska-gray: #F0F0F0;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-surface: rgba(245, 241, 236, 0.92);
+  --color-text-light: #FFFFFF;
+
+  --border-subtle: color-mix(in srgb, var(--palette-ink) 12%, transparent);
+  --border-glow: hsla(265, 99%, 49%, 0.22);
+  --brand-surface: hsla(265, 99%, 49%, 0.08);
+  --brand-focus: hsla(265, 99%, 49%, 0.38);
+  /* Opacity mixes (CTA rings, hovers) */
+  --brand-fade-6: color-mix(in srgb, var(--brand-primary) 6%, transparent);
+  --brand-fade-18: color-mix(in srgb, var(--brand-primary) 18%, transparent);
+  --brand-fade-20: color-mix(in srgb, var(--brand-primary) 20%, transparent);
+  --brand-fade-35: color-mix(in srgb, var(--brand-primary) 35%, transparent);
+  --brand-fade-85: color-mix(in srgb, var(--brand-primary) 85%, transparent);
+
+  --glass-bg: hsla(0, 0%, 100%, 0.7);
+  --glass-border: hsla(0, 0%, 0%, 0.1);
+
+  /* Typography: Plus Jakarta Sans (headings / marketing), Jost (body — same as homepage layout) */
+  --font-body: var(--font-label), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /* Layout & Spacing */
+  --nav-height: 72px;
+  --max-width: 1280px;
+  --container-padding: 2rem;
+  --space-xl: 2rem;
+  --section-gap: 8rem;
+  --radius-md: 8px;
+
+  /* Animations */
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --transition-fast: 0.2s var(--ease-expo);
+  --transition-base: 0.4s var(--ease-expo);
+  --transition-slow: 0.8s var(--ease-expo);
+  --transition-standard: 0.3s var(--ease-expo);
+}
+
+[data-theme='dark'] {
+  --bg-primary: var(--palette-ink);
+  --bg-secondary: color-mix(in srgb, var(--palette-slate) 28%, var(--palette-ink));
+  --bg-accent: color-mix(in srgb, var(--palette-slate) 38%, var(--palette-ink));
+
+  --fg-primary: var(--palette-white);
+  --fg-secondary: hsla(0, 0%, 100%, 0.72);
+  --fg-accent: hsla(258, 25%, 65%, 0.95);
+
+  --color-border: hsla(0, 0%, 100%, 0.12);
+  --color-surface: color-mix(in srgb, var(--palette-slate) 35%, var(--palette-ink));
+
+  --border-subtle: hsla(0, 0%, 100%, 0.12);
+  --border-glow: hsla(265, 99%, 55%, 0.35);
+  --brand-surface: hsla(265, 99%, 58%, 0.12);
+  --brand-focus: hsla(265, 99%, 58%, 0.45);
+
+  --glass-bg: hsla(228, 35%, 8%, 0.72);
+  --glass-border: hsla(0, 0%, 100%, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  height: -webkit-fill-available;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  transition: background-color 0.5s var(--ease-expo), color 0.5s var(--ease-expo);
+}
+
+/* Ambient loop — route videos in `PageBackground.tsx` (`/public/*.mp4`) */
+.app-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+.app-shell-main {
+  position: relative;
+  z-index: 1;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--bg-primary);
+}
+
+.page-bg-video {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0.72;
+}
+
+.page-bg-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    hsla(228, 42%, 5%, 0.38) 0%,
+    hsla(258, 40%, 9%, 0.22) 45%,
+    hsla(228, 35%, 6%, 0.52) 100%
+  );
+}
+
+html[data-theme='light'] .page-bg-video {
+  opacity: 0.38;
+}
+
+html[data-theme='light'] .page-bg-scrim {
+  background: linear-gradient(
+    165deg,
+    hsla(0, 0%, 100%, 0.72) 0%,
+    hsla(258, 30%, 96%, 0.38) 50%,
+    hsla(0, 0%, 100%, 0.62) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-bg-video {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .page-bg-scrim {
+    background: transparent;
+  }
+}
+
+/* Fluid Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+p {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  font-family: var(--font-body);
+}
+
+/* Utilities */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.section-spacing {
+  padding: var(--section-gap) 0;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--brand-primary);
+  color: var(--brand-on-primary);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: transform 0.2s var(--ease-expo), opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hide scrollbars everywhere — scroll still works */
+* {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE / Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  /* Chrome / Safari / Opera */
+}

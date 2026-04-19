@@ -1,0 +1,713 @@
+/* ─── Section: translucent scrims over global `PageBackground` video ─── */
+.section {
+  --spec-bg: hsl(222, 47%, 6%);
+  --spec-surface: hsl(220, 16%, 12%);
+  --spec-blue: hsl(226, 71%, 48%);
+  --spec-blue-bright: hsl(226, 84%, 56%);
+  --spec-muted: hsl(220, 12%, 68%);
+  --spec-ghost: hsla(0, 0%, 100%, 0.08);
+
+  position: relative;
+  background-color: transparent;
+  background-image: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    hsla(222, 47%, 5%, 0.52) 0%,
+    hsla(222, 40%, 9%, 0.48) 45%,
+    hsla(222, 47%, 6%, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, hsla(226, 84%, 56%, 0.1), transparent 55%);
+  pointer-events: none;
+}
+
+.sectionHeader {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 3rem;
+}
+
+.titleBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.1rem;
+}
+
+.ghostStack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.02em;
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(2rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--spec-ghost);
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0;
+}
+
+.lede {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.65;
+  color: var(--spec-muted);
+  max-width: 44ch;
+  margin: 0 auto;
+}
+
+/* ─── Card grid: tall left + 3 stacked right ─── */
+.cardGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: repeat(3, minmax(0, auto));
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+.cardFeatured {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.5rem 1.6rem;
+  border-radius: 1.35rem;
+  background: linear-gradient(165deg, var(--spec-blue-bright) 0%, var(--spec-blue) 100%);
+  color: #fff;
+  border: 1px solid hsla(0, 0%, 100%, 0.14);
+  box-shadow:
+    0 0 0 1px hsla(0, 0%, 100%, 0.08),
+    0 24px 48px -12px hsla(226, 84%, 40%, 0.55);
+  min-height: 100%;
+  transition:
+    transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+    border-color 0.35s ease;
+}
+
+.cardFeatured:hover {
+  transform: translateY(-8px);
+  border-color: hsla(0, 0%, 100%, 0.35);
+  box-shadow:
+    0 0 0 1px hsla(0, 0%, 100%, 0.2),
+    0 32px 56px -14px hsla(226, 84%, 38%, 0.65),
+    0 0 80px -20px hsla(226, 90%, 60%, 0.35);
+}
+
+.cardFeatured:active {
+  transform: translateY(-4px);
+  transition-duration: 0.15s;
+}
+
+.cardFeaturedCopy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1.75rem;
+}
+
+.cardTitleLight {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.cardDescLight {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: hsla(0, 0%, 100%, 0.88);
+  max-width: none;
+}
+
+.discoverFeatured {
+  align-self: flex-start;
+  margin-top: 1.25rem;
+  padding: 0.55rem 1.35rem;
+  border-radius: 999px;
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: transparent;
+  border: 1px solid hsla(0, 0%, 100%, 0.55);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.discoverFeatured:hover {
+  background: hsla(0, 0%, 100%, 0.12);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Compact dark cards */
+.cardCompact {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.35rem 1.25rem;
+  border-radius: 1.15rem;
+  background: var(--spec-surface);
+  border: 1px solid hsla(0, 0%, 100%, 0.06);
+  box-shadow: 0 16px 40px -20px hsla(0, 0%, 0%, 0.45);
+  overflow: visible;
+  transition:
+    transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+    border-color 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.cardCompact:hover {
+  transform: translateY(-6px);
+  border-color: hsla(0, 0%, 100%, 0.18);
+  background: hsl(220, 16%, 14%);
+  box-shadow:
+    0 20px 48px -18px hsla(0, 0%, 0%, 0.55),
+    0 0 0 1px hsla(0, 0%, 100%, 0.06);
+}
+
+.cardCompact:active {
+  transform: translateY(-3px);
+  transition-duration: 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardFeatured,
+  .cardCompact {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .cardFeatured:hover,
+  .cardCompact:hover {
+    transform: none;
+  }
+
+  .cardFeatured:active,
+  .cardCompact:active {
+    transform: none;
+  }
+
+  .cardCompact:hover .compactMedia > * {
+    transform: none;
+  }
+
+  .cardFeatured:hover .illuWeb {
+    transform: none;
+  }
+}
+
+.mediaRight {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.mediaLeft {
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+}
+
+.compactCopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.compactCopyEnd {
+  text-align: right;
+  align-items: flex-end;
+}
+
+@media (max-width: 520px) {
+  .compactCopyEnd {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+.cardTitleDark {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.cardDescDark {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--spec-muted);
+  max-width: none;
+}
+
+.discoverDark {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: 999px;
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  border: 1px solid hsla(0, 0%, 100%, 0.18);
+  background: hsla(0, 0%, 100%, 0.04);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.discoverDark:hover {
+  background: hsla(0, 0%, 100%, 0.1);
+  border-color: hsla(0, 0%, 100%, 0.35);
+  transform: translateY(-2px);
+}
+
+.compactCopyEnd .discoverDark {
+  align-self: flex-end;
+}
+
+@media (max-width: 520px) {
+  .compactCopyEnd .discoverDark {
+    align-self: flex-start;
+  }
+}
+
+.compactMedia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Tallest graphic: phone ~9.5rem; leave room for scale(1.06) + padding */
+  min-height: 11rem;
+  padding: 0.5rem 0.45rem;
+  overflow: visible;
+}
+
+.compactMedia > * {
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cardCompact:hover .compactMedia > * {
+  transform: scale(1.06);
+}
+
+.mediaLeft .compactMedia {
+  justify-content: flex-start;
+}
+
+.mediaRight .compactMedia {
+  justify-content: flex-end;
+}
+
+/* ─── Illustrations ─── */
+.illuWeb {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  border-radius: 0.65rem;
+  overflow: hidden;
+  background: hsla(0, 0%, 100%, 0.12);
+  border: 1px solid hsla(0, 0%, 100%, 0.2);
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cardFeatured:hover .illuWeb {
+  transform: scale(1.04);
+}
+
+.illuWebChrome {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.65rem;
+  background: hsla(0, 0%, 100%, 0.18);
+}
+
+.illuWebDot {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: hsla(0, 0%, 100%, 0.45);
+}
+
+.illuWebCanvas {
+  padding: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.illuWebHero {
+  height: 2.65rem;
+  border-radius: 0.35rem;
+  background: hsla(0, 0%, 100%, 0.22);
+}
+
+.illuWebRow {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.illuWebCol {
+  flex: 1;
+  height: 2.25rem;
+  border-radius: 0.3rem;
+  background: hsla(0, 0%, 100%, 0.14);
+}
+
+.illuWebBarLong {
+  height: 0.5rem;
+  border-radius: 0.2rem;
+  background: hsla(0, 0%, 100%, 0.18);
+  width: 72%;
+}
+
+.illuPhone {
+  width: 5.25rem;
+  height: 9.5rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(180deg, hsl(220, 14%, 18%) 0%, hsl(220, 12%, 10%) 100%);
+  border: 2px solid hsla(0, 0%, 100%, 0.12);
+  padding: 0.35rem 0.45rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 12px 28px hsla(0, 0%, 0%, 0.35);
+}
+
+.illuPhoneNotch {
+  width: 2.25rem;
+  height: 0.35rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: hsl(220, 12%, 8%);
+  margin-bottom: 0.35rem;
+}
+
+.illuPhoneBody {
+  flex: 1;
+  width: 100%;
+  border-radius: 0.4rem;
+  background: hsla(226, 40%, 45%, 0.25);
+  padding: 0.45rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.illuPhoneAvatar {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: hsla(0, 0%, 100%, 0.25);
+}
+
+.illuPhoneLines {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.illuPhoneLines span {
+  height: 0.28rem;
+  border-radius: 0.1rem;
+  background: hsla(0, 0%, 100%, 0.18);
+}
+
+.illuPhoneLines span:nth-child(1) {
+  width: 100%;
+}
+.illuPhoneLines span:nth-child(2) {
+  width: 85%;
+}
+.illuPhoneLines span:nth-child(3) {
+  width: 65%;
+}
+
+.illuShield {
+  position: relative;
+  width: 6.5rem;
+  height: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illuShieldRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid hsla(0, 0%, 100%, 0.12);
+  background: radial-gradient(circle at 30% 25%, hsla(0, 0%, 100%, 0.08), transparent 60%);
+}
+
+.illuShieldCore {
+  width: 3.25rem;
+  height: 3.6rem;
+  border-radius: 0.35rem 0.35rem 0.5rem 0.5rem;
+  background: linear-gradient(180deg, hsl(152, 55%, 42%) 0%, hsl(152, 45%, 32%) 100%);
+  box-shadow: 0 8px 20px hsla(152, 60%, 30%, 0.35);
+  clip-path: polygon(15% 0%, 85% 0%, 100% 28%, 100% 72%, 50% 100%, 0% 72%, 0% 28%);
+}
+
+.illuUi {
+  position: relative;
+  width: 6.5rem;
+  height: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illuUiGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.35rem;
+  width: 4.5rem;
+}
+
+.illuUiGrid span {
+  aspect-ratio: 1;
+  border-radius: 0.35rem;
+  background: hsla(0, 0%, 100%, 0.08);
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.illuUiPen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  width: 2.5rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, hsl(226, 84%, 56%), hsl(280, 70%, 55%));
+  box-shadow: 0 8px 28px hsla(226, 84%, 40%, 0.55);
+}
+
+/* ─── Masked video ─── */
+.showcaseWrap {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 0.5rem;
+}
+
+.infinityStage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+  min-height: min(42vh, 480px);
+}
+
+.infinityVideo {
+  display: block;
+  width: min(100%, 720px);
+  margin: 0;
+  aspect-ratio: 240 / 100;
+  height: auto;
+  max-height: min(58vh, 680px);
+  object-fit: cover;
+  background: transparent;
+  -webkit-mask-image: url('/infinity-video-mask.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-mode: alpha;
+  mask-image: url('/infinity-video-mask.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-mode: alpha;
+}
+
+.videoPlaceholder {
+  width: min(100%, 720px);
+  aspect-ratio: 240 / 100;
+  max-height: min(58vh, 680px);
+  background: hsla(0, 0%, 100%, 0.04);
+  border: 1px dashed hsla(0, 0%, 100%, 0.15);
+  -webkit-mask-image: url('/infinity-video-mask.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url('/infinity-video-mask.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+/* ─── “Make a wish” CTA under masked video ─── */
+.wishCta {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 0 0.5rem 0.5rem;
+  text-align: center;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wishKicker {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: hsla(0, 0%, 100%, 0.88);
+  margin-bottom: 0.85rem;
+  text-align: center;
+}
+
+.wishLine {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--spec-muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.45rem;
+  text-align: center;
+}
+
+.wishLead,
+.wishTrail {
+  color: hsla(220, 12%, 72%, 0.95);
+}
+
+.genieLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 0;
+  border-radius: 50%;
+  padding: 2px;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), filter 0.25s ease;
+  outline: none;
+}
+
+.genieLink:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 6px 18px hsla(265, 99%, 49%, 0.32));
+}
+
+.genieLink:focus-visible {
+  box-shadow: 0 0 0 3px hsla(226, 84%, 56%, 0.55);
+  border-radius: 50%;
+}
+
+.genieImg {
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genieLink:hover {
+    transform: none;
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 960px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .cardFeatured {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: auto;
+  }
+
+  .cardCompact {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .cardCompact {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .mediaRight .compactMedia {
+    order: -1;
+    justify-content: center;
+  }
+
+  .mediaLeft .compactMedia {
+    justify-content: center;
+  }
+
+  .compactCopyEnd {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .compactCopyEnd .discoverDark {
+    align-self: flex-start;
+  }
+}

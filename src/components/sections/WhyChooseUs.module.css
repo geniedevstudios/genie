@@ -1,0 +1,494 @@
+/*
+  One continuous block: SVG band height follows artwork (1440×800), then copy flows on the same surface.
+  No hard “second panel” — avoid border between bands and heavy lower cards.
+*/
+.whySection {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Top edge lines up with the end of the previous section; band uses SVG’s native aspect ratio */
+.cutoutStage {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
+  /* Transparent so global background video shows around the masked hero */
+  background-color: transparent;
+  /* Matches public/why-cutout.svg viewBox — mask maps 1:1, no cover crop */
+  aspect-ratio: 1440 / 800;
+}
+
+/* ─── Feature row: outlined Roman numerals (Services-style), no glass cards / lamp ─── */
+.featuresPanel {
+  position: relative;
+  padding: clamp(1.75rem, 4vw, 2.75rem) 0 clamp(2rem, 5vw, 3.25rem);
+  background: transparent;
+}
+
+.featuresGridWrap {
+  position: relative;
+  max-width: min(1280px, 100%);
+  margin: 0 auto;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.2vw, 1.75rem);
+}
+
+.featureColumn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  min-height: 0;
+  padding: clamp(0.35rem, 1vw, 0.65rem) clamp(0.25rem, 0.8vw, 0.5rem);
+}
+
+/* Mirrors Services `.copy` — title stacks into the numeral like `.watermark` + `.sectionTitle` */
+.featureCopy {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Smaller Services `.watermark`: outline numeral + negative margin pulls title onto it */
+.featureWatermark {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.65rem, 3.8vw, 2.45rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.25px hsla(0, 0%, 100%, 0.28);
+  paint-order: stroke fill;
+  margin: 0 0 -0.15em;
+  user-select: none;
+  pointer-events: none;
+}
+
+:global(html[data-theme='light']) .featureWatermark {
+  -webkit-text-stroke: 1.25px color-mix(in srgb, var(--palette-ink) 22%, transparent);
+}
+
+.featureTitle {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.45vw, 1.22rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin: 0 0 0.45rem;
+  line-height: 1.2;
+  text-shadow:
+    0 1px 12px hsla(0, 0%, 0%, 0.35),
+    0 2px 20px hsla(0, 0%, 0%, 0.45);
+}
+
+.featureDesc {
+  font-family: var(--font-heading);
+  font-size: clamp(0.76rem, 1.1vw, 0.86rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  color: hsla(0, 0%, 100%, 0.88);
+  margin: 0;
+  text-wrap: balance;
+  text-shadow: 0 1px 10px hsla(0, 0%, 0%, 0.3);
+}
+
+:global(html[data-theme='light']) .featureTitle {
+  color: var(--palette-ink);
+  text-shadow: none;
+}
+
+:global(html[data-theme='light']) .featureDesc {
+  color: color-mix(in srgb, var(--palette-ink) 78%, white);
+  text-shadow: none;
+}
+
+@media (max-width: 1024px) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .featureWatermark {
+    font-size: clamp(1.5rem, 5vw, 2.1rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Photo band: fills stage (notch is a sibling — z-index keeps mask/photo under UI chrome) */
+.heroBand {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Stretch mask to the stage box — same aspect as viewBox → full shape, no slice crop */
+.chooseMaskWrap {
+  position: absolute;
+  inset: 0;
+  mask-image: url('/why-cutout.svg');
+  mask-size: 100% 100%;
+  mask-position: center center;
+  mask-repeat: no-repeat;
+  mask-mode: alpha;
+  -webkit-mask-image: url('/why-cutout.svg');
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-position: center center;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.choosePhoto {
+  position: absolute;
+  inset: 0;
+  background-image: url('/choose.png');
+  background-size: cover;
+  background-position: center 22%;
+  background-repeat: no-repeat;
+}
+
+.chooseScrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    hsla(222, 45%, 8%, 0.45) 0%,
+    transparent 38%,
+    hsla(222, 40%, 6%, 0.2) 62%,
+    hsla(222, 45%, 5%, 0.65) 100%
+  );
+}
+
+/* Centered copy on the masked image */
+.heroCopy {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: clamp(1.75rem, 4vw, 3rem);
+  transform: translateX(-50%);
+  width: min(92%, 720px);
+  text-align: center;
+  pointer-events: none;
+}
+
+.heroTitle {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(1.35rem, 3.2vw, 2.15rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 0.65rem;
+  text-wrap: balance;
+  text-shadow:
+    0 2px 24px hsla(0, 0%, 0%, 0.45),
+    0 1px 2px hsla(0, 0%, 0%, 0.35);
+}
+
+.heroTitleLine {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.35rem;
+  vertical-align: middle;
+}
+
+.heroTitleGenie {
+  flex-shrink: 0;
+  width: clamp(1.75rem, 4.2vw, 2.15rem);
+  height: clamp(1.75rem, 4.2vw, 2.15rem);
+  object-fit: contain;
+}
+
+.heroSub {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: clamp(0.88rem, 1.6vw, 1.05rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: hsla(0, 0%, 100%, 0.92);
+  margin: 0 auto;
+  max-width: 52ch;
+  text-shadow: 0 2px 18px hsla(0, 0%, 0%, 0.4);
+}
+
+/* Glass rating card — bottom-right on photo */
+.ratingCard {
+  position: absolute;
+  z-index: 3;
+  right: clamp(0.75rem, 2.5vw, 1.75rem);
+  bottom: clamp(0.75rem, 2.5vw, 1.75rem);
+  width: min(100%, 19.5rem);
+  padding: 1.1rem 1.2rem 1.15rem;
+  border-radius: 1.25rem;
+  background: hsla(0, 0%, 100%, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid hsla(0, 0%, 100%, 0.42);
+  box-shadow:
+    0 8px 32px hsla(0, 0%, 0%, 0.18),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.35);
+  pointer-events: auto;
+}
+
+.ratingKicker {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsla(0, 0%, 100%, 0.65);
+  margin: 0 0 0.35rem;
+}
+
+.ratingTitle {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.25rem;
+  line-height: 1.25;
+}
+
+.ratingSub {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: hsla(0, 0%, 100%, 0.78);
+  margin: 0 0 0.85rem;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.avatarStack {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  border: 2px solid hsla(0, 0%, 100%, 0.55);
+  margin-left: -0.55rem;
+  background: linear-gradient(145deg, hsl(226, 55%, 48%), hsl(280, 45%, 42%));
+  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.2);
+}
+
+.avatarStack .avatar:first-child {
+  margin-left: 0;
+}
+
+.ratingStat {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: hsla(0, 0%, 100%, 0.9);
+}
+
+.ratingStat strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: hsl(152, 62%, 52%);
+  margin-right: 0.2rem;
+}
+
+/*
+  ≤1024px: tighten hero + rating on the cutout stage.
+*/
+@media (max-width: 1024px) {
+  .cutoutStage {
+    min-height: min(92vw, 440px);
+  }
+
+  .choosePhoto {
+    background-position: center center;
+  }
+
+  .heroCopy {
+    top: clamp(0.5rem, 2.5vw, 1rem);
+    width: min(96%, 22rem);
+    padding-inline: 0.35rem;
+    box-sizing: border-box;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.05rem, 4.2vw, 1.42rem);
+    margin-bottom: 0.45rem;
+  }
+
+  .heroSub {
+    font-size: clamp(0.78rem, 2.8vw, 0.92rem);
+    line-height: 1.42;
+    max-width: 36ch;
+  }
+
+  /* Bottom-right on the gradient shelf — matches large-screen composition */
+  .ratingCard {
+    top: auto;
+    bottom: clamp(0.5rem, 2.2vw, 0.95rem);
+    right: clamp(0.45rem, 2.5vw, 0.85rem);
+    left: auto;
+    width: min(calc(100% - 1rem), 15.25rem);
+    padding: 0.75rem 0.9rem 0.85rem;
+  }
+
+  .ratingTitle {
+    font-size: 0.92rem;
+  }
+
+  .ratingSub {
+    font-size: 0.72rem;
+    margin-bottom: 0.65rem;
+  }
+}
+
+/* Very narrow: rating would cover hero copy if kept bottom-right — park top-right + clamp sub */
+@media (max-width: 640px) {
+  .heroCopy {
+    width: min(98%, 20rem);
+  }
+
+  .heroSub {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .ratingCard {
+    top: clamp(6.4rem, 36vw, 9rem);
+    bottom: auto;
+    right: clamp(0.4rem, 2.5vw, 0.75rem);
+    width: min(calc(100% - 0.85rem), 12.6rem);
+    padding: 0.5rem 0.62rem 0.58rem;
+    border-radius: 1.05rem;
+  }
+
+  .ratingKicker {
+    font-size: 0.56rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .ratingTitle {
+    font-size: 0.86rem;
+  }
+
+  .ratingSub {
+    font-size: 0.68rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .avatar {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .ratingStat {
+    font-size: 0.72rem;
+  }
+
+  .ratingStat strong {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ratingRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Target ~540×720 devices: move rating card further down */
+@media (max-width: 540px) and (max-height: 720px) {
+  .ratingCard {
+    top: clamp(11.8rem, 70vw, 15.4rem);
+    width: min(calc(100% - 0.85rem), 11.4rem);
+  }
+}
+
+/* Target ~414×896 devices: smaller rating card footprint */
+@media (max-width: 414px) and (max-height: 896px) {
+  .ratingCard {
+    width: min(calc(100% - 0.85rem), 11rem);
+    padding: 0.42rem 0.55rem 0.48rem;
+    border-radius: 0.95rem;
+  }
+
+  .ratingKicker {
+    font-size: 0.54rem;
+  }
+
+  .ratingTitle {
+    font-size: 0.82rem;
+  }
+
+  .ratingSub {
+    font-size: 0.64rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .ratingStat {
+    font-size: 0.7rem;
+  }
+
+  .ratingStat strong {
+    font-size: 1rem;
+  }
+}
+
+/* Target ~375×667 devices: move rating card up */
+@media (max-width: 375px) and (max-height: 667px) {
+  .ratingCard {
+    top: clamp(4.6rem, 18vw, 6rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featureCard,
+  .featureLamp::before,
+  .featureLamp::after {
+    transition: none;
+  }
+
+  .heroTitle,
+  .heroSub,
+  .ratingCard {
+    animation: none;
+  }
+}

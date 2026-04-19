@@ -1,0 +1,35 @@
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding) 3rem;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  color: var(--fg-primary);
+  margin: 0 0 1.35rem;
+}
+
+.lead {
+  margin: 0 auto;
+  max-width: min(54rem, 100%);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  line-height: 1.72;
+  color: var(--fg-secondary);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 2.25rem;
+  }
+
+  .title {
+    margin-bottom: 1.1rem;
+  }
+}

@@ -1,0 +1,108 @@
+.page {
+  min-height: 100vh;
+  padding: calc(var(--nav-height) + 4rem) 0 6rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.glassCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 4rem);
+  box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lastUpdated {
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  color: var(--fg-accent);
+  margin-bottom: 3rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.content {
+  color: var(--fg-primary);
+  line-height: 1.7;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--fg-primary);
+  font-weight: 700;
+}
+
+.content p {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  max-width: none; /* Allow full width within the glass container */
+}
+
+.content ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.content li {
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.contactBox {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.contactLink {
+  color: var(--brand-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.contactLink:hover {
+  color: var(--brand-secondary);
+}
+
+.inlineLogo {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-right: 0.15em;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+[data-theme='dark'] .glassCard {
+  box-shadow: 0 12px 48px -12px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: calc(var(--nav-height) + 2rem);
+  }
+}

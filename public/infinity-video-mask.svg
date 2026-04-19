@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" preserveAspectRatio="xMidYMid meet">
+  <!-- White fill = visible video in mask-mode: alpha -->
+  <path
+    fill="#ffffff"
+    d="
+      M 12 50
+      C 5 40 5 26 14 18
+      C 23 10 40 6 54 10
+      C 70 14 78 10 90 14
+      C 102 18 108 24 118 20
+      C 128 16 136 4 156 3
+      C 182 2 210 12 226 30
+      C 242 48 242 70 230 82
+      C 218 94 194 96 176 91
+      C 162 87 150 91 136 95
+      C 124 99 118 100 112 97
+      C 106 94 100 96 92 97
+      C 84 98 72 94 58 90
+      C 38 84 22 70 16 58
+      C 13 54 12 52 12 50
+      Z
+    "
+  />
+</svg>
