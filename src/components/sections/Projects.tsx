@@ -71,25 +71,15 @@ const PORTFOLIO_SECTION_HREF = '/portfolio';
 
 export const Projects: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [worksVideoSrc, setWorksVideoSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/works.mp4', { method: 'HEAD' })
-      .then(r => {
-        if (!cancelled && r.ok) setWorksVideoSrc('/works.mp4');
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const worksVideoSrc =
+    (process.env.NEXT_PUBLIC_WORKS_VIDEO_URL && process.env.NEXT_PUBLIC_WORKS_VIDEO_URL.trim()) || '/works.mp4';
+  const [worksVideoOk, setWorksVideoOk] = useState(true);
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v || !worksVideoSrc) return;
+    if (!v || !worksVideoOk) return;
     void v.play().catch(() => {});
-  }, [worksVideoSrc]);
+  }, [worksVideoOk]);
 
   return (
     <section
@@ -213,7 +203,7 @@ export const Projects: React.FC = () => {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.55, ease: [0.19, 1, 0.22, 1] }}
           >
-            {worksVideoSrc ? (
+            {worksVideoOk ? (
               <video
                 ref={videoRef}
                 className={styles.infinityVideo}
@@ -223,6 +213,7 @@ export const Projects: React.FC = () => {
                 playsInline
                 autoPlay
                 preload="auto"
+                onError={() => setWorksVideoOk(false)}
               />
             ) : (
               <div className={styles.videoPlaceholder} aria-hidden />
