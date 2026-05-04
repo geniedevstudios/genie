@@ -548,6 +548,294 @@
   color: var(--fg-secondary);
 }
 
+/* “And more tools” — opens genie-style dialog (matches Hero pill card motion) */
+.techMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.techMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.58rem 1.15rem 0.58rem 0.72rem;
+  min-height: 2.65rem;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--fg-primary);
+  background: color-mix(in srgb, var(--brand-primary) 12%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 38%, transparent);
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow:
+    0 2px 12px color-mix(in srgb, var(--brand-primary) 12%, transparent),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.65);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.techMoreBtn:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
+  box-shadow:
+    0 8px 26px color-mix(in srgb, var(--brand-primary) 18%, transparent),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.85);
+}
+
+.techMoreBtn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+
+.techMoreBtnIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--brand-primary) 85%, white);
+  color: var(--brand-on-primary);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--brand-primary) 35%, transparent);
+}
+
+.techModalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: hsla(222, 42%, 7%, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.techModalShell {
+  position: fixed;
+  inset: 0;
+  z-index: 1101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 1.75rem);
+  pointer-events: none;
+}
+
+.techModalPanel {
+  pointer-events: auto;
+  position: relative;
+  width: min(100%, 26rem);
+  max-height: min(88vh, 32rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.25rem 1.35rem 1.35rem;
+  border-radius: 1rem;
+  background: rgba(8, 10, 20, 0.94);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 24px 60px hsla(0, 0%, 0%, 0.45),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.14);
+}
+
+.techModalPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--brand-primary) 65%, transparent),
+    transparent
+  );
+  border-radius: 1rem 1rem 0 0;
+}
+
+.techModalClose {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 9999px;
+  background: hsla(0, 0%, 100%, 0.08);
+  color: hsla(0, 0%, 100%, 0.85);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.techModalClose:hover {
+  background: hsla(0, 0%, 100%, 0.14);
+  color: #fff;
+}
+
+.techModalClose:focus-visible {
+  outline: 2px solid hsl(265, 85%, 68%);
+  outline-offset: 2px;
+}
+
+.techModalKicker {
+  font-family: var(--font-heading);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0 0 0.45rem;
+  padding-right: 2.5rem;
+}
+
+.techModalTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2.5vw, 1.22rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: #fff;
+  margin: 0 0 0.85rem;
+}
+
+.techModalBody,
+.techModalBodySecondary {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 0.85rem;
+}
+
+.techModalBodySecondary {
+  margin-bottom: 1.15rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.techModalBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.techModalMark {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.techModalCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.62rem 1.25rem;
+  min-height: 2.65rem;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 9999px;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--brand-primary) 92%, #fff),
+    var(--brand-primary)
+  );
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 45%, transparent);
+  box-shadow:
+    0 8px 28px color-mix(in srgb, var(--brand-primary) 35%, transparent),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.22);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.techModalCta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 12px 34px color-mix(in srgb, var(--brand-primary) 42%, transparent),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.28);
+}
+
+.techModalCta:focus-visible {
+  outline: 2px solid hsl(265, 85%, 72%);
+  outline-offset: 3px;
+}
+
+:global(html[data-theme='light']) .techModalBackdrop {
+  background: hsla(0, 0%, 40%, 0.35);
+}
+
+:global(html[data-theme='light']) .techModalPanel {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
+  box-shadow:
+    0 28px 70px rgba(11, 13, 27, 0.14),
+    inset 0 1px 0 white;
+}
+
+:global(html[data-theme='light']) .techModalKicker {
+  color: color-mix(in srgb, var(--palette-ink) 48%, white);
+}
+
+:global(html[data-theme='light']) .techModalTitle {
+  color: var(--palette-ink);
+}
+
+:global(html[data-theme='light']) .techModalBody,
+:global(html[data-theme='light']) .techModalBodySecondary {
+  color: color-mix(in srgb, var(--palette-ink) 78%, white);
+}
+
+:global(html[data-theme='light']) .techModalBrand {
+  color: var(--palette-ink);
+}
+
+:global(html[data-theme='light']) .techModalClose {
+  background: color-mix(in srgb, var(--palette-ink) 8%, white);
+  color: var(--palette-ink);
+}
+
+:global(html[data-theme='light']) .techModalClose:hover {
+  background: color-mix(in srgb, var(--palette-ink) 12%, white);
+}
+
+:global(html[data-theme='light']) .techMoreBtn {
+  background: color-mix(in srgb, var(--brand-primary) 10%, white);
+  border-color: color-mix(in srgb, var(--brand-primary) 35%, transparent);
+  box-shadow: 0 2px 14px color-mix(in srgb, var(--brand-primary) 10%, transparent);
+}
+
+:global(html[data-theme='light']) .techMoreBtnIcon {
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+}
+
+:global(html[data-theme='light']) .techModalCta {
+  color: var(--brand-on-primary);
+}
+
 :global(html[data-theme='light']) .techWatermark {
   opacity: 0.35;
   -webkit-text-stroke: 1px color-mix(in srgb, var(--palette-ink) 10%, transparent);

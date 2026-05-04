@@ -240,52 +240,77 @@
   z-index: 3;
   right: clamp(0.75rem, 2.5vw, 1.75rem);
   bottom: clamp(0.75rem, 2.5vw, 1.75rem);
-  width: min(100%, 19.5rem);
-  padding: 1.1rem 1.2rem 1.15rem;
-  border-radius: 1.25rem;
-  background: hsla(0, 0%, 100%, 0.14);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid hsla(0, 0%, 100%, 0.42);
+  width: min(100%, 21rem);
+  padding: 1.15rem 1.25rem 1.2rem;
+  border-radius: 1.35rem;
+  background: linear-gradient(
+    155deg,
+    hsla(0, 0%, 100%, 0.2) 0%,
+    hsla(220, 28%, 14%, 0.42) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid hsla(0, 0%, 100%, 0.38);
   box-shadow:
-    0 8px 32px hsla(0, 0%, 0%, 0.18),
-    inset 0 1px 0 hsla(0, 0%, 100%, 0.35);
+    0 12px 40px hsla(0, 0%, 0%, 0.22),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.42),
+    inset 0 -1px 0 hsla(265, 90%, 40%, 0.08);
   pointer-events: auto;
 }
 
-.ratingKicker {
+.ratingStars {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0 0 0.55rem;
+  color: hsl(43, 96%, 56%);
+  filter: drop-shadow(0 1px 3px hsla(0, 0%, 0%, 0.35));
+}
+
+.ratingStarIcon {
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.ratingEyebrow {
   font-family: var(--font-heading);
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: hsla(0, 0%, 100%, 0.65);
+  color: hsla(0, 0%, 100%, 0.58);
   margin: 0 0 0.35rem;
 }
 
-.ratingTitle {
+.ratingHeadline {
   font-family: var(--font-jakarta), sans-serif;
-  font-size: 1.02rem;
+  font-size: clamp(0.98rem, 2.1vw, 1.12rem);
   font-weight: 800;
+  letter-spacing: -0.025em;
   color: #fff;
-  margin: 0 0 0.25rem;
-  line-height: 1.25;
+  margin: 0 0 0.45rem;
+  line-height: 1.28;
+  text-wrap: balance;
+  text-shadow: 0 1px 14px hsla(0, 0%, 0%, 0.35);
 }
 
-.ratingSub {
+.ratingTagline {
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  line-height: 1.45;
-  color: hsla(0, 0%, 100%, 0.78);
-  margin: 0 0 0.85rem;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: hsla(0, 0%, 100%, 0.82);
+  margin: 0 0 1rem;
+  text-wrap: balance;
 }
 
-.ratingRow {
+.ratingFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.65rem;
   flex-wrap: wrap;
+  padding-top: 0.65rem;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.14);
 }
 
 .avatarStack {
@@ -293,32 +318,38 @@
   align-items: center;
 }
 
-.avatar {
+.avatarImg {
   width: 1.85rem;
   height: 1.85rem;
   border-radius: 50%;
-  border: 2px solid hsla(0, 0%, 100%, 0.55);
+  border: 2px solid hsla(0, 0%, 100%, 0.58);
   margin-left: -0.55rem;
-  background: linear-gradient(145deg, hsl(226, 55%, 48%), hsl(280, 45%, 42%));
-  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.2);
+  object-fit: cover;
+  object-position: center center;
+  background: hsla(228, 35%, 18%, 0.9);
+  box-shadow:
+    0 2px 10px hsla(0, 0%, 0%, 0.28),
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.12);
+  flex-shrink: 0;
 }
 
-.avatarStack .avatar:first-child {
+.avatarStack .avatarImg:first-child {
   margin-left: 0;
 }
 
-.ratingStat {
+.ratingChip {
   font-family: var(--font-heading);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: hsla(0, 0%, 100%, 0.9);
-}
-
-.ratingStat strong {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: hsl(152, 62%, 52%);
-  margin-right: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsla(0, 0%, 100%, 0.88);
+  padding: 0.38rem 0.62rem;
+  border-radius: 9999px;
+  background: hsla(265, 85%, 52%, 0.22);
+  border: 1px solid hsla(265, 90%, 68%, 0.35);
+  box-shadow: 0 2px 10px hsla(265, 85%, 40%, 0.12);
+  white-space: nowrap;
 }
 
 /*
@@ -357,17 +388,17 @@
     bottom: clamp(0.5rem, 2.2vw, 0.95rem);
     right: clamp(0.45rem, 2.5vw, 0.85rem);
     left: auto;
-    width: min(calc(100% - 1rem), 15.25rem);
-    padding: 0.75rem 0.9rem 0.85rem;
+    width: min(calc(100% - 1rem), 17rem);
+    padding: 0.82rem 0.95rem 0.9rem;
   }
 
-  .ratingTitle {
-    font-size: 0.92rem;
+  .ratingHeadline {
+    font-size: 0.94rem;
   }
 
-  .ratingSub {
+  .ratingTagline {
     font-size: 0.72rem;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.75rem;
   }
 }
 
@@ -389,41 +420,58 @@
     top: clamp(6.4rem, 36vw, 9rem);
     bottom: auto;
     right: clamp(0.4rem, 2.5vw, 0.75rem);
-    width: min(calc(100% - 0.85rem), 12.6rem);
-    padding: 0.5rem 0.62rem 0.58rem;
+    width: min(calc(100% - 0.85rem), 13.75rem);
+    padding: 0.55rem 0.68rem 0.62rem;
     border-radius: 1.05rem;
   }
 
-  .ratingKicker {
-    font-size: 0.56rem;
-    margin-bottom: 0.25rem;
+  .ratingStars {
+    margin-bottom: 0.42rem;
+    gap: 0.12rem;
   }
 
-  .ratingTitle {
-    font-size: 0.86rem;
+  .ratingStarIcon {
+    width: 14px;
+    height: 14px;
   }
 
-  .ratingSub {
-    font-size: 0.68rem;
+  .ratingEyebrow {
+    font-size: 0.54rem;
+    margin-bottom: 0.22rem;
+  }
+
+  .ratingHeadline {
+    font-size: 0.84rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .ratingTagline {
+    font-size: 0.65rem;
     margin-bottom: 0.55rem;
+    line-height: 1.42;
   }
 
-  .avatar {
+  .ratingFooter {
+    padding-top: 0.55rem;
+    gap: 0.45rem;
+  }
+
+  .avatarImg {
     width: 1.6rem;
     height: 1.6rem;
   }
 
-  .ratingStat {
-    font-size: 0.72rem;
-  }
-
-  .ratingStat strong {
-    font-size: 1.05rem;
+  .ratingChip {
+    font-size: 0.58rem;
+    padding: 0.32rem 0.5rem;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
   }
 }
 
 @media (max-width: 480px) {
-  .ratingRow {
+  .ratingFooter {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -445,30 +493,27 @@
     border-radius: 0.95rem;
   }
 
-  .ratingKicker {
-    font-size: 0.54rem;
+  .ratingEyebrow {
+    font-size: 0.52rem;
   }
 
-  .ratingTitle {
-    font-size: 0.82rem;
+  .ratingHeadline {
+    font-size: 0.8rem;
   }
 
-  .ratingSub {
-    font-size: 0.64rem;
-    margin-bottom: 0.5rem;
+  .ratingTagline {
+    font-size: 0.62rem;
+    margin-bottom: 0.48rem;
   }
 
-  .avatar {
+  .avatarImg {
     width: 1.5rem;
     height: 1.5rem;
   }
 
-  .ratingStat {
-    font-size: 0.7rem;
-  }
-
-  .ratingStat strong {
-    font-size: 1rem;
+  .ratingChip {
+    font-size: 0.54rem;
+    padding: 0.28rem 0.45rem;
   }
 }
 

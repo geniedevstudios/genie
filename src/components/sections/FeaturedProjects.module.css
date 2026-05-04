@@ -120,6 +120,30 @@
   position: relative;
 }
 
+/* Stacked crossfade — shared grid cell, opacity-only transition */
+.featuredMediaStack {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+}
+
+.featuredMediaLayer {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.75s ease-in-out;
+  pointer-events: none;
+}
+
+.featuredMediaLayer[data-active='true'] {
+  opacity: 1;
+}
+
 .featuredMedia {
   display: block;
   width: 100%;

@@ -101,6 +101,17 @@ html {
   height: -webkit-fill-available;
 }
 
+/* Prevent auto-zoom on iOS by ensuring input font-size is at least 16px */
+@media screen and (max-width: 800px) {
+  input, 
+  select, 
+  textarea,
+  .newsletter-input {
+    font-size: 16px !important;
+  }
+}
+
+
 body {
   background-color: var(--bg-primary);
   color: var(--fg-primary);
@@ -119,10 +130,13 @@ body {
   isolation: isolate;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  overflow-x: clip; /* Prevent horizontal overflow from children like Hero pills */
 }
+
 
 .app-shell-main {
   position: relative;
+  overflow: clip; 
   z-index: 1;
 }
 

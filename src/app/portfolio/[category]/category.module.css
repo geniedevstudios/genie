@@ -135,13 +135,7 @@
 
 .projectGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
   align-items: stretch;
-}
-
-@media (max-width: 640px) {
-  .projectGrid {
-    grid-template-columns: 1fr;
-  }
 }

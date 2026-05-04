@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, RefreshCcw } from 'lucide-react';
-import { LinkedinIcon, InstagramIcon, FacebookIcon, XIcon } from '@/components/common/BrandIcons';
+import { LinkedinIcon, InstagramIcon, XIcon, GithubIcon } from '@/components/common/BrandIcons';
+import { SOCIAL_LINKS } from '@/lib/socialLinks';
 import { PhoneCountrySelect } from '@/components/common/PhoneCountrySelect';
 import {
   DEFAULT_PHONE_COUNTRY_ID,
@@ -136,7 +137,7 @@ export const ContactPageForm: React.FC = () => {
 
           <div className={styles.socialRow} aria-label="Social links">
             <a
-              href="https://linkedin.com"
+              href={SOCIAL_LINKS.linkedin}
               className={styles.socialBtn}
               aria-label="LinkedIn"
               target="_blank"
@@ -144,11 +145,17 @@ export const ContactPageForm: React.FC = () => {
             >
               <LinkedinIcon size={18} />
             </a>
-            <a href="https://x.com" className={styles.socialBtn} aria-label="X" target="_blank" rel="noopener noreferrer">
+            <a
+              href={SOCIAL_LINKS.x}
+              className={styles.socialBtn}
+              aria-label="X"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <XIcon size={16} />
             </a>
             <a
-              href="https://instagram.com"
+              href={SOCIAL_LINKS.instagram}
               className={styles.socialBtn}
               aria-label="Instagram"
               target="_blank"
@@ -157,13 +164,13 @@ export const ContactPageForm: React.FC = () => {
               <InstagramIcon size={18} />
             </a>
             <a
-              href="https://facebook.com"
+              href={SOCIAL_LINKS.github}
               className={styles.socialBtn}
-              aria-label="Facebook"
+              aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FacebookIcon size={17} />
+              <GithubIcon size={18} />
             </a>
           </div>
         </aside>

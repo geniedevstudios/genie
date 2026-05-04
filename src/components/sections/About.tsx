@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, Target, ShieldCheck, Star } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from '@/components/common/BrandIcons';
 import { GenieMark } from '@/components/common/GenieMark';
+import { SOCIAL_LINKS } from '@/lib/socialLinks';
 import styles from './About.module.css';
 
 type SocialIconType = 'linkedin' | 'x' | 'instagram' | 'github';
@@ -32,9 +33,10 @@ const TEAM: TeamMember[] = [
     portraitSrc: EMIL_AVATAR,
     thumbSrc: EMIL_THUMB,
     links: [
-      { label: 'GitHub', href: 'https://github.com', icon: 'github' },
-      { label: 'LinkedIn', href: 'https://linkedin.com', icon: 'linkedin' },
-      { label: 'X', href: 'https://x.com', icon: 'x' },
+      { label: 'Instagram', href: SOCIAL_LINKS.instagram, icon: 'instagram' },
+      { label: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: 'linkedin' },
+      { label: 'X', href: SOCIAL_LINKS.x, icon: 'x' },
+      { label: 'GitHub', href: SOCIAL_LINKS.github, icon: 'github' },
     ],
   },
 ];

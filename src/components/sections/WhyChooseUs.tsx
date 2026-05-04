@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 import { GenieMark } from '@/components/common/GenieMark';
 import styles from './WhyChooseUs.module.css';
 
@@ -33,6 +34,9 @@ const FEATURE_GRID = [
 ] as const;
 
 const ROMAN = ['I', 'II', 'III', 'IV'] as const;
+
+/** Illustrated faces for the rating stack (DiceBear notionists — lightweight SVGs, stable per seed). */
+const TRUST_AVATAR_SEEDS = ['Amara', 'Kwesi', 'Lin'] as const;
 
 const cellMotion = {
   hidden: { opacity: 0, y: 10 },
@@ -82,24 +86,46 @@ export const WhyChooseUs: React.FC = () => {
           <motion.aside
             className={styles.ratingCard}
             role="group"
-            aria-label="Client satisfaction"
+            aria-label="Client trust and satisfaction"
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.1, ease: [0.19, 1, 0.22, 1] }}
           >
-            <p className={styles.ratingKicker}>Trusted delivery</p>
-            <p className={styles.ratingTitle}>Quality-first builds</p>
-            <p className={styles.ratingSub}>Shipped on scope — and on your timeline.</p>
-            <div className={styles.ratingRow}>
+            <div className={styles.ratingStars} aria-hidden="true">
+              {Array.from({ length: 5 }, (_, i) => (
+                <Star
+                  key={i}
+                  className={styles.ratingStarIcon}
+                  size={17}
+                  strokeWidth={1.75}
+                  fill="currentColor"
+                  aria-hidden
+                />
+              ))}
+            </div>
+            <p className={styles.ratingEyebrow}>Client-rated excellence</p>
+            <p className={styles.ratingHeadline}>Trusted by 200+ businesses</p>
+            <p className={styles.ratingTagline}>
+              From lean MVPs to production rollouts — shipped with clarity, scope discipline, and code you can
+              grow into.
+            </p>
+            <div className={styles.ratingFooter}>
               <div className={styles.avatarStack} aria-hidden>
-                <span className={styles.avatar} />
-                <span className={styles.avatar} style={{ filter: 'hue-rotate(32deg)' }} />
-                <span className={styles.avatar} style={{ filter: 'hue-rotate(64deg)' }} />
+                {TRUST_AVATAR_SEEDS.map(seed => (
+                  <img
+                    key={seed}
+                    src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(seed)}&backgroundColor=e8d5f2,fbcfe8,d5e8f7`}
+                    alt=""
+                    className={styles.avatarImg}
+                    width={36}
+                    height={36}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
               </div>
-              <span className={styles.ratingStat}>
-                <strong>+48%</strong> velocity
-              </span>
+              <span className={styles.ratingChip}>500+ deliverables shipped</span>
             </div>
           </motion.aside>
         </div>

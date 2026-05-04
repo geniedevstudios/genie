@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { GenieMark } from '@/components/common/GenieMark';
-import { LinkedinIcon, InstagramIcon, FacebookIcon, XIcon } from '@/components/common/BrandIcons';
+import { LinkedinIcon, InstagramIcon, XIcon, GithubIcon } from '@/components/common/BrandIcons';
+import { SOCIAL_LINKS } from '@/lib/socialLinks';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -43,17 +44,35 @@ export const Footer: React.FC = () => {
               experiences that drive growth and empower businesses worldwide.
             </p>
             <div className="social-row" aria-label="Social links">
-              <a href="https://linkedin.com" className="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                className="social-btn"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <LinkedinIcon size={18} />
               </a>
-              <a href="https://x.com" className="social-btn" aria-label="X" target="_blank" rel="noopener noreferrer">
+              <a href={SOCIAL_LINKS.x} className="social-btn" aria-label="X" target="_blank" rel="noopener noreferrer">
                 <XIcon size={16} />
               </a>
-              <a href="https://instagram.com" className="social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.instagram}
+                className="social-btn"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <InstagramIcon size={18} />
               </a>
-              <a href="https://facebook.com" className="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-                <FacebookIcon size={17} />
+              <a
+                href={SOCIAL_LINKS.github}
+                className="social-btn"
+                aria-label="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon size={18} />
               </a>
             </div>
           </div>
@@ -185,6 +204,13 @@ export const Footer: React.FC = () => {
           padding: 0 var(--container-padding);
         }
 
+        @media (max-width: 640px) {
+          .footer-inner {
+            padding: 0 1.25rem;
+          }
+        }
+
+
         .footer-grid {
           display: grid;
           grid-template-columns: 1.35fr 1.25fr 0.85fr 0.85fr;
@@ -293,7 +319,7 @@ export const Footer: React.FC = () => {
           border: 1px solid hsla(0, 0%, 100%, 0.22);
           background: var(--footer-input-bg);
           color: var(--footer-heading);
-          font-size: 0.875rem;
+          font-size: 1rem;
           outline: none;
           transition: border-color 0.2s ease;
         }
@@ -453,18 +479,44 @@ export const Footer: React.FC = () => {
         @media (max-width: 640px) {
           .footer-grid {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 2.75rem;
+            text-align: center;
+          }
+
+          .footer-brand, .footer-connect {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .footer-desc {
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          .social-row, .newsletter-form, .footer-contact-lines {
+            justify-content: center;
+          }
+
+          .footer-nav {
+            align-items: center;
           }
 
           .footer-bottom {
             flex-direction: column;
             text-align: center;
+            gap: 1.5rem;
           }
 
           .footer-legal {
             justify-content: center;
           }
+
+          .footer-copyright {
+            justify-content: center;
+          }
         }
+
       `}</style>
     </footer>
   );

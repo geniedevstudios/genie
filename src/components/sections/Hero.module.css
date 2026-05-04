@@ -9,7 +9,7 @@
   align-items: center;
   position: relative;
   /* Must not clip pill popovers (genie cards) that extend past the section edge */
-  overflow: visible;
+  overflow: clip;
   padding-top: var(--nav-height);
   /* Light vignette only — ambient video comes from global `PageBackground`. */
   background-image:

@@ -71,13 +71,13 @@ const PORTFOLIO_SECTION_HREF = '/portfolio';
 
 export const Projects: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [aboutVideoSrc, setAboutVideoSrc] = useState<string | null>(null);
+  const [worksVideoSrc, setWorksVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/about-vid.mp4', { method: 'HEAD' })
+    fetch('/works.mp4', { method: 'HEAD' })
       .then(r => {
-        if (!cancelled && r.ok) setAboutVideoSrc('/about-vid.mp4');
+        if (!cancelled && r.ok) setWorksVideoSrc('/works.mp4');
       })
       .catch(() => {});
     return () => {
@@ -87,9 +87,9 @@ export const Projects: React.FC = () => {
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v || !aboutVideoSrc) return;
+    if (!v || !worksVideoSrc) return;
     void v.play().catch(() => {});
-  }, [aboutVideoSrc]);
+  }, [worksVideoSrc]);
 
   return (
     <section
@@ -213,11 +213,11 @@ export const Projects: React.FC = () => {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.55, ease: [0.19, 1, 0.22, 1] }}
           >
-            {aboutVideoSrc ? (
+            {worksVideoSrc ? (
               <video
                 ref={videoRef}
                 className={styles.infinityVideo}
-                src={aboutVideoSrc}
+                src={worksVideoSrc}
                 muted
                 loop
                 playsInline

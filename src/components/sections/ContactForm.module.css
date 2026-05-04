@@ -1,12 +1,17 @@
 .wrap {
   --contact-after-hero-gap: clamp(3.75rem, 9vw, 7.5rem);
   position: relative;
-  min-height: calc(100vh - var(--nav-height));
-  padding: calc(var(--nav-height) + 2rem) 0 4rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 1px 0 6rem; /* Using 1px padding and relying on inner margin */
   background: transparent;
   color: hsl(220, 9%, 70%);
-  overflow: hidden;
+  overflow-x: hidden;
 }
+
+
+
+
 
 .inner {
   max-width: var(--max-width);
@@ -21,8 +26,28 @@
 @media (max-width: 1024px) {
   .inner {
     grid-template-columns: 1fr;
+    gap: 2.25rem;
+    margin-top: 160px;
+  }
+
+  .heroTitle, .headline, .lede {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 0 2rem 0 0.4rem; /* Significantly shifting left */
+    margin-top: 140px;
+  }
+}
+
+
+
+
+
 
 /* ─── Left column ─────────────────────────────────────────────── */
 .aside {
@@ -175,7 +200,7 @@
 
 @media (min-width: 1025px) {
   .wrap {
-    padding-top: calc(var(--nav-height) + 4rem);
+    padding-top: calc(var(--nav-height) + 6rem);
   }
 
   .formCard {
@@ -184,6 +209,7 @@
     );
   }
 }
+
 
 .formTitle {
   font-family: var(--font-jakarta), sans-serif;
@@ -242,7 +268,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;

@@ -13,7 +13,26 @@ export type PortfolioItem = {
   href: string;
   /** Served from `public/` — URL path is `/filename.ext` (not `/public/...`) */
   thumbSrc?: string;
+  /** Multiple previews — rotate on a timer in cards and the home featured strip */
+  thumbSrcs?: string[];
 };
+
+/** Interval for cycling `thumbSrcs` in UI */
+export const PORTFOLIO_IMAGE_ROTATE_MS = 5000;
+
+export function getPortfolioThumbSources(item: PortfolioItem): string[] {
+  if (item.thumbSrcs?.length) return item.thumbSrcs;
+  if (item.thumbSrc) return [item.thumbSrc];
+  return [];
+}
+
+/** Shared previews for JOEY The brand (web + UI/UX listings) */
+const JOEY_THE_BRAND_THUMB_SRCS = [
+  '/joey-portfolio.png',
+  '/joey-app.png',
+  '/appsnap.png',
+  '/admin.png',
+] as const;
 
 export const PORTFOLIO_CATEGORY_IDS: PortfolioCategoryId[] = [
   'web',
@@ -63,39 +82,26 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
 export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = {
   web: [
     {
-      id: 'web-joey-portfolio',
-      title: 'Joey Portfolio',
-      summary: 'Marketing portfolio site—fast load, responsive layout, and a polished presentation layer.',
+      id: 'web-joey-brand',
+      title: 'JOEY The brand',
+      summary:
+        'One brand across marketing site, product surfaces, UI explorations, and admin tooling—built for clarity, speed, and a cohesive experience.',
       href: '/contact',
-      thumbSrc: '/joey-portfolio.png',
-    },
-    {
-      id: 'web-joey-app',
-      title: 'Joey App',
-      summary: 'Product web experience with dashboards and flows tuned for clarity and daily use.',
-      href: '/contact',
-      thumbSrc: '/joey-app.png',
+      thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
   ],
   uiux: [
     {
-      id: 'ux-appsnap',
-      title: 'AppSnap',
-      summary: 'UI exploration and snapshot-ready layouts for reviews and stakeholder alignment.',
+      id: 'ux-joey-brand',
+      title: 'JOEY The brand',
+      summary:
+        'UI and UX for the JOEY brand—explorations, flows, and design-system-aligned screens from marketing through product and ops.',
       href: '/contact',
-      thumbSrc: '/appsnap.png',
+      thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
   ],
   mobile: [],
-  security: [
-    {
-      id: 'sec-admin',
-      title: 'Admin console',
-      summary: 'Operational dashboard patterns with visibility into users, jobs, and security posture.',
-      href: '/contact',
-      thumbSrc: '/admin.png',
-    },
-  ],
+  security: [],
   consultancy: [],
 };
 

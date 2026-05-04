@@ -5,6 +5,7 @@ import { Check } from 'lucide-react';
 import { GenieMark } from '@/components/common/GenieMark';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
+import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
 import styles from './services.module.css';
 
 export const metadata: Metadata = {
@@ -307,6 +308,7 @@ export default function ServicesPage() {
                   </article>
                 ))}
               </div>
+              <TechStackMoreDialog />
             </div>
           </section>
         </div>
