@@ -103,7 +103,7 @@ export default function TermsPage() {
               </section>
 
               <div className={styles.contactBox}>
-                <h2 className={styles.sectionTitle}>Contact Informantion</h2>
+                <h2 className={styles.sectionTitle}>Contact Information</h2>
                 <p>
                   For any questions regarding these Terms, please contact us at:
                   <br />
