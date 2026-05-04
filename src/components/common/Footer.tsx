@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { GenieMark } from '@/components/common/GenieMark';
@@ -12,6 +12,7 @@ export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
   const [error, setError] = useState('');
+  const [mapOpen, setMapOpen] = useState(false);
 
   const onNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +30,15 @@ export const Footer: React.FC = () => {
     setJoined(true);
     setEmail('');
   };
+
+  useEffect(() => {
+    if (!mapOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMapOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [mapOpen]);
 
   return (
     <footer className="site-footer">
@@ -134,12 +144,19 @@ export const Footer: React.FC = () => {
                 </span>
                 +233 53 943 3339
               </a>
-              <div className="contact-line">
+              <button
+                type="button"
+                className="contact-line contact-line-btn"
+                onClick={() => setMapOpen(true)}
+                aria-haspopup="dialog"
+                aria-expanded={mapOpen}
+                aria-label="Open map for Accra, Ghana"
+              >
                 <span className="contact-icon" aria-hidden>
                   <MapPin size={16} strokeWidth={2} />
                 </span>
                 <span>Accra, Ghana</span>
-              </div>
+              </button>
             </div>
           </div>
 
@@ -182,6 +199,42 @@ export const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {mapOpen ? (
+        <div className="map-backdrop" role="presentation" onClick={() => setMapOpen(false)}>
+          <div
+            className="map-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Google Map — Accra, Ghana"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="map-modal-top">
+              <span className="map-modal-title">Accra, Ghana</span>
+              <button type="button" className="map-close" onClick={() => setMapOpen(false)} aria-label="Close map">
+                ×
+              </button>
+            </div>
+            <div className="map-frame">
+              <iframe
+                title="Google Maps — Accra, Ghana"
+                src="https://www.google.com/maps?q=Accra%2C%20Ghana&z=12&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+            <a
+              className="map-open"
+              href="https://www.google.com/maps?q=Accra%2C%20Ghana&z=12"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps
+            </a>
+          </div>
+        </div>
+      ) : null}
 
       <style jsx>{`
         .site-footer {
@@ -398,6 +451,24 @@ export const Footer: React.FC = () => {
           color: var(--footer-heading);
         }
 
+        .contact-line-btn {
+          background: transparent;
+          border: none;
+          padding: 0;
+          text-align: left;
+          cursor: pointer;
+        }
+
+        .contact-line-btn:hover {
+          color: var(--footer-heading);
+        }
+
+        .contact-line-btn:focus-visible {
+          outline: 2px solid rgba(255, 255, 255, 0.7);
+          outline-offset: 3px;
+          border-radius: 8px;
+        }
+
         .contact-icon {
           display: inline-flex;
           align-items: center;
@@ -408,6 +479,96 @@ export const Footer: React.FC = () => {
           background: var(--footer-social-bg);
           color: var(--footer-heading);
           flex-shrink: 0;
+        }
+
+        .map-backdrop {
+          position: fixed;
+          inset: 0;
+          z-index: 1200;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: clamp(1rem, 4vw, 1.75rem);
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .map-modal {
+          width: min(100%, 48rem);
+          background: rgba(8, 10, 20, 0.94);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 1.1rem;
+          overflow: hidden;
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .map-modal-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 0.85rem 1rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .map-modal-title {
+          font-family: var(--font-heading);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: rgba(255, 255, 255, 0.92);
+        }
+
+        .map-close {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 2.25rem;
+          height: 2.25rem;
+          border-radius: 9999px;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          background: rgba(255, 255, 255, 0.08);
+          color: rgba(255, 255, 255, 0.9);
+          cursor: pointer;
+          font-size: 1.25rem;
+          line-height: 1;
+        }
+
+        .map-close:hover {
+          background: rgba(255, 255, 255, 0.14);
+        }
+
+        .map-close:focus-visible {
+          outline: 2px solid rgba(255, 255, 255, 0.7);
+          outline-offset: 2px;
+        }
+
+        .map-frame {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          background: rgba(255, 255, 255, 0.04);
+        }
+
+        .map-frame :global(iframe) {
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+
+        .map-open {
+          display: block;
+          padding: 0.75rem 1rem 0.95rem;
+          font-family: var(--font-heading);
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.88);
+          text-decoration: none;
+        }
+
+        .map-open:hover {
+          color: #fff;
+          text-decoration: underline;
+          text-decoration-color: rgba(255, 255, 255, 0.5);
+          text-underline-offset: 0.18em;
         }
 
         .footer-bottom {
