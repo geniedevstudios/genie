@@ -45,56 +45,7 @@
   }
 }
 
-/* ─── Cursor-follow Video Trailer ───────────────────────────────── */
-.cursorTrailer {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 520px;
-  height: 320px;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 1;
-  will-change: transform;
-  transform: translate3d(-9999px, -9999px, 0);
-}
 
-/* Stacked pair for seamless crossfade looping (see SeamlessLoopVideo). */
-.cursorTrailerVideoStack {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.cursorTrailerVideo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-  object-position: center;
-  background: transparent;
-  opacity: 0.9;
-  filter: saturate(1.02) contrast(1.01);
-  mix-blend-mode: screen;
-}
-
-.cursorTrailerFallback {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(420px, calc(100% - 2rem));
-  max-width: min(420px, 92vw);
-  max-width: min(420px, 92dvw);
-  aspect-ratio: 18 / 11;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.95;
-}
-
-/* bgDecor removed — hero image provides the background */
 
 /* ─── Centered Hero Content ──────────────────────────────────────── */
 .heroContent {
