@@ -45,9 +45,11 @@ export const Footer: React.FC = () => {
       <div className="footer-inner">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Link href="/" className="footer-logo" aria-label="Home">
-              <GenieMark width={32} />
-              <span className="footer-logo-text">| dev</span>
+            <Link href="/" className="footer-logo-link" aria-label="Home">
+              <span className="footer-logo">
+                <GenieMark width={28} className="footer-logo-img" />
+                <span className="footer-logo-text">| dev</span>
+              </span>
             </Link>
             <p className="footer-desc">
               Innovating at the intersection of design and technology to create exceptional digital
@@ -271,13 +273,23 @@ export const Footer: React.FC = () => {
           margin-bottom: clamp(2.5rem, 5vw, 4rem);
         }
 
+        .footer-logo-link {
+          text-decoration: none;
+          color: inherit;
+          display: inline-block;
+          margin-bottom: 1.25rem;
+        }
+
         .footer-logo {
           display: inline-flex;
           align-items: center;
           gap: 0.35rem;
-          text-decoration: none;
           color: inherit;
-          margin-bottom: 1.25rem;
+        }
+
+        .footer-logo-img {
+          display: block;
+          flex-shrink: 0;
         }
 
         .footer-logo-text {
@@ -287,6 +299,7 @@ export const Footer: React.FC = () => {
           letter-spacing: -0.03em;
           color: #fff;
           text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+          line-height: 1;
         }
 
         .footer-desc {

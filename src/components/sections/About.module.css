@@ -161,16 +161,58 @@
   max-height: min(60vh, 620px);
   object-fit: cover;
   background: transparent;
-  -webkit-mask-image: url('/infinity-video-mask.svg');
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNIDEyIDUwIEMgNSA0MCA1IDI2IDE0IDE4IEMgMjMgMTAgNDAgNiA1NCAxMCBDIDcwIDE0IDc4IDEwIDkwIDE0IEMgMTAyIDE4IDEwOCAyNCAxMTggMjAgQyAxMjggMTYgMTM2IDQgMTU2IDMgQyAxODIgMiAyMTAgMTIgMjI2IDMwIEMgMjQyIDQ4IDI0MiA3MCAyMzAgODIgQyAyMTggOTQgMTk0IDk2IDE3NiA5MSBDIDE2MiA4NyAxNTAgOTEgMTM2IDk1IEMgMTI0IDk5IDExOCAxMDAgMTEyIDk3IEMgMTA2IDk0IDEwMCA5NiA5MiA5NyBDIDg0IDk4IDcyIDk0IDU4IDkwIEMgMzggODQgMjIgNzAgMTYgNTggQyAxMyA1NCAxMiA1MiAxMiA1MCBaIi8+Cjwvc3ZnPg==");
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-mode: alpha;
-  mask-image: url('/infinity-video-mask.svg');
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNIDEyIDUwIEMgNSA0MCA1IDI2IDE0IDE4IEMgMjMgMTAgNDAgNiA1NCAxMCBDIDcwIDE0IDc4IDEwIDkwIDE0IEMgMTAyIDE4IDEwOCAyNCAxMTggMjAgQyAxMjggMTYgMTM2IDQgMTU2IDMgQyAxODIgMiAyMTAgMTIgMjI2IDMwIEMgMjQyIDQ4IDI0MiA3MCAyMzAgODIgQyAyMTggOTQgMTk0IDk2IDE3NiA5MSBDIDE2MiA4NyAxNTAgOTEgMTM2IDk1IEMgMTI0IDk5IDExOCAxMDAgMTEyIDk3IEMgMTA2IDk0IDEwMCA5NiA5MiA5NyBDIDg0IDk4IDcyIDk0IDU4IDkwIEMgMzggODQgMjIgNzAgMTYgNTggQyAxMyA1NCAxMiA1MiAxMiA1MCBaIi8+Cjwvc3ZnPg==");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
   mask-mode: alpha;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.storyInfinityVideoReady {
+  opacity: 1;
+}
+
+.storyVideoShimmer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.storyVideoShimmer::before {
+  content: '';
+  width: 100%;
+  aspect-ratio: 240 / 100;
+  max-height: min(60vh, 620px);
+  background: linear-gradient(
+    110deg,
+    hsla(0, 0%, 100%, 0.03) 25%,
+    hsla(0, 0%, 100%, 0.08) 37%,
+    hsla(0, 0%, 100%, 0.03) 63%
+  );
+  background-size: 200% 100%;
+  animation: storyShimmer 1.5s ease-in-out infinite;
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNIDEyIDUwIEMgNSA0MCA1IDI2IDE0IDE4IEMgMjMgMTAgNDAgNiA1NCAxMCBDIDcwIDE0IDc4IDEwIDkwIDE0IEMgMTAyIDE4IDEwOCAyNCAxMTggMjAgQyAxMjggMTYgMTM2IDQgMTU2IDMgQyAxODIgMiAyMTAgMTIgMjI2IDMwIEMgMjQyIDQ4IDI0MiA3MCAyMzAgODIgQyAyMTggOTQgMTk0IDk2IDE3NiA5MSBDIDE2MiA4NyAxNTAgOTEgMTM2IDk1IEMgMTI0IDk5IDExOCAxMDAgMTEyIDk3IEMgMTA2IDk0IDEwMCA5NiA5MiA5NyBDIDg0IDk4IDcyIDk0IDU4IDkwIEMgMzggODQgMjIgNzAgMTYgNTggQyAxMyA1NCAxMiA1MiAxMiA1MCBaIi8+Cjwvc3ZnPg==");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNIDEyIDUwIEMgNSA0MCA1IDI2IDE0IDE4IEMgMjMgMTAgNDAgNiA1NCAxMCBDIDcwIDE0IDc4IDEwIDkwIDE0IEMgMTAyIDE4IDEwOCAyNCAxMTggMjAgQyAxMjggMTYgMTM2IDQgMTU2IDMgQyAxODIgMiAyMTAgMTIgMjI2IDMwIEMgMjQyIDQ4IDI0MiA3MCAyMzAgODIgQyAyMTggOTQgMTk0IDk2IDE3NiA5MSBDIDE2MiA4NyAxNTAgOTEgMTM2IDk1IEMgMTI0IDk5IDExOCAxMDAgMTEyIDk3IEMgMTA2IDk0IDEwMCA5NiA5MiA5NyBDIDg0IDk4IDcyIDk0IDU4IDkwIEMgMzggODQgMjIgNzAgMTYgNTggQyAxMyA1NCAxMiA1MiAxMiA1MCBaIi8+Cjwvc3ZnPg==");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+@keyframes storyShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .storyVideoPlaceholder {
@@ -179,11 +221,11 @@
   max-height: min(60vh, 620px);
   background: hsla(0, 0%, 100%, 0.05);
   border: 1px dashed hsla(0, 0%, 100%, 0.18);
-  -webkit-mask-image: url('/infinity-video-mask.svg');
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNIDEyIDUwIEMgNSA0MCA1IDI2IDE0IDE4IEMgMjMgMTAgNDAgNiA1NCAxMCBDIDcwIDE0IDc4IDEwIDkwIDE0IEMgMTAyIDE4IDEwOCAyNCAxMTggMjAgQyAxMjggMTYgMTM2IDQgMTU2IDMgQyAxODIgMiAyMTAgMTIgMjI2IDMwIEMgMjQyIDQ4IDI0MiA3MCAyMzAgODIgQyAyMTggOTQgMTk0IDk2IDE3NiA5MSBDIDE2MiA4NyAxNTAgOTEgMTM2IDk1IEMgMTI0IDk5IDExOCAxMDAgMTEyIDk3IEMgMTA2IDk0IDEwMCA5NiA5MiA5NyBDIDg0IDk4IDcyIDk0IDU4IDkwIEMgMzggODQgMjIgNzAgMTYgNTggQyAxMyA1NCAxMiA1MiAxMiA1MCBaIi8+Cjwvc3ZnPg==");
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  mask-image: url('/infinity-video-mask.svg');
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNIDEyIDUwIEMgNSA0MCA1IDI2IDE0IDE4IEMgMjMgMTAgNDAgNiA1NCAxMCBDIDcwIDE0IDc4IDEwIDkwIDE0IEMgMTAyIDE4IDEwOCAyNCAxMTggMjAgQyAxMjggMTYgMTM2IDQgMTU2IDMgQyAxODIgMiAyMTAgMTIgMjI2IDMwIEMgMjQyIDQ4IDI0MiA3MCAyMzAgODIgQyAyMTggOTQgMTk0IDk2IDE3NiA5MSBDIDE2MiA4NyAxNTAgOTEgMTM2IDk1IEMgMTI0IDk5IDExOCAxMDAgMTEyIDk3IEMgMTA2IDk0IDEwMCA5NiA5MiA5NyBDIDg0IDk4IDcyIDk0IDU4IDkwIEMgMzggODQgMjIgNzAgMTYgNTggQyAxMyA1NCAxMiA1MiAxMiA1MCBaIi8+Cjwvc3ZnPg==");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;

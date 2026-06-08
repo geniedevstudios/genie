@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, RefreshCcw } from 'lucide-react';
 import { LinkedinIcon, InstagramIcon, XIcon, GithubIcon } from '@/components/common/BrandIcons';
@@ -325,9 +326,9 @@ export const ContactPageForm: React.FC = () => {
                     />
                     <span>
                       You agree to our{' '}
-                      <a href="#" onClick={(e) => e.preventDefault()}>
+                      <Link href="/privacy">
                         privacy policy
-                      </a>
+                      </Link>
                       .
                       {errors.privacy && <span className={styles.errorHint}>{errors.privacy}</span>}
                     </span>

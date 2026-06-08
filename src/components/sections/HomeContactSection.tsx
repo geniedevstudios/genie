@@ -210,9 +210,9 @@ export const HomeContactSection: React.FC = () => {
                     />
                     <span>
                       You agree to our friendly{' '}
-                      <a href="#" className={styles.privacyLink} onClick={(e) => e.preventDefault()}>
+                      <Link href="/privacy" className={styles.privacyLink}>
                         privacy policy
-                      </a>
+                      </Link>
                       .
                       {errors.privacy && <span className={styles.errorHint}>{errors.privacy}</span>}
                     </span>
