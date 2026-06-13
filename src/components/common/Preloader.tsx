@@ -31,9 +31,6 @@ export const Preloader: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Avoid hydration mismatch by not rendering until mounted
-  if (!isMounted) return null;
-
   return (
     <AnimatePresence>
       {show && (

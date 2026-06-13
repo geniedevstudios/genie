@@ -11,6 +11,13 @@
   background-image: radial-gradient(circle at center, rgba(30, 40, 70, 0.4) 0%, rgba(5, 8, 18, 1) 70%);
 }
 
+/* If the hide-preloader class is added to the HTML by the inline script, hide it immediately */
+:global(.hide-preloader) .preloaderOverlay {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .pillContainer {
   position: relative;
   display: flex;

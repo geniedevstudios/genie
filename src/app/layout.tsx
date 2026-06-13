@@ -47,9 +47,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'GENIE | DEV - HOME',
-  applicationName: 'GENIE | DEV',
+  // Using a special unicode vertical line '│' instead of standard '|' so iOS doesn't split and truncate the name
+  applicationName: '🧞 │ dev',
   appleWebApp: {
-    title: 'GENIE | DEV',
+    title: '🧞 │ dev',
     statusBarStyle: 'default',
     capable: true,
   },
@@ -74,6 +75,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('genie_preloader_played')) {
+                  document.documentElement.classList.add('hide-preloader');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
         <ClientProvider>
           <Preloader />
           <div className="app-shell">
