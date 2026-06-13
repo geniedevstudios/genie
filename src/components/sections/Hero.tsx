@@ -207,7 +207,7 @@ export const Hero: React.FC = () => {
           <Link href="/portfolio" className={styles.btnOutline}>
             Explore Portfolio
           </Link>
-          <Link href="/contact" className={styles.btnSolid}>
+          <Link href="/contact" className={styles.btnOutline}>
             Get a Quote
           </Link>
         </div>

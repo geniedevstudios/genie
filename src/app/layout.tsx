@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono, Bodoni_Moda, Jost, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { PageBackground } from '@/components/common/PageBackground';
+import { Preloader } from '@/components/common/Preloader';
 import { ClientProvider } from '@/context/ClientProvider';
 import { GENIE_IMAGE_SRC } from '@/lib/genieAsset';
 
@@ -74,6 +75,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ClientProvider>
+          <Preloader />
           <div className="app-shell">
             <PageBackground />
             <div className="app-shell-main">{children}</div>
