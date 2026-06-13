@@ -10,25 +10,78 @@ export const Preloader: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-    // Check if we've already played the animation in this session
-    // (Disabled during development so you can see it on refresh)
-    /*
-    const hasLoaded = sessionStorage.getItem('genie_preloader_played');
-    if (hasLoaded) {
+    // If the inline script already hid it, we don't need to do anything
+    if (document.documentElement.classList.contains('hide-preloader')) {
       setShow(false);
       return;
     }
-    */
 
-    // Timer covers the animation duration. We give it enough time to play out
-    // and let the underlying heavy assets start loading.
-    const timer = setTimeout(() => {
-      setShow(false);
-      // sessionStorage.setItem('genie_preloader_played', 'true');
-    }, 2800); 
+    const startTime = Date.now();
+    const MIN_DURATION = 2500; // Let the animation play out for at least 2.5s
+    const MAX_DURATION = 8000; // Absolute fallback so we never block forever
 
-    return () => clearTimeout(timer);
+    let isFinished = false;
+    let maxTimer: NodeJS.Timeout;
+
+    const finishLoading = () => {
+      if (isFinished) return;
+      isFinished = true;
+      clearTimeout(maxTimer);
+
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, MIN_DURATION - elapsed);
+
+      setTimeout(() => {
+        setShow(false);
+        // sessionStorage.setItem('genie_preloader_played', 'true');
+      }, remaining);
+    };
+
+    // Fallback timer
+    maxTimer = setTimeout(finishLoading, MAX_DURATION);
+
+    const checkMedia = () => {
+      const videos = Array.from(document.querySelectorAll('video'));
+      // Only wait for priority/eager images or large hero images to avoid waiting for every tiny icon
+      const images = Array.from(document.querySelectorAll('img[loading="eager"], img[priority]')) as HTMLImageElement[];
+      
+      let pending = videos.length + images.length;
+      
+      if (pending === 0) {
+        finishLoading();
+        return;
+      }
+
+      const decrement = () => {
+        pending--;
+        if (pending <= 0) finishLoading();
+      };
+
+      videos.forEach(v => {
+        if (v.readyState >= 3) {
+          decrement();
+        } else {
+          v.addEventListener('canplay', decrement, { once: true });
+          v.addEventListener('error', decrement, { once: true });
+        }
+      });
+
+      images.forEach(img => {
+        if (img.complete) {
+          decrement();
+        } else {
+          img.addEventListener('load', decrement, { once: true });
+          img.addEventListener('error', decrement, { once: true });
+        }
+      });
+    };
+
+    // Wait a brief moment for React components to fully mount into the DOM before querying them
+    setTimeout(checkMedia, 100);
+
+    return () => {
+      clearTimeout(maxTimer);
+    };
   }, []);
 
   return (
