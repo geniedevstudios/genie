@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
@@ -9,7 +9,7 @@ import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
 import styles from './services.module.css';
 
 export const metadata: Metadata = {
-  title: 'Services | GENIE | DEV',
+  title: 'Services | 🧞 │ dev',
   description:
     'Website and web apps, UI/UX, mobile apps, cybersecurity, and IT consultancy — built for clarity, scale, and outcomes.',
 };

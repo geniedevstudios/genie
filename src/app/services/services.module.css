@@ -730,6 +730,7 @@
   font-weight: 700;
   color: #fff;
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 .techModalMark {

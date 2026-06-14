@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next';
+﻿import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono, Bodoni_Moda, Jost, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { PageBackground } from '@/components/common/PageBackground';
@@ -46,7 +46,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'GENIE | DEV - HOME',
+  title: '🧞 │ dev - HOME',
   // Using a special unicode vertical line '│' instead of standard '|' so iOS doesn't split and truncate the name
   applicationName: '🧞 │ dev',
   appleWebApp: {
@@ -57,7 +57,8 @@ export const metadata: Metadata = {
   description: 'Expert Full-Stack Engineer and Geophysics student based in Ghana building revenue-generating systems, payment integrations, and real-time applications.',
   keywords: ['Full-Stack Developer', 'Ghana Engineering', 'Paystack Integration', 'React Developer', 'Django', 'Geophysics', 'Systems Design'],
   openGraph: {
-    title: 'GENIE | DEV',
+    title: '🧞 │ dev - HOME',
+    siteName: '🧞 │ dev',
     description: 'Building high-performance systems that scale and handle payments.',
     type: 'website',
   },

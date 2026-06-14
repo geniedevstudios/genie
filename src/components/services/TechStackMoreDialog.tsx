@@ -88,8 +88,7 @@ export function TechStackMoreDialog() {
                   <span className={styles.techModalBrand}>
                     <GenieMark width={22} className={styles.techModalMark} />
                     <span>| dev</span>
-                  </span>
-                  , we choose technologies that ship fast, scale cleanly, and stay maintainable as your product grows.
+                  </span>, we choose technologies that ship fast, scale cleanly, and stay maintainable as your product grows.
                 </p>
                 <p className={styles.techModalBodySecondary}>
                   Reach out and we&apos;ll help you plan your next big project — from first sketch to production.

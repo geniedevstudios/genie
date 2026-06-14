@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Navbar } from '@/components/common/Navbar';
 import { Hero } from '@/components/sections/Hero';
 import { Projects } from '@/components/sections/Projects';

@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { About } from '@/components/sections/About';
 import styles from './about.module.css';
 
 export const metadata: Metadata = {
-  title: 'About | GENIE | DEV',
+  title: 'About | 🧞 │ dev',
   description:
     'How GENIE | dev works — engineering discipline, partnerships, and the team behind your next build.',
 };

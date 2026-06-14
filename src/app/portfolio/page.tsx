@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { PortfolioExplorer } from '@/components/sections/PortfolioExplorer';
@@ -6,7 +6,7 @@ import styles from '../services/services.module.css';
 import hero from './portfolio.module.css';
 
 export const metadata: Metadata = {
-  title: 'Portfolio | GENIE | DEV',
+  title: 'Portfolio | 🧞 │ dev',
   description:
     'Featured digital work—from polished websites to complex systems—showing how we turn concepts into reliable solutions and lasting partnerships.',
 };
