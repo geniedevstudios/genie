@@ -9,7 +9,7 @@ import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
 import styles from './services.module.css';
 
 export const metadata: Metadata = {
-  title: 'Services | 🧞 │ dev',
+  title: 'Services | Genie │ dev',
   description:
     'Website and web apps, UI/UX, mobile apps, cybersecurity, and IT consultancy — built for clarity, scale, and outcomes.',
 };

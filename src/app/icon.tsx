@@ -7,7 +7,7 @@ export const contentType = 'image/png';
 
 export default function Icon() {
   // Read the local file from public directory
-  const imageBuffer = readFileSync(join(process.cwd(), 'public/genilicious.png'));
+  const imageBuffer = readFileSync(join(process.cwd(), 'public/genie-logo.png'));
   const imageData = imageBuffer.toString('base64');
   const src = `data:image/png;base64,${imageData}`;
 

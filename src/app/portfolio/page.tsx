@@ -6,7 +6,7 @@ import styles from '../services/services.module.css';
 import hero from './portfolio.module.css';
 
 export const metadata: Metadata = {
-  title: 'Portfolio | 🧞 │ dev',
+  title: 'Portfolio | Genie │ dev',
   description:
     'Featured digital work—from polished websites to complex systems—showing how we turn concepts into reliable solutions and lasting partnerships.',
 };

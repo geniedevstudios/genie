@@ -46,19 +46,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: '🧞 │ dev - HOME',
+  title: 'Genie │ dev - HOME',
   // Using a special unicode vertical line '│' instead of standard '|' so iOS doesn't split and truncate the name
-  applicationName: '🧞 │ dev',
+  applicationName: 'Genie │ dev',
   appleWebApp: {
-    title: '🧞 │ dev',
+    title: 'Genie │ dev',
     statusBarStyle: 'default',
     capable: true,
   },
   description: 'Expert Full-Stack Engineer and Geophysics student based in Ghana building revenue-generating systems, payment integrations, and real-time applications.',
   keywords: ['Full-Stack Developer', 'Ghana Engineering', 'Paystack Integration', 'React Developer', 'Django', 'Geophysics', 'Systems Design'],
   openGraph: {
-    title: '🧞 │ dev - HOME',
-    siteName: '🧞 │ dev',
+    title: 'Genie │ dev - HOME',
+    siteName: 'Genie │ dev',
     description: 'Building high-performance systems that scale and handle payments.',
     type: 'website',
   },

@@ -5,7 +5,7 @@ import { GenieMark } from '@/components/common/GenieMark';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | 🧞 | DEV',
+  title: 'Terms of Service | Genie | DEV',
   description: 'The terms and conditions for using GENIE | DEV services.',
 };
 

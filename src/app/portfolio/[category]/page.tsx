@@ -26,11 +26,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params;
   if (!isPortfolioCategoryId(slug)) {
-    return { title: 'Portfolio | 🧞 │ dev' };
+    return { title: 'Portfolio | Genie │ dev' };
   }
   const cat = getPortfolioCategory(slug);
   return {
-    title: `${cat?.title ?? 'Portfolio'} | 🧞 │ dev`,
+    title: `${cat?.title ?? 'Portfolio'} | Genie │ dev`,
     description: cat?.description ?? 'Explore work by specialty.',
   };
 }
