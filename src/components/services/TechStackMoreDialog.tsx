@@ -9,7 +9,7 @@ import { GenieMark } from '@/components/common/GenieMark';
 import { buildGenieVariants } from '@/lib/genieCardMotion';
 import styles from '@/app/services/services.module.css';
 
-export function TechStackMoreDialog() {
+export function TechStackMoreDialog({ onOpenChange }: { onOpenChange?: (open: boolean) => void }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const titleId = useId();
@@ -39,6 +39,10 @@ export function TechStackMoreDialog() {
     };
   }, [open]);
 
+  useEffect(() => {
+    onOpenChange?.(open);
+  }, [open, onOpenChange]);
+
   const overlay =
     mounted ? (
       <AnimatePresence mode="sync">
@@ -48,13 +52,14 @@ export function TechStackMoreDialog() {
               key="tech-modal-backdrop"
               role="presentation"
               className={styles.techModalBackdrop}
+              style={{ position: 'absolute' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
               onClick={() => setOpen(false)}
             />
-            <div key="tech-modal-shell" className={styles.techModalShell}>
+            <div key="tech-modal-shell" className={styles.techModalShell} style={{ position: 'absolute' }}>
               <motion.div
                 key="tech-modal-panel"
                 role="dialog"
@@ -114,15 +119,20 @@ export function TechStackMoreDialog() {
         type="button"
         className={styles.techMoreBtn}
         onClick={() => setOpen(true)}
+        style={{ 
+          opacity: open ? 0 : 1, 
+          pointerEvents: open ? 'none' : 'auto',
+          transition: 'opacity 0.2s ease'
+        }}
         aria-expanded={open}
         aria-haspopup="dialog"
       >
         <span className={styles.techMoreBtnIcon} aria-hidden>
           <Plus size={18} strokeWidth={2.5} />
         </span>
-        <span>And more tools</span>
+        <span>More Tools</span>
       </button>
-      {mounted && typeof document !== 'undefined' ? createPortal(overlay, document.body) : null}
+      {mounted ? overlay : null}
     </div>
   );
 }

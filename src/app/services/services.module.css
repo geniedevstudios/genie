@@ -444,13 +444,21 @@
   z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.techMoreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  width: 100%;
 }
 
 .techHead {
-  max-width: min(52rem, 100%);
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: clamp(2rem, 5vw, 3rem);
+  max-width: 100%;
   text-align: center;
 }
 
@@ -486,12 +494,12 @@
 }
 
 .techLead {
-  margin: 0 auto;
   font-size: clamp(1rem, 1.55vw, 1.125rem);
   line-height: 1.72;
   color: var(--fg-secondary);
   max-width: 62ch;
   text-align: center;
+  margin: 0 auto;
 }
 
 .techColumns {
@@ -566,13 +574,22 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--fg-primary);
-  background: color-mix(in srgb, var(--brand-primary) 12%, var(--bg-secondary));
-  border: 1px solid color-mix(in srgb, var(--brand-primary) 38%, transparent);
+  
+  /* Glass matching cards */
+  background: rgba(18, 22, 32, 0.58);
+  backdrop-filter: blur(44px) saturate(210%);
+  -webkit-backdrop-filter: blur(44px) saturate(210%);
+  will-change: backdrop-filter;
+  transform: translateZ(0);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
   cursor: pointer;
   box-shadow:
-    0 2px 12px color-mix(in srgb, var(--brand-primary) 12%, transparent),
-    inset 0 1px 0 hsla(0, 0%, 100%, 0.65);
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
@@ -581,11 +598,12 @@
 }
 
 .techMoreBtn:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
+  transform: translateY(-2px) translateZ(0);
+  border-color: rgba(255, 255, 255, 0.4);
   box-shadow:
-    0 8px 26px color-mix(in srgb, var(--brand-primary) 18%, transparent),
-    inset 0 1px 0 hsla(0, 0%, 100%, 0.85);
+    0 8px 26px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
 .techMoreBtn:focus-visible {
@@ -609,9 +627,7 @@
   position: fixed;
   inset: 0;
   z-index: 1100;
-  background: hsla(222, 42%, 7%, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* Removed background and blur so it's an invisible click layer */
 }
 
 .techModalShell {
@@ -635,13 +651,19 @@
   -webkit-overflow-scrolling: touch;
   padding: 1.25rem 1.35rem 1.35rem;
   border-radius: 1rem;
-  background: rgba(8, 10, 20, 0.94);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  
+  /* Glass matching cards */
+  background: rgba(18, 22, 32, 0.58);
+  backdrop-filter: blur(44px) saturate(210%);
+  -webkit-backdrop-filter: blur(44px) saturate(210%);
+  will-change: backdrop-filter;
+  transform: translateZ(0);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.18);
   box-shadow:
-    0 24px 60px hsla(0, 0%, 0%, 0.45),
-    inset 0 1px 0 hsla(0, 0%, 100%, 0.14);
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
 .techModalPanel::before {
@@ -845,6 +867,10 @@
 @media (max-width: 1100px) {
   .techColumns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .techInner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 }
 

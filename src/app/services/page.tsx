@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
@@ -6,6 +6,7 @@ import { GenieMark } from '@/components/common/GenieMark';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
+import { AnimatedTechGrid } from '@/components/services/AnimatedTechGrid';
 import styles from './services.module.css';
 
 export const metadata: Metadata = {
@@ -142,7 +143,7 @@ type TechStackId = (typeof TECH_STACK)[number]['id'];
 
 const TECH_ICON_SRC: Record<TechStackId, string | null> = {
   node: '/node.png',
-  react: null,
+  react: '/react.svg',
   supabase: '/supa.png',
   mongodb: '/mongo.png',
   vscode: '/vs.png',
@@ -296,19 +297,15 @@ export default function ServicesPage() {
                   We choose technologies that ship fast, scale cleanly, and stay maintainable as your product grows.
                 </p>
               </header>
-              <div className={styles.techColumns}>
-                {TECH_STACK.map((t) => (
-                  <article key={t.id} className={styles.techCard}>
-                    <div className={styles.techBrand}>
-                      <TechBrandIcon id={t.id} />
-                      <span className={styles.techBrandLabel}>{t.label}</span>
-                    </div>
-                    <h3 className={styles.techCardTitle}>{t.title}</h3>
-                    <p className={styles.techCardDesc}>{t.description}</p>
-                  </article>
-                ))}
+              <div className={styles.techRightPanel}>
+                <AnimatedTechGrid 
+                  items={TECH_STACK.map(t => ({
+                    id: t.id,
+                    label: t.label,
+                    iconSrc: TECH_ICON_SRC[t.id]
+                  }))} 
+                />
               </div>
-              <TechStackMoreDialog />
             </div>
           </section>
         </div>
