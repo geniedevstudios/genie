@@ -21,6 +21,8 @@ type Props = {
   inputId: string;
   /** Shown under the field; linked for assistive tech. */
   errorMessage?: string;
+  theme?: 'light' | 'dark';
+  placeholder?: string;
 };
 
 export const PhoneCountrySelect: React.FC<Props> = ({
@@ -30,6 +32,8 @@ export const PhoneCountrySelect: React.FC<Props> = ({
   onPhoneChange,
   inputId,
   errorMessage,
+  theme = 'dark',
+  placeholder,
 }) => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -96,7 +100,7 @@ export const PhoneCountrySelect: React.FC<Props> = ({
   };
 
   return (
-    <div className={styles.wrap} ref={wrapRef}>
+    <div className={styles.wrap} data-theme={theme} ref={wrapRef}>
       <div className={styles.row}>
         <button
           type="button"
@@ -127,6 +131,7 @@ export const PhoneCountrySelect: React.FC<Props> = ({
           className={styles.input}
           maxLength={selected.nsnMax}
           value={phoneValue}
+          placeholder={placeholder}
           onChange={(e) => {
             const normalized = normalizeNationalDigits(e.target.value);
             onPhoneChange(clampNationalDigits(normalized, selected.nsnMax));

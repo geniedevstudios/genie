@@ -6,21 +6,21 @@ import styles from './quote.module.css';
 const TESTIMONIALS = [
   {
     id: 1,
-    name: 'Sarah Jenkins',
+    name: 'JOEY The brand',
     text: 'Working with Genie dev was an absolute game-changer. They delivered our complex e-commerce platform ahead of schedule, with flawless code quality.',
-    avatar: 'https://i.pravatar.cc/100?img=1',
+    avatar: '/joey logo.png',
   },
   {
     id: 2,
-    name: 'Marcus Chen',
+    name: 'JOEY The brand',
     text: 'Their deep understanding of systems architecture helped us scale from a few hundred users to tens of thousands without a single hiccup.',
-    avatar: 'https://i.pravatar.cc/100?img=11',
+    avatar: '/joey logo.png',
   },
   {
     id: 3,
-    name: 'Elena Rodriguez',
+    name: 'JOEY The brand',
     text: 'Incredible attention to detail. Not only is the final product lightning fast, but the communication throughout the entire build process was top-tier.',
-    avatar: 'https://i.pravatar.cc/100?img=9',
+    avatar: '/joey logo.png',
   },
 ];
 

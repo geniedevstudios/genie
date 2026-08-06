@@ -17,6 +17,86 @@
   box-shadow: 0 0 0 3px hsla(210, 100%, 50%, 0.12);
 }
 
+/* --- LIGHT THEME (Matches QuoteForm underline style) --- */
+.wrap[data-theme="light"] .row {
+  border: none;
+  border-bottom: 2px solid #e2e8f0;
+  background: transparent;
+  border-radius: 0;
+  align-items: center;
+}
+
+.wrap[data-theme="light"] .row:focus-within {
+  border-color: var(--brand-primary);
+  box-shadow: none;
+}
+
+.wrap[data-theme="light"] .trigger {
+  background: transparent;
+  border-right: 1px solid #e2e8f0;
+  color: #1a202c;
+  padding: 1rem 0.75rem 1rem 0;
+}
+
+.wrap[data-theme="light"] .trigger:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.wrap[data-theme="light"] .chevron {
+  color: #64748b;
+}
+
+.wrap[data-theme="light"] .flagImg {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.wrap[data-theme="light"] .input {
+  color: #1a202c;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 1rem 0 1rem 0.75rem;
+  font-family: var(--font-body);
+}
+
+.wrap[data-theme="light"] .input::placeholder {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light"] .dropdown {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.wrap[data-theme="light"] .search {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.wrap[data-theme="light"] .searchInput {
+  color: #1a202c;
+}
+
+.wrap[data-theme="light"] .searchInput::placeholder {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light"] .item {
+  color: #4a5568;
+}
+
+.wrap[data-theme="light"] .item:hover {
+  background: #f8fafc;
+}
+
+.wrap[data-theme="light"] .itemSelected {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.wrap[data-theme="light"] .itemDial {
+  color: #a0aec0;
+}
+
 .trigger {
   display: inline-flex;
   align-items: center;
@@ -198,4 +278,86 @@
   font-size: 0.8125rem;
   color: #f87171;
   line-height: 1.35;
+}
+
+/* --- LIGHT THEME (Matches QuoteForm underline style) --- */
+.wrap[data-theme="light"] .row {
+  border: none;
+  border-bottom: 2px solid #e2e8f0;
+  background: transparent;
+  border-radius: 0;
+  align-items: center;
+}
+
+.wrap[data-theme="light"] .row:focus-within {
+  border-color: var(--brand-primary);
+  box-shadow: none;
+}
+
+.wrap[data-theme="light"] .trigger {
+  background: transparent;
+  border-right: 1px solid #e2e8f0;
+  color: #1a202c;
+  padding: 1rem 0.75rem 1rem 0;
+}
+
+.wrap[data-theme="light"] .trigger:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.wrap[data-theme="light"] .chevron {
+  color: #64748b;
+}
+
+.wrap[data-theme="light"] .flagImg {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.wrap[data-theme="light"] .input {
+  color: #1a202c;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 1rem 0 1rem 0.75rem;
+  font-family: var(--font-body);
+}
+
+.wrap[data-theme="light"] .input::placeholder {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light"] .dropdown {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.wrap[data-theme="light"] .search {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.wrap[data-theme="light"] .searchInput {
+  color: #1a202c;
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.wrap[data-theme="light"] .searchInput::placeholder {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light"] .item {
+  color: #4a5568;
+}
+
+.wrap[data-theme="light"] .item:hover {
+  background: #f8fafc;
+}
+
+.wrap[data-theme="light"] .itemSelected {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.wrap[data-theme="light"] .itemDial {
+  color: #a0aec0;
 }

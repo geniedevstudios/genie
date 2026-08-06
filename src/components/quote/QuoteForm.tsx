@@ -3,16 +3,48 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GenieMark } from '@/components/common/GenieMark';
+import { PhoneCountrySelect } from '@/components/common/PhoneCountrySelect';
+import {
+  DEFAULT_PHONE_COUNTRY_ID,
+  findCountryById,
+  normalizeNationalDigits,
+  nationalLengthOk,
+} from '@/lib/phoneCountries';
 import styles from './form.module.css';
 
-const PROJECT_TYPES = ['Website', 'Web App', 'Mobile App', 'E-commerce', 'Dashboard / Admin System'];
-const FEATURES = [
-  'User accounts', 'Payments', 'Booking / Scheduling', 
-  'Admin dashboard', 'Inventory / Products', 'Analytics / Reports', 
-  'Third-party integrations', 'AI features'
+const PROJECT_TYPES = [
+  'Website and Web Apps Development',
+  'UI/UX Designs',
+  'Mobile Apps Development',
+  'Cybersecurity',
+  'IT Consultancy'
 ];
+
+const FEATURES_BY_TYPE: Record<string, string[]> = {
+  'Website and Web Apps Development': [
+    'Custom E-commerce', 'Portfolio / Corporate Site', 'Web Portal', 
+    'SaaS Platform', 'Admin Dashboard', 'User Accounts', 'Payments', 'AI Features'
+  ],
+  'UI/UX Designs': [
+    'Wireframing', 'High-fidelity Mockups', 'Interactive Prototypes', 
+    'Design System', 'User Research', 'Usability Testing'
+  ],
+  'Mobile Apps Development': [
+    'iOS Native', 'Android Native', 'Cross-Platform', 
+    'App Store Submission', 'Push Notifications', 'Offline Mode', 'In-App Purchases', 'Location Services'
+  ],
+  'Cybersecurity': [
+    'Vulnerability Assessment', 'Penetration Testing', 'Security Audit', 
+    'Compliance Consulting', 'Data Encryption', 'Threat Modeling'
+  ],
+  'IT Consultancy': [
+    'Tech Stack Assessment', 'Architecture Design', 'Cloud Migration', 
+    'Vendor Selection', 'Team Augmentation', 'API Strategy'
+  ]
+};
+
 const BUDGETS = ['Under $500', '$500–$1,500', '$1,500–$3,000', '$3,000–$10,000', '$10,000+'];
-const TIMEFRAMES = ['Immediately', 'Within 2 weeks', 'Within 1 month', 'Just exploring'];
+const TIMEFRAMES = ['1-3 weeks', '1-3 months', '3-6 months', 'Not sure yet'];
 
 const STEP_LABELS = ['Project Type', 'Features', 'Details', 'Budget', 'Contact'];
 
@@ -27,7 +59,12 @@ export function QuoteForm() {
   const [description, setDescription] = useState('');
   const [budget, setBudget] = useState('');
   const [timeframe, setTimeframe] = useState('');
-  const [contact, setContact] = useState({ name: '', email: '', whatsapp: '' });
+  const [contact, setContact] = useState({ 
+    name: '', 
+    email: '', 
+    phoneCountryId: DEFAULT_PHONE_COUNTRY_ID, 
+    phoneLocal: '' 
+  });
 
   const nextStep = () => {
     if (step < 6) {
@@ -48,6 +85,12 @@ export function QuoteForm() {
     
     try {
       const estimate = calculateEstimate();
+      
+      const country = findCountryById(contact.phoneCountryId) ?? findCountryById(DEFAULT_PHONE_COUNTRY_ID)!;
+      const national = normalizeNationalDigits(contact.phoneLocal);
+      const dialDigits = country.dial.replace(/\D/g, '');
+      const finalWhatsApp = national.length > 0 ? `+${dialDigits}${national}` : undefined;
+
       await fetch('/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,7 +100,11 @@ export function QuoteForm() {
           description,
           budget,
           timeframe,
-          contact,
+          contact: {
+            name: contact.name,
+            email: contact.email,
+            whatsapp: finalWhatsApp
+          },
           estimate
         })
       });
@@ -71,23 +118,29 @@ export function QuoteForm() {
 
   const calculateEstimate = () => {
     let score = 0;
-    if (projectType === "Website") score += 1;
-    if (projectType === "E-commerce") score += 3;
-    if (projectType === "Web App") score += 3;
-    if (projectType === "Mobile App") score += 4;
-    if (projectType === "Dashboard / Admin System") score += 3;
+    
+    // Project Types
+    if (projectType === "Website and Web Apps Development") score += 2;
+    if (projectType === "UI/UX Designs") score += 1;
+    if (projectType === "Mobile Apps Development") score += 3;
+    if (projectType === "Cybersecurity") score += 3;
+    if (projectType === "IT Consultancy") score += 2;
 
-    if (features.includes("Payments")) score += 2;
-    if (features.includes("Admin dashboard")) score += 2;
-    if (features.includes("AI features")) score += 4;
-    if (features.includes("User accounts")) score += 1;
-    if (features.includes("Booking / Scheduling")) score += 2;
-    if (features.includes("Inventory / Products")) score += 2;
-    if (features.includes("Third-party integrations")) score += 2;
+    // Capabilities / Features (Base score of 1 per feature)
+    score += features.length * 1;
+    
+    // Premium features add extra weight
+    if (features.includes("Custom E-commerce")) score += 2;
+    if (features.includes("SaaS Platform")) score += 2;
+    if (features.includes("AI Features")) score += 2;
+    if (features.includes("Penetration Testing")) score += 2;
+    if (features.includes("Architecture Design")) score += 1;
 
-    if (score <= 2) return "$500 – $1,500";
-    if (score <= 5) return "$1,500 – $3,000";
-    return "$3,000 – $10,000+";
+    // Thresholds
+    if (score <= 3) return "$500 – $1,500";
+    if (score <= 7) return "$1,500 – $5,000";
+    if (score <= 12) return "$5,000 – $10,000";
+    return "$10,000+";
   };
 
   const toggleFeature = (feat: string) => {
@@ -101,6 +154,9 @@ export function QuoteForm() {
     center: { opacity: 1, x: 0 },
     exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -20 : 20 })
   };
+
+  const selectedCountry = findCountryById(contact.phoneCountryId) ?? findCountryById(DEFAULT_PHONE_COUNTRY_ID)!;
+  const isPhoneOk = nationalLengthOk(normalizeNationalDigits(contact.phoneLocal), selectedCountry.nsnMin, selectedCountry.nsnMax);
 
   return (
     <div className={styles.formContainer}>
@@ -150,7 +206,10 @@ export function QuoteForm() {
                       key={type} 
                       type="button"
                       className={`${styles.selectCard} ${projectType === type ? styles.selectCardActive : ''}`}
-                      onClick={() => setProjectType(type)}
+                      onClick={() => {
+                        setProjectType(type);
+                        setFeatures([]);
+                      }}
                     >
                       {type}
                     </button>
@@ -173,14 +232,12 @@ export function QuoteForm() {
             {step === 2 && (
               <div className={styles.stepInner}>
                 <h2 className={styles.stepTitle}>Which capabilities are important?</h2>
-                <div className={styles.checkboxGrid}>
-                  {FEATURES.map(feat => (
-                    <label 
-                      key={feat} 
-                      className={`${styles.checkboxCard} ${features.includes(feat) ? styles.checkboxCardActive : ''}`}
-                    >
+                <div className={styles.checkboxGrid2}>
+                  {FEATURES_BY_TYPE[projectType || PROJECT_TYPES[0]]?.map(feat => (
+                    <label key={feat} className={`${styles.checkboxCard} ${features.includes(feat) ? styles.checkboxCardActive : ''}`}>
                       <input 
                         type="checkbox" 
+                        value={feat}
                         checked={features.includes(feat)}
                         onChange={() => toggleFeature(feat)}
                         className={styles.hiddenCheckbox}
@@ -286,13 +343,17 @@ export function QuoteForm() {
                     value={contact.email}
                     onChange={e => setContact({...contact, email: e.target.value})}
                   />
-                  <input 
-                    type="tel" 
-                    placeholder="WhatsApp (Numbers only)" 
-                    className={styles.inputLine}
-                    value={contact.whatsapp}
-                    onChange={e => setContact({...contact, whatsapp: e.target.value.replace(/[^\d+]/g, '')})}
-                  />
+                  <div className={styles.phoneFieldWrap}>
+                    <PhoneCountrySelect
+                      countryId={contact.phoneCountryId}
+                      onCountryChange={(phoneCountryId) => setContact(prev => ({ ...prev, phoneCountryId }))}
+                      phoneValue={contact.phoneLocal}
+                      onPhoneChange={(phoneLocal) => setContact(prev => ({ ...prev, phoneLocal }))}
+                      inputId="quote-whatsapp"
+                      theme="light"
+                      placeholder="WhatsApp (Numbers only)"
+                    />
+                  </div>
                 </div>
                 <div className={styles.stepFooter}>
                   <button className={styles.textBtn} onClick={prevStep}>Back</button>
@@ -302,7 +363,7 @@ export function QuoteForm() {
                     disabled={
                       !contact.name || 
                       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email) || 
-                      !contact.whatsapp || 
+                      !isPhoneOk || 
                       isLoading
                     }
                   >

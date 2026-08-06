@@ -40,7 +40,6 @@
   padding: 3.5rem;
   border-radius: 1.5rem;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -270,8 +269,12 @@
 .inputStack {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 400px;
+  gap: 2rem;
+  max-width: 600px;
+}
+
+.phoneFieldWrap {
+  margin-top: 0.5rem;
 }
 
 .inputLine {
