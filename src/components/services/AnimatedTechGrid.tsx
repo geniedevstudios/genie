@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { TechStackMoreDialog } from './TechStackMoreDialog';
 import styles from './AnimatedTechGrid.module.css';
 
@@ -52,7 +52,7 @@ export function AnimatedTechGrid({ items }: AnimatedTechGridProps) {
 
   // For col1 (LEFT): moving UP. 
   // Start off-screen bottom, scroll up until last item is fully visible.
-  const col1Variants = {
+  const col1Variants: Variants = {
     initial: { y: 500 },
     scroll: { y: -250, transition: { duration: 8, ease: 'linear' } },
     pause: { y: -250 },
@@ -60,7 +60,7 @@ export function AnimatedTechGrid({ items }: AnimatedTechGridProps) {
 
   // For col2 (RIGHT): moving DOWN.
   // Start off-screen top, scroll down until first item is fully visible.
-  const col2Variants = {
+  const col2Variants: Variants = {
     initial: { y: -750 },
     scroll: { y: 0, transition: { duration: 8, ease: 'linear' } },
     pause: { y: 0 },
