@@ -86,7 +86,7 @@ export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = 
       title: 'JOEY The brand',
       summary:
         'One brand across marketing site, product surfaces, UI explorations, and admin tooling—built for clarity, speed, and a cohesive experience.',
-      href: '/contact',
+      href: 'https://joeythebrand.com',
       thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
   ],
@@ -96,7 +96,7 @@ export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = 
       title: 'JOEY The brand',
       summary:
         'UI and UX for the JOEY brand—explorations, flows, and design-system-aligned screens from marketing through product and ops.',
-      href: '/contact',
+      href: 'https://joeythebrand.com',
       thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
   ],
