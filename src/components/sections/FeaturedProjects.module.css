@@ -14,29 +14,6 @@
   z-index: 1;
 }
 
-.section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    180deg,
-    hsla(222, 47%, 5%, 0.52) 0%,
-    hsla(222, 40%, 9%, 0.48) 45%,
-    hsla(222, 47%, 6%, 0.55) 100%
-  );
-  pointer-events: none;
-}
-
-.section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% -20%, hsla(226, 84%, 56%, 0.1), transparent 55%);
-  pointer-events: none;
-}
-
 .sectionHeader {
   position: relative;
   z-index: 1;
@@ -68,7 +45,7 @@
   line-height: 0.95;
   letter-spacing: 0.04em;
   color: transparent;
-  -webkit-text-stroke: 1px var(--spec-ghost);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.08);
   text-transform: uppercase;
   pointer-events: none;
   user-select: none;
@@ -82,7 +59,7 @@
   font-size: clamp(1.75rem, 4vw, 2.35rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: #1a202c;
   margin: 0;
 }
 
@@ -90,7 +67,7 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: clamp(0.95rem, 2vw, 1.05rem);
   line-height: 1.65;
-  color: var(--spec-muted);
+  color: #4a5568;
   max-width: 44ch;
   margin: 0 auto;
 }
@@ -114,9 +91,9 @@
 .featuredMediaWrap {
   border-radius: 1rem;
   overflow: hidden;
-  border: 1px solid hsla(0, 0%, 100%, 0.14);
-  background: hsla(228, 38%, 10%, 0.45);
-  box-shadow: 0 22px 56px hsla(0, 0%, 0%, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
   position: relative;
 }
 
@@ -159,8 +136,8 @@
   justify-content: center;
   min-height: 340px;
   background:
-    linear-gradient(145deg, hsla(226, 84%, 56%, 0.08) 0%, transparent 50%),
-    hsla(0, 0%, 100%, 0.03);
+    linear-gradient(145deg, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+    rgba(0, 0, 0, 0.01);
 }
 
 .featuredPlaceholderLabel {
@@ -169,7 +146,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: hsla(0, 0%, 100%, 0.38);
+  color: rgba(0, 0, 0, 0.38);
 }
 
 .featuredDesc {
@@ -182,7 +159,7 @@
   font-family: var(--font-body);
   font-size: clamp(0.92rem, 1.65vw, 1.02rem);
   line-height: 1.68;
-  color: hsla(0, 0%, 100%, 0.82);
+  color: #4a5568;
   margin: 0;
 }
 
@@ -218,9 +195,9 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  color: hsla(0, 0%, 100%, 0.82);
-  background: hsla(0, 0%, 100%, 0.06);
-  border: 1px solid hsla(0, 0%, 100%, 0.14);
+  color: #4a5568;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition:
     background 0.2s ease,
@@ -233,15 +210,15 @@
 }
 
 .featuredTileBtn:hover {
-  background: hsla(0, 0%, 100%, 0.1);
-  border-color: hsla(0, 0%, 100%, 0.24);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #1a202c;
 }
 
 .featuredTileBtnActive {
-  background: hsla(226, 84%, 56%, 0.22);
-  border-color: hsla(226, 84%, 56%, 0.55);
-  color: #fff;
+  background: rgba(255, 255, 255, 1);
+  border-color: hsl(226, 84%, 56%);
+  color: #1a202c;
 }
 
 .featuredTileBtn:focus-visible {
@@ -265,7 +242,7 @@
   font-family: var(--font-body);
   font-size: clamp(0.88rem, 1.5vw, 0.98rem);
   line-height: 1.55;
-  color: hsla(0, 0%, 100%, 0.72);
+  color: #4a5568;
 }
 
 .featuredClosingLink {
@@ -289,37 +266,4 @@
   border-radius: 2px;
 }
 
-:global(html[data-theme='light']) .featuredMediaWrap {
-  border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
-  background: hsla(0, 0%, 100%, 0.35);
-  box-shadow: 0 18px 44px rgba(11, 13, 27, 0.08);
-}
 
-:global(html[data-theme='light']) .featuredDescText {
-  color: color-mix(in srgb, var(--palette-ink) 82%, white);
-}
-
-:global(html[data-theme='light']) .featuredTileBtn {
-  color: color-mix(in srgb, var(--palette-ink) 88%, white);
-  background: hsla(0, 0%, 100%, 0.72);
-  border-color: color-mix(in srgb, var(--palette-ink) 14%, transparent);
-}
-
-:global(html[data-theme='light']) .featuredTileBtn:hover {
-  background: rgba(255, 255, 255, 0.94);
-}
-
-:global(html[data-theme='light']) .featuredTileBtnActive {
-  background: color-mix(in srgb, var(--brand-primary) 14%, white);
-  border-color: color-mix(in srgb, var(--brand-primary) 38%, transparent);
-  color: var(--palette-ink);
-}
-
-:global(html[data-theme='light']) .featuredClosing {
-  color: color-mix(in srgb, var(--palette-ink) 72%, white);
-}
-
-:global(html[data-theme='light']) .featuredClosingLink {
-  color: var(--brand-primary);
-  text-decoration-color: color-mix(in srgb, var(--brand-primary) 45%, transparent);
-}

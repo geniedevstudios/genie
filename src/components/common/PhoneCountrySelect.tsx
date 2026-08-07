@@ -21,7 +21,7 @@ type Props = {
   inputId: string;
   /** Shown under the field; linked for assistive tech. */
   errorMessage?: string;
-  theme?: 'light' | 'dark';
+  theme?: 'light' | 'dark' | 'light-box';
   placeholder?: string;
 };
 

@@ -11,13 +11,9 @@
   /* Must not clip pill popovers (genie cards) that extend past the section edge */
   overflow: clip;
   padding-top: var(--nav-height);
-  /* Light vignette only — ambient video comes from global `PageBackground`. */
-  background-image:
-    linear-gradient(to bottom, rgba(5, 8, 18, 0.38) 0%, rgba(5, 8, 18, 0.52) 100%);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  color: #fff;
+  /* Transparent to show global background */
+  background: transparent;
+  color: #1a202c;
 }
 
 /* Tall narrow portrait (e.g. Galaxy S8+, Fold outer cover) — cover crops heavily; anchor focal slightly higher */
@@ -75,11 +71,8 @@
   font-size: clamp(3rem, 8vw, 6.5rem);
   font-weight: 400;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: #1a202c;
   line-height: 1;
-  text-shadow:
-    0 2px 24px rgba(0, 0, 0, 0.5),
-    0 0 80px rgba(255, 255, 255, 0.06);
 }
 
 /* Subtitle */
@@ -87,7 +80,7 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: clamp(1rem, 2.2vw, 1.3rem);
   font-weight: 400;
-  color: #fff;
+  color: #1a202c;
   letter-spacing: 0.01em;
   line-height: 1.5;
   margin-bottom: 0.75rem;
@@ -99,7 +92,7 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: clamp(0.8rem, 1.4vw, 0.95rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.42);
+  color: #4a5568;
   letter-spacing: 0.01em;
   line-height: 1.6;
   margin-bottom: 3.5rem;
@@ -127,19 +120,19 @@
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
+  color: #1a202c;
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   transition: background 0.22s ease, border-color 0.22s ease, transform 0.18s ease;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .btnOutline:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
 
@@ -339,8 +332,8 @@
 /* Edge-only layout keeps the center column clear for headline + CTAs. */
 /* Amber-Orange — top left */
 .pillImplement {
-  top: 11%;
-  left: 5%;
+  top: 22%;
+  left: 20%;
   right: auto;
   bottom: auto;
   background: linear-gradient(165deg, #fb923c 0%, #c2410c 100%);
@@ -352,8 +345,8 @@
 
 /* Cyan-Teal — top right */
 .pillDesign {
-  top: 11%;
-  right: 5%;
+  top: 22%;
+  right: 20%;
   left: auto;
   bottom: auto;
   background: linear-gradient(165deg, #22d3ee 0%, #0e7490 100%);
@@ -368,8 +361,8 @@
 
 /* Rose-Pink — mid right (below nav / clear of title band) */
 .pillCode {
-  top: 38%;
-  right: 4%;
+  top: 45%;
+  right: 14%;
   left: auto;
   bottom: auto;
   background: linear-gradient(165deg, #f472b6 0%, #be185d 100%);
@@ -391,8 +384,8 @@
 
 /* Indigo-Violet — mid left (mirror of Code; clears center) */
 .pillManage {
-  top: 38%;
-  left: 4%;
+  top: 45%;
+  left: 14%;
   right: auto;
   bottom: auto;
   background: linear-gradient(165deg, #818cf8 0%, #4338ca 100%);
@@ -404,8 +397,8 @@
 
 /* Lime-Gold — bottom left (above scroll chevron, clear of CTAs) */
 .pillSeo {
-  bottom: 22%;
-  left: 4%;
+  bottom: 26%;
+  left: 20%;
   top: auto;
   right: auto;
   background: linear-gradient(165deg, #d9f99d 0%, #84cc16 100%);
@@ -420,8 +413,8 @@
 
 /* Jade-Teal — bottom right */
 .pillSecurity {
-  bottom: 22%;
-  right: 4%;
+  bottom: 26%;
+  right: 20%;
   left: auto;
   top: auto;
   background: linear-gradient(165deg, #34d399 0%, #065f46 100%);
@@ -437,7 +430,7 @@
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--fg-accent);
+  color: #1a202c;
 }
 
 /* ─── Genie Card ─────────────────────────────────────────────────── */
@@ -460,6 +453,12 @@
   white-space: normal;
   text-align: left;
   z-index: 30;
+}
+
+:global([data-theme='light']) .pillCard {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
+  box-shadow: 0 4px 16px rgba(11, 13, 27, 0.1);
 }
 
 /* vertical placement */
@@ -493,6 +492,10 @@
   border-radius: 1rem 1rem 0 0;
 }
 
+:global([data-theme='light']) .pillCard::before {
+  background: color-mix(in srgb, var(--palette-ink) 10%, transparent);
+}
+
 .pillCardLabel {
   font-family: var(--font-label);
   font-size: 0.56rem;
@@ -504,6 +507,10 @@
   max-width: none;
 }
 
+:global([data-theme='light']) .pillCardLabel {
+  color: color-mix(in srgb, var(--palette-ink) 55%, transparent);
+}
+
 .pillCardDesc {
   font-family: var(--font-body);
   font-size: 0.78rem;
@@ -511,6 +518,10 @@
   color: rgba(255, 255, 255, 0.88);
   margin-bottom: 0.75rem;
   max-width: none;
+}
+
+:global([data-theme='light']) .pillCardDesc {
+  color: color-mix(in srgb, var(--palette-ink) 85%, transparent);
 }
 
 .pillCardStat {
@@ -525,6 +536,11 @@
   padding-top: 0.55rem;
 }
 
+:global([data-theme='light']) .pillCardStat {
+  color: color-mix(in srgb, var(--palette-ink) 55%, transparent);
+  border-top-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
+}
+
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .heroPill {
@@ -533,43 +549,43 @@
   }
 
   .pillImplement {
-    top: 10%;
-    left: 3%;
+    top: 15%;
+    left: 10%;
     right: auto;
     bottom: auto;
   }
 
   .pillDesign {
-    top: 10%;
-    right: 3%;
+    top: 15%;
+    right: 10%;
     left: auto;
     bottom: auto;
   }
 
   .pillManage {
-    top: 36%;
-    left: 3%;
+    top: 40%;
+    left: 8%;
     right: auto;
     bottom: auto;
   }
 
   .pillCode {
-    top: 36%;
-    right: 3%;
+    top: 40%;
+    right: 8%;
     left: auto;
     bottom: auto;
   }
 
   .pillSeo {
-    bottom: 20%;
-    left: 3%;
+    bottom: 22%;
+    left: 10%;
     top: auto;
     right: auto;
   }
 
   .pillSecurity {
-    bottom: 20%;
-    right: 3%;
+    bottom: 22%;
+    right: 10%;
     left: auto;
     top: auto;
   }
@@ -631,43 +647,43 @@
 
   /* Edge columns only — keeps center free for headline + CTAs + trailer */
   .pillImplement {
-    top: 9%;
-    left: 2%;
+    top: 15%;
+    left: 5%;
     right: auto;
     bottom: auto;
   }
 
   .pillDesign {
-    top: 9%;
-    right: 2%;
+    top: 15%;
+    right: 5%;
     left: auto;
     bottom: auto;
   }
 
   .pillManage {
-    top: 26%;
+    top: 35%;
     left: 2%;
     right: auto;
     bottom: auto;
   }
 
   .pillCode {
-    top: 26%;
+    top: 35%;
     right: 2%;
     left: auto;
     bottom: auto;
   }
 
   .pillSeo {
-    bottom: 26%;
-    left: 2%;
+    bottom: 25%;
+    left: 5%;
     top: auto;
     right: auto;
   }
 
   .pillSecurity {
-    bottom: 26%;
-    right: 2%;
+    bottom: 25%;
+    right: 5%;
     left: auto;
     top: auto;
   }
@@ -694,42 +710,42 @@
   }
 
   .pillImplement {
-    top: 11%;
+    top: 14%;
     left: 2%;
     right: auto;
     bottom: auto;
   }
 
   .pillDesign {
-    top: 8%;
+    top: 14%;
     right: 2%;
     left: auto;
     bottom: auto;
   }
 
   .pillManage {
-    top: 28%;
+    top: 32%;
     left: 2%;
     right: auto;
     bottom: auto;
   }
 
   .pillCode {
-    top: 24%;
+    top: 32%;
     right: 2%;
     left: auto;
     bottom: auto;
   }
 
   .pillSeo {
-    bottom: 28%;
+    bottom: 26%;
     left: 2%;
     top: auto;
     right: auto;
   }
 
   .pillSecurity {
-    bottom: 28%;
+    bottom: 26%;
     right: 2%;
     left: auto;
     top: auto;
@@ -743,43 +759,43 @@
 /* Short viewports (e.g. landscape phones): keep pills in corners, away from centered CTAs */
 @media (max-height: 480px) and (orientation: landscape) {
   .pillImplement {
-    top: 6%;
-    left: 2%;
+    top: 10%;
+    left: 8%;
     right: auto;
     bottom: auto;
   }
 
   .pillDesign {
-    top: 6%;
-    right: 2%;
+    top: 10%;
+    right: 8%;
     left: auto;
     bottom: auto;
   }
 
   .pillManage {
-    top: 22%;
-    left: 2%;
+    top: 35%;
+    left: 5%;
     right: auto;
     bottom: auto;
   }
 
   .pillCode {
-    top: 22%;
-    right: 2%;
+    top: 35%;
+    right: 5%;
     left: auto;
     bottom: auto;
   }
 
   .pillSeo {
-    bottom: 14%;
-    left: 2%;
+    bottom: 18%;
+    left: 8%;
     top: auto;
     right: auto;
   }
 
   .pillSecurity {
-    bottom: 14%;
-    right: 2%;
+    bottom: 18%;
+    right: 8%;
     left: auto;
     top: auto;
   }

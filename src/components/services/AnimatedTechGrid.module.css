@@ -68,6 +68,12 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+:global([data-theme='light']) .card {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: color-mix(in srgb, var(--palette-ink) 14%, transparent);
+  box-shadow: 0 4px 16px rgba(11, 13, 27, 0.08);
+}
+
 .card:hover {
   transform: translateY(-2px);
 }
@@ -102,4 +108,8 @@
   font-weight: 500;
   color: #f1f1f1;
   text-align: center;
+}
+
+:global([data-theme='light']) .label {
+  color: var(--palette-ink);
 }

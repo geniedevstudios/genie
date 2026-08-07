@@ -147,29 +147,29 @@
 }
 
 /* Light theme: keep frosted readable on pale cards */
-:global(html[data-theme='light']) .browseProjectsBubble {
+:global([data-theme='light']) .browseProjectsBubble {
   color: var(--palette-ink);
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid color-mix(in srgb, var(--palette-ink) 14%, transparent);
   box-shadow: 0 2px 12px rgba(11, 13, 27, 0.06);
 }
 
-:global(html[data-theme='light']) .browseProjectsBubble:hover {
+:global([data-theme='light']) .browseProjectsBubble:hover {
   background: rgba(255, 255, 255, 0.92);
   border-color: color-mix(in srgb, var(--palette-ink) 22%, transparent);
   color: var(--palette-ink);
 }
 
-:global(html[data-theme='light']) .categoryCardActive .browseProjectsBubble {
+:global([data-theme='light']) .categoryCardActive .browseProjectsBubble {
   background: rgba(255, 255, 255, 0.88);
   border-color: color-mix(in srgb, var(--brand-primary) 45%, transparent);
 }
 
-:global(html[data-theme='light']) .browseProjectsBubble:focus-visible {
+:global([data-theme='light']) .browseProjectsBubble:focus-visible {
   outline: 2px solid var(--brand-primary);
 }
 
-:global(html[data-theme='light']) .categoryCardActive .browseProjectsBubble:hover {
+:global([data-theme='light']) .categoryCardActive .browseProjectsBubble:hover {
   border-color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
 }
 
@@ -218,10 +218,29 @@
   overflow: hidden;
 }
 
+.desktopDetailShell {
+  display: flex;
+}
+
+.mobileDetailShell {
+  display: none;
+  margin-top: 0.5rem;
+  /* Prevent it from getting absurdly tall on mobile */
+  min-height: min(70vh, 800px);
+}
+
 @media (max-width: 960px) {
   .detailShell {
     min-height: 0;
     max-height: none;
+  }
+  
+  .desktopDetailShell {
+    display: none;
+  }
+  
+  .mobileDetailShell {
+    display: flex;
   }
 }
 
@@ -585,18 +604,18 @@
   }
 }
 
-:global(html[data-theme='light']) .projectCardRowSurface {
+:global([data-theme='light']) .projectCardRowSurface {
   --card-page-bg: hsl(258, 42%, 97%);
   border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
   box-shadow: 0 14px 40px rgba(11, 13, 27, 0.1);
 }
 
-:global(html[data-theme='light']) .projectCardRowSurface:hover {
+:global([data-theme='light']) .projectCardRowSurface:hover {
   border-color: color-mix(in srgb, var(--brand-primary) 40%, transparent);
   box-shadow: 0 20px 52px color-mix(in srgb, var(--brand-primary) 12%, transparent);
 }
 
-:global(html[data-theme='light']) .projectCardVisualInner {
+:global([data-theme='light']) .projectCardVisualInner {
   border-color: color-mix(in srgb, var(--palette-ink) 18%, transparent);
   background: hsla(228, 38%, 12%, 0.06);
   box-shadow:
@@ -604,35 +623,35 @@
     inset 0 1px 0 hsla(0, 0%, 100%, 0.35);
 }
 
-:global(html[data-theme='light']) .projectCardRow:not(.projectCardRowSurface):hover .projectCardVisualInner {
+:global([data-theme='light']) .projectCardRow:not(.projectCardRowSurface):hover .projectCardVisualInner {
   border-color: color-mix(in srgb, var(--brand-primary) 38%, transparent);
   box-shadow:
     0 18px 52px color-mix(in srgb, var(--brand-primary) 16%, transparent),
     0 10px 34px rgba(11, 13, 27, 0.1);
 }
 
-:global(html[data-theme='light']) .projectAsideRoman {
+:global([data-theme='light']) .projectAsideRoman {
   -webkit-text-stroke: 1.5px color-mix(in srgb, var(--palette-ink) 18%, transparent);
 }
 
-:global(html[data-theme='light']) .viewBtnInCard {
+:global([data-theme='light']) .viewBtnInCard {
   color: var(--palette-ink);
   background: rgba(255, 255, 255, 0.88);
   border-color: color-mix(in srgb, var(--palette-ink) 18%, transparent);
   box-shadow: 0 4px 16px rgba(11, 13, 27, 0.1);
 }
 
-:global(html[data-theme='light']) .viewBtnInCard:hover {
+:global([data-theme='light']) .viewBtnInCard:hover {
   border-color: color-mix(in srgb, var(--palette-ink) 32%, transparent);
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 6px 20px rgba(11, 13, 27, 0.12);
 }
 
-:global(html[data-theme='light']) .viewBtnInCard:focus-visible {
+:global([data-theme='light']) .viewBtnInCard:focus-visible {
   outline-color: var(--brand-primary);
 }
 
-:global(html[data-theme='light']) .projectCardFigureWithCta::after {
+:global([data-theme='light']) .projectCardFigureWithCta::after {
   background: linear-gradient(
     to top,
     hsla(0, 0%, 100%, 0.82) 0%,
@@ -642,7 +661,7 @@
 }
 
 /* Light theme: glassy cards (violet / slate wash, not flat grey) */
-:global(html[data-theme='light']) .categoryCardOuter {
+:global([data-theme='light']) .categoryCardOuter {
   border: 1px solid color-mix(in srgb, var(--palette-ink) 9%, white);
   background:
     linear-gradient(
@@ -657,14 +676,14 @@
   -webkit-backdrop-filter: blur(16px) saturate(150%);
 }
 
-:global(html[data-theme='light']) .categoryCardOuter:hover:not(.categoryCardActive) {
+:global([data-theme='light']) .categoryCardOuter:hover:not(.categoryCardActive) {
   border-color: color-mix(in srgb, var(--brand-primary) 32%, white);
   box-shadow:
     inset 0 1px 0 white,
     0 16px 48px color-mix(in srgb, var(--brand-primary) 12%, transparent);
 }
 
-:global(html[data-theme='light']) .categoryCardActive {
+:global([data-theme='light']) .categoryCardActive {
   border-color: var(--brand-fade-85);
   box-shadow: 0 0 0 1px var(--brand-fade-20);
   background: var(--brand-surface);
@@ -672,11 +691,11 @@
   -webkit-backdrop-filter: blur(16px) saturate(150%);
 }
 
-:global(html[data-theme='light']) .categoryCardActive:hover {
+:global([data-theme='light']) .categoryCardActive:hover {
   transform: translateY(-1px);
 }
 
-:global(html[data-theme='light']) .detailShell {
+:global([data-theme='light']) .detailShell {
   border: 1px solid color-mix(in srgb, var(--palette-ink) 10%, white);
   background:
     linear-gradient(
@@ -692,11 +711,11 @@
   -webkit-backdrop-filter: blur(22px) saturate(155%);
 }
 
-:global(html[data-theme='light']) .detailTop {
+:global([data-theme='light']) .detailTop {
   border-bottom-color: color-mix(in srgb, var(--palette-ink) 8%, transparent);
 }
 
-:global(html[data-theme='light']) .detailBadge {
+:global([data-theme='light']) .detailBadge {
   border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
   background: linear-gradient(
     145deg,
@@ -759,7 +778,7 @@
   z-index: 0;
 }
 
-:global(html[data-theme='light']) .projectCardPageFigureInner {
+:global([data-theme='light']) .projectCardPageFigureInner {
   background: color-mix(in srgb, var(--palette-ink) 5%, hsl(258, 48%, 99%));
 }
 
@@ -776,14 +795,14 @@
   -webkit-text-stroke: 1.5px hsla(0, 0%, 100%, 0.26);
 }
 
-:global(html[data-theme='light']) .projectCardRowSurface .projectAsideTitle {
+:global([data-theme='light']) .projectCardRowSurface .projectAsideTitle {
   color: var(--palette-ink);
 }
 
-:global(html[data-theme='light']) .projectCardRowSurface .projectAsideSummary {
+:global([data-theme='light']) .projectCardRowSurface .projectAsideSummary {
   color: color-mix(in srgb, var(--palette-ink) 74%, white);
 }
 
-:global(html[data-theme='light']) .projectCardRowSurface .projectAsideRoman {
+:global([data-theme='light']) .projectCardRowSurface .projectAsideRoman {
   -webkit-text-stroke: 1.5px color-mix(in srgb, var(--palette-ink) 18%, transparent);
 }

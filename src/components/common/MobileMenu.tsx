@@ -103,7 +103,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ id, isOpen, onClose }) =
               onClick={onClose}
               aria-label="Home"
             >
-              <GenieMark width={26} />
+              <GenieMark width={32} />
               <span>| dev</span>
             </Link>
 

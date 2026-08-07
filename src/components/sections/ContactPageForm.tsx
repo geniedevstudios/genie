@@ -294,6 +294,7 @@ export const ContactPageForm: React.FC = () => {
                       }}
                       inputId="cp-phone"
                       errorMessage={errors.phone}
+                      theme="light-box"
                     />
                   </div>
 

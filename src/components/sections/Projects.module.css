@@ -14,29 +14,6 @@
   z-index: 1;
 }
 
-.section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    180deg,
-    hsla(222, 47%, 5%, 0.52) 0%,
-    hsla(222, 40%, 9%, 0.48) 45%,
-    hsla(222, 47%, 6%, 0.55) 100%
-  );
-  pointer-events: none;
-}
-
-.section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% -20%, hsla(226, 84%, 56%, 0.1), transparent 55%);
-  pointer-events: none;
-}
-
 .sectionHeader {
   position: relative;
   z-index: 1;
@@ -68,7 +45,7 @@
   line-height: 0.95;
   letter-spacing: 0.04em;
   color: transparent;
-  -webkit-text-stroke: 1px var(--spec-ghost);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.08);
   text-transform: uppercase;
   pointer-events: none;
   user-select: none;
@@ -82,7 +59,7 @@
   font-size: clamp(1.75rem, 4vw, 2.35rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: #1a202c;
   margin: 0;
 }
 
@@ -90,7 +67,7 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: clamp(0.95rem, 2vw, 1.05rem);
   line-height: 1.65;
-  color: var(--spec-muted);
+  color: #4a5568;
   max-width: 44ch;
   margin: 0 auto;
 }
@@ -199,9 +176,11 @@
   align-items: center;
   padding: 1.35rem 1.25rem;
   border-radius: 1.15rem;
-  background: var(--spec-surface);
-  border: 1px solid hsla(0, 0%, 100%, 0.06);
-  box-shadow: 0 16px 40px -20px hsla(0, 0%, 0%, 0.45);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
   overflow: visible;
   transition:
     transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
@@ -212,11 +191,11 @@
 
 .cardCompact:hover {
   transform: translateY(-6px);
-  border-color: hsla(0, 0%, 100%, 0.18);
-  background: hsl(220, 16%, 14%);
+  border-color: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 20px 48px -18px hsla(0, 0%, 0%, 0.55),
-    0 0 0 1px hsla(0, 0%, 100%, 0.06);
+    0 15px 40px -15px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
 .cardCompact:active {
@@ -282,14 +261,14 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  color: #fff;
+  color: #1a202c;
 }
 
 .cardDescDark {
   font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.55;
-  color: var(--spec-muted);
+  color: #4a5568;
   max-width: none;
 }
 
@@ -302,9 +281,9 @@
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #fff;
-  border: 1px solid hsla(0, 0%, 100%, 0.18);
-  background: hsla(0, 0%, 100%, 0.04);
+  color: #1a202c;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.6);
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -312,8 +291,8 @@
 }
 
 .discoverDark:hover {
-  background: hsla(0, 0%, 100%, 0.1);
-  border-color: hsla(0, 0%, 100%, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
 
@@ -651,7 +630,7 @@
   font-style: italic;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: hsla(0, 0%, 100%, 0.88);
+  color: #1a202c;
   margin-bottom: 0.85rem;
   text-align: center;
 }
@@ -660,7 +639,7 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: clamp(0.95rem, 2vw, 1.05rem);
   line-height: 1.7;
-  color: var(--spec-muted);
+  color: #4a5568;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -671,7 +650,7 @@
 
 .wishLead,
 .wishTrail {
-  color: hsla(220, 12%, 72%, 0.95);
+  color: #4a5568;
 }
 
 .genieLink {

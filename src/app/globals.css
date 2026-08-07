@@ -1,7 +1,7 @@
-:root {
+:root, [data-theme='light'] {
   /* Brand palette */
   --palette-white: #ffffff;
-  --palette-violet: #5f01fb;
+  --palette-violet: hsl(210, 100%, 50%); /* Changed to blue per request */
   --palette-slate: #514a85;
   --palette-ink: #0b0d1b;
 

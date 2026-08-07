@@ -361,3 +361,80 @@
 .wrap[data-theme="light"] .itemDial {
   color: #a0aec0;
 }
+
+/* --- LIGHT-BOX THEME --- */
+.wrap[data-theme="light-box"] .row {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.7);
+  align-items: stretch;
+}
+
+.wrap[data-theme="light-box"] .row:focus-within {
+  border-color: hsla(210, 100%, 55%, 0.55);
+  box-shadow: 0 0 0 3px hsla(210, 100%, 50%, 0.12);
+}
+
+.wrap[data-theme="light-box"] .trigger {
+  background: rgba(0, 0, 0, 0.04);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a202c;
+  padding: 0 0.65rem 0 0.75rem;
+}
+
+.wrap[data-theme="light-box"] .trigger:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.wrap[data-theme="light-box"] .chevron {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light-box"] .flagImg {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.wrap[data-theme="light-box"] .input {
+  color: #1a202c;
+  font-size: 1rem;
+}
+
+.wrap[data-theme="light-box"] .input::placeholder {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light-box"] .dropdown {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.wrap[data-theme="light-box"] .search {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.wrap[data-theme="light-box"] .searchInput {
+  color: #1a202c;
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.wrap[data-theme="light-box"] .searchInput::placeholder {
+  color: #a0aec0;
+}
+
+.wrap[data-theme="light-box"] .item {
+  color: #4a5568;
+}
+
+.wrap[data-theme="light-box"] .item:hover {
+  background: #f8fafc;
+}
+
+.wrap[data-theme="light-box"] .itemSelected {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.wrap[data-theme="light-box"] .itemDial {
+  color: #a0aec0;
+}

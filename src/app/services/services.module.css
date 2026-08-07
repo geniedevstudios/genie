@@ -194,20 +194,20 @@
   outline-offset: 3px;
 }
 
-:global(html[data-theme='light']) .cta {
+:global([data-theme='light']) .cta {
   color: var(--palette-ink);
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid color-mix(in srgb, var(--palette-ink) 14%, transparent);
   box-shadow: 0 2px 12px rgba(11, 13, 27, 0.06);
 }
 
-:global(html[data-theme='light']) .cta:hover {
+:global([data-theme='light']) .cta:hover {
   background: rgba(255, 255, 255, 0.92);
   border-color: color-mix(in srgb, var(--palette-ink) 22%, transparent);
   color: var(--palette-ink);
 }
 
-:global(html[data-theme='light']) .cta:focus-visible {
+:global([data-theme='light']) .cta:focus-visible {
   outline: 2px solid var(--brand-primary);
 }
 
@@ -611,6 +611,17 @@
   outline-offset: 3px;
 }
 
+:global([data-theme='light']) .techMoreBtn {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: color-mix(in srgb, var(--palette-ink) 14%, transparent);
+  box-shadow: 0 2px 12px rgba(11, 13, 27, 0.06);
+}
+
+:global([data-theme='light']) .techMoreBtn:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: color-mix(in srgb, var(--palette-ink) 22%, transparent);
+}
+
 .techMoreBtnIcon {
   display: inline-flex;
   align-items: center;
@@ -666,6 +677,14 @@
     inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
+:global([data-theme='light']) .techModalPanel {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: color-mix(in srgb, var(--palette-ink) 14%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
 .techModalPanel::before {
   content: '';
   position: absolute;
@@ -705,6 +724,16 @@
   color: #fff;
 }
 
+:global([data-theme='light']) .techModalClose {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--palette-ink);
+}
+
+:global([data-theme='light']) .techModalClose:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--brand-primary);
+}
+
 .techModalClose:focus-visible {
   outline: 2px solid hsl(265, 85%, 68%);
   outline-offset: 2px;
@@ -738,6 +767,26 @@
   line-height: 1.62;
   color: rgba(255, 255, 255, 0.88);
   margin: 0 0 0.85rem;
+}
+
+:global([data-theme='light']) .techModalKicker {
+  color: color-mix(in srgb, var(--palette-ink) 55%, transparent);
+}
+
+:global([data-theme='light']) .techModalTitle {
+  color: var(--palette-ink);
+}
+
+:global([data-theme='light']) .techModalBody {
+  color: color-mix(in srgb, var(--palette-ink) 85%, transparent);
+}
+
+:global([data-theme='light']) .techModalBodySecondary {
+  color: color-mix(in srgb, var(--palette-ink) 70%, transparent);
+}
+
+:global([data-theme='light']) .techModalBrand {
+  color: var(--palette-ink);
 }
 
 .techModalBodySecondary {
@@ -806,11 +855,19 @@
   outline-offset: 3px;
 }
 
-:global(html[data-theme='light']) .techModalBackdrop {
-  background: hsla(0, 0%, 40%, 0.35);
+:global([data-theme='light']) .techModalCta {
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.22);
 }
 
-:global(html[data-theme='light']) .techModalPanel {
+:global([data-theme='light']) .techModalCta:hover {
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.28);
+}
+
+:global([data-theme='light']) .techModalBackdrop {
+  background: transparent;
+}
+
+:global([data-theme='light']) .techModalPanel {
   background: rgba(255, 255, 255, 0.96);
   border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
   box-shadow:
@@ -818,48 +875,48 @@
     inset 0 1px 0 white;
 }
 
-:global(html[data-theme='light']) .techModalKicker {
+:global([data-theme='light']) .techModalKicker {
   color: color-mix(in srgb, var(--palette-ink) 48%, white);
 }
 
-:global(html[data-theme='light']) .techModalTitle {
+:global([data-theme='light']) .techModalTitle {
   color: var(--palette-ink);
 }
 
-:global(html[data-theme='light']) .techModalBody,
-:global(html[data-theme='light']) .techModalBodySecondary {
+:global([data-theme='light']) .techModalBody,
+:global([data-theme='light']) .techModalBodySecondary {
   color: color-mix(in srgb, var(--palette-ink) 78%, white);
 }
 
-:global(html[data-theme='light']) .techModalBrand {
+:global([data-theme='light']) .techModalBrand {
   color: var(--palette-ink);
 }
 
-:global(html[data-theme='light']) .techModalClose {
+:global([data-theme='light']) .techModalClose {
   background: color-mix(in srgb, var(--palette-ink) 8%, white);
   color: var(--palette-ink);
 }
 
-:global(html[data-theme='light']) .techModalClose:hover {
+:global([data-theme='light']) .techModalClose:hover {
   background: color-mix(in srgb, var(--palette-ink) 12%, white);
 }
 
-:global(html[data-theme='light']) .techMoreBtn {
+:global([data-theme='light']) .techMoreBtn {
   background: color-mix(in srgb, var(--brand-primary) 10%, white);
   border-color: color-mix(in srgb, var(--brand-primary) 35%, transparent);
   box-shadow: 0 2px 14px color-mix(in srgb, var(--brand-primary) 10%, transparent);
 }
 
-:global(html[data-theme='light']) .techMoreBtnIcon {
+:global([data-theme='light']) .techMoreBtnIcon {
   background: var(--brand-primary);
   color: var(--brand-on-primary);
 }
 
-:global(html[data-theme='light']) .techModalCta {
+:global([data-theme='light']) .techModalCta {
   color: var(--brand-on-primary);
 }
 
-:global(html[data-theme='light']) .techWatermark {
+:global([data-theme='light']) .techWatermark {
   opacity: 0.35;
   -webkit-text-stroke: 1px color-mix(in srgb, var(--palette-ink) 10%, transparent);
 }

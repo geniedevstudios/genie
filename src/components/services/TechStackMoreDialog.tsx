@@ -21,8 +21,6 @@ export function TechStackMoreDialog({ onOpenChange }: { onOpenChange?: (open: bo
 
   useEffect(() => {
     if (!open) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false);
@@ -34,7 +32,6 @@ export function TechStackMoreDialog({ onOpenChange }: { onOpenChange?: (open: bo
     });
 
     return () => {
-      document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', onKey);
     };
   }, [open]);

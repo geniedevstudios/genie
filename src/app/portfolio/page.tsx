@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
 import { PortfolioExplorer } from '@/components/sections/PortfolioExplorer';
@@ -11,11 +11,13 @@ export const metadata: Metadata = {
     'Featured digital work—from polished websites to complex systems—showing how we turn concepts into reliable solutions and lasting partnerships.',
 };
 
+import pageStyles from '@/app/page.module.css';
+
 export default function PortfolioPage() {
   return (
     <>
       <Navbar />
-      <main className={styles.page}>
+      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
         <div className={styles.main}>
           <header className={hero.hero}>
             <h1 className={hero.title}>Portfolio</h1>

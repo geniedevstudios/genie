@@ -8,6 +8,7 @@ import { Footer } from '@/components/common/Footer';
 import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
 import { AnimatedTechGrid } from '@/components/services/AnimatedTechGrid';
 import styles from './services.module.css';
+import pageStyles from '@/app/page.module.css';
 
 export const metadata: Metadata = {
   title: 'Services | Genie │ dev',
@@ -217,7 +218,7 @@ export default function ServicesPage() {
   return (
     <>
       <Navbar />
-      <main className={styles.page}>
+      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
         <div className={styles.main}>
           <header className={styles.intro}>
             <h1 className={styles.title}>Services</h1>

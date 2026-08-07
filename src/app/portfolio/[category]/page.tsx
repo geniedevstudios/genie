@@ -14,6 +14,7 @@ import {
 import { PortfolioProjectCard } from '@/components/portfolio/PortfolioProjectCard';
 import explorerStyles from '@/components/sections/PortfolioExplorer.module.css';
 import styles from './category.module.css';
+import pageStyles from '@/app/page.module.css';
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -52,7 +53,7 @@ export default async function PortfolioCategoryPage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main className={styles.page}>
+      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
         <div className={styles.main}>
           <div className={styles.backRow}>
             <Link
