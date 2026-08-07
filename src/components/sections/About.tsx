@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, Target, ShieldCheck, Star } from 'lucide-react';
@@ -61,6 +61,23 @@ export const About: React.FC = () => {
   const [memberIdx, setMemberIdx] = useState(0);
   const member = TEAM[memberIdx] ?? TEAM[0];
 
+  const storyVideoRef = useRef<HTMLVideoElement>(null);
+  const [storyVideoOk, setStoryVideoOk] = useState(true);
+  const [storyVideoReady, setStoryVideoReady] = useState(false);
+  const storyRevealedRef = useRef(false);
+
+  const handleStoryReady = useCallback(() => {
+    if (storyRevealedRef.current) return;
+    storyRevealedRef.current = true;
+    setStoryVideoReady(true);
+  }, []);
+
+  useEffect(() => {
+    const v = storyVideoRef.current;
+    if (!v || !storyVideoOk) return;
+    void v.play().catch(() => {});
+  }, [storyVideoOk]);
+
   return (
     <div className={styles.root}>
       <div className={styles.aboutForeground}>
@@ -108,7 +125,32 @@ export const About: React.FC = () => {
             </div>
             <div className={styles.storyMedia}>
               <div className={styles.storyInfinityStage}>
-                <div className={styles.storyVideoPlaceholder} aria-hidden />
+                {storyVideoOk ? (
+                  <>
+                  <video
+                    ref={storyVideoRef}
+                    className={`${styles.storyInfinityVideo} ${storyVideoReady ? styles.storyInfinityVideoReady : ''}`}
+                    src="/about-vid.mp4"
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload="auto"
+                    aria-label="Ambient reel"
+                    onCanPlay={handleStoryReady}
+                    onPlaying={handleStoryReady}
+                    onTimeUpdate={(e) => {
+                      if (e.currentTarget.currentTime > 0.05) handleStoryReady();
+                    }}
+                    onError={() => setStoryVideoOk(false)}
+                  />
+                  {!storyVideoReady && (
+                    <div className={styles.storyVideoShimmer} aria-hidden />
+                  )}
+                  </>
+                ) : (
+                  <div className={styles.storyVideoPlaceholder} aria-hidden />
+                )}
               </div>
             </div>
           </div>

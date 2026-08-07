@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { GENIE_IMAGE_SRC } from '@/lib/genieAsset';
@@ -70,6 +70,24 @@ const PORTFOLIO_SHOWCASE_HREF = '/portfolio#portfolio-showcase';
 const PORTFOLIO_SECTION_HREF = '/portfolio';
 
 export const Projects: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const worksVideoSrc =
+    (process.env.NEXT_PUBLIC_WORKS_VIDEO_URL && process.env.NEXT_PUBLIC_WORKS_VIDEO_URL.trim()) || '/works.mp4';
+  const [worksVideoOk, setWorksVideoOk] = useState(true);
+  const [worksVideoReady, setWorksVideoReady] = useState(false);
+  const worksRevealedRef = useRef(false);
+
+  const handleWorksReady = useCallback(() => {
+    if (worksRevealedRef.current) return;
+    worksRevealedRef.current = true;
+    setWorksVideoReady(true);
+  }, []);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !worksVideoOk) return;
+    void v.play().catch(() => {});
+  }, [worksVideoOk]);
 
   return (
     <section
@@ -193,7 +211,31 @@ export const Projects: React.FC = () => {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.55, ease: [0.19, 1, 0.22, 1] }}
           >
-            <div className={styles.videoPlaceholder} aria-hidden />
+            {worksVideoOk ? (
+              <>
+              <video
+                ref={videoRef}
+                className={`${styles.infinityVideo} ${worksVideoReady ? styles.infinityVideoReady : ''}`}
+                src={worksVideoSrc}
+                muted
+                loop
+                playsInline
+                autoPlay
+                preload="auto"
+                onCanPlay={handleWorksReady}
+                onPlaying={handleWorksReady}
+                onTimeUpdate={(e) => {
+                  if (e.currentTarget.currentTime > 0.05) handleWorksReady();
+                }}
+                onError={() => setWorksVideoOk(false)}
+              />
+              {!worksVideoReady && (
+                <div className={styles.infinityVideoShimmer} aria-hidden />
+              )}
+              </>
+            ) : (
+              <div className={styles.videoPlaceholder} aria-hidden />
+            )}
           </motion.div>
 
           <motion.div
