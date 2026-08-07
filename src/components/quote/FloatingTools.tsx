@@ -22,34 +22,36 @@ export function FloatingTools() {
         Works <span>with modern and reliable tools...</span>
       </h2>
       
-      {TOOLS.map((tool) => (
-        <motion.div
-          key={tool.id}
-          className={styles.toolBubble}
-          style={{ 
-            width: tool.size, 
-            height: tool.size,
-            x: tool.x,
-            y: tool.y
-          }}
-          animate={{
-            y: [tool.y - 10, tool.y + 10, tool.y - 10],
-            x: [tool.x - 5, tool.x + 5, tool.x - 5],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: Math.random() * 2,
-          }}
-        >
-          {tool.iconSrc ? (
-            <img src={tool.iconSrc} alt={tool.label} />
-          ) : (
-            <span style={{ fontWeight: 800, fontSize: tool.size * 0.25 }}>{tool.label}</span>
-          )}
-        </motion.div>
-      ))}
+      <div className={styles.toolsContainer}>
+        {TOOLS.map((tool) => (
+          <motion.div
+            key={tool.id}
+            className={styles.toolBubble}
+            style={{ 
+              width: tool.size, 
+              height: tool.size,
+              x: tool.x,
+              y: tool.y
+            }}
+            animate={{
+              y: [tool.y - 10, tool.y + 10, tool.y - 10],
+              x: [tool.x - 5, tool.x + 5, tool.x - 5],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: Math.random() * 2,
+            }}
+          >
+            {tool.iconSrc ? (
+              <img src={tool.iconSrc} alt={tool.label} />
+            ) : (
+              <span style={{ fontWeight: 800, fontSize: tool.size * 0.25 }}>{tool.label}</span>
+            )}
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
