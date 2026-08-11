@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+import { generateEmailTemplate } from '@/utils/emailTemplates';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -35,29 +38,55 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
+    const adminEmailHtml = generateEmailTemplate({
+      title: 'New Contact Request',
+      contentHtml: `
+        <h2>New Contact Request</h2>
+        <p>A new contact request has been submitted by <strong>${resolvedName}</strong>.</p>
+        
+        <h3>Details</h3>
+        <ul>
+          <li><strong>Name:</strong> ${resolvedName}</li>
+          <li><strong>Email:</strong> ${resolvedEmail}</li>
+          <li><strong>Phone:</strong> ${phone || 'Not provided'}</li>
+          <li><strong>Purpose:</strong> ${resolvedPurpose}</li>
+        </ul>
+      `
     });
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      replyTo: resolvedEmail,
-      subject: `New Contact: ${resolvedName} - ${resolvedPurpose}`,
-      html: `
-        <h3>New Contact Request</h3>
-        <p><strong>Name:</strong> ${resolvedName}</p>
-        <p><strong>Email:</strong> ${resolvedEmail}</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-        <p><strong>Purpose:</strong> ${resolvedPurpose}</p>
-      `,
-    };
+    const userEmailHtml = generateEmailTemplate({
+      title: 'Thank you for your Contact Request',
+      contentHtml: `
+        <h2>Hi ${resolvedName},</h2>
+        <p>Our team has received your contact request regarding "${resolvedPurpose}".</p>
+        <p>We're reviewing your details and will get back to you shortly.</p>
+        <p>If you need immediate assistance, please reply directly to this email.</p>
+        <br />
+        <p>Best regards,</p>
+        <p><strong>The Genie Dev Studios Team</strong></p>
+      `
+    });
 
-    await transporter.sendMail(mailOptions);
+    const [adminRes, userRes] = await Promise.all([
+      resend.emails.send({
+        from: 'Genie Dev Studios <contact@geniedevstudios.com>',
+        to: 'contact@geniedevstudios.com',
+        replyTo: resolvedEmail,
+        subject: `New Contact Request Received: ${resolvedName}`,
+        html: adminEmailHtml,
+      }),
+      resend.emails.send({
+        from: 'Genie Dev Studios <contact@geniedevstudios.com>',
+        to: resolvedEmail,
+        subject: `Thank you for reaching out to Genie Dev Studios`,
+        html: userEmailHtml,
+      })
+    ]);
+
+    if (adminRes.error || userRes.error) {
+      console.error('Resend Errors:', adminRes.error, userRes.error);
+      return NextResponse.json({ error: 'Failed to send emails' }, { status: 500 });
+    }
 
     console.log('Email sent successfully for lead:', {
       name: resolvedName,
