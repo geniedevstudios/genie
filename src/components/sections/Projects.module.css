@@ -93,9 +93,7 @@
   background: linear-gradient(165deg, var(--spec-blue-bright) 0%, var(--spec-blue) 100%);
   color: #fff;
   border: 1px solid hsla(0, 0%, 100%, 0.14);
-  box-shadow:
-    0 0 0 1px hsla(0, 0%, 100%, 0.08),
-    0 24px 48px -12px hsla(226, 84%, 40%, 0.55);
+  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.08);
   min-height: 100%;
   transition:
     transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
@@ -106,10 +104,7 @@
 .cardFeatured:hover {
   transform: translateY(-8px);
   border-color: hsla(0, 0%, 100%, 0.35);
-  box-shadow:
-    0 0 0 1px hsla(0, 0%, 100%, 0.2),
-    0 32px 56px -14px hsla(226, 84%, 38%, 0.65),
-    0 0 80px -20px hsla(226, 90%, 60%, 0.35);
+  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.2);
 }
 
 .cardFeatured:active {
@@ -693,18 +688,31 @@
 /* ─── Responsive ─── */
 @media (max-width: 960px) {
   .cardGrid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    /* optional: bleed margin if the container has padding */
+  }
+
+  .cardGrid::-webkit-scrollbar {
+    display: none;
   }
 
   .cardFeatured {
-    grid-column: 1;
-    grid-row: auto;
+    flex: 0 0 85vw;
+    max-width: 400px;
     min-height: auto;
+    scroll-snap-align: center;
   }
 
   .cardCompact {
-    grid-column: 1;
+    flex: 0 0 85vw;
+    max-width: 400px;
+    scroll-snap-align: center;
   }
 }
 
@@ -731,4 +739,40 @@
   .compactCopyEnd .discoverDark {
     align-self: flex-start;
   }
+}
+
+/* ─── Pagination Dots (visible only on mobile) ─── */
+.paginationDots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .paginationDots {
+    display: flex;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.15);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dotActive {
+  background-color: var(--spec-blue, hsl(226, 71%, 48%));
+  transform: scale(1.2);
 }

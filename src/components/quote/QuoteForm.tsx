@@ -385,7 +385,7 @@ export function QuoteForm() {
                   Based on the information you provided, this appears to be a <strong>{features.length > 3 ? 'high-complexity' : 'medium-complexity'} custom development project</strong>.
                 </p>
                 <div className={styles.noticeBox}>
-                  This is a <strong>preliminary estimate</strong>, not a final quotation. We'll review your requirements and provide a detailed proposal within <strong>24 hours</strong>.
+                  This is a <strong>preliminary estimate</strong>, not a final quotation. We&apos;ll review your requirements and provide a detailed proposal within <strong>24 hours</strong>.
                 </div>
                 
                 <div className={styles.nextSteps}>
@@ -398,7 +398,7 @@ export function QuoteForm() {
                 </div>
                 
                 <p className={styles.thankYouMsg}>
-                  Thank you for reaching out to <span className={styles.inlineLogoWrap}><GenieMark width={24} className={styles.inlineMark} /> | dev</span>. We've received your request and will get back to you within 24 hours with a tailored proposal.
+                  Thank you for reaching out to <span className={styles.inlineLogoWrap}><GenieMark width={24} className={styles.inlineMark} /> | dev</span>. We&apos;ve received your request and will get back to you within 24 hours with a tailored proposal.
                 </p>
 
                 <div className={styles.successFooter}>

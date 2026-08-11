@@ -2,7 +2,7 @@
 
 import React, { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
-import { createPortal } from 'react-dom';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, X } from 'lucide-react';
 import { GenieMark } from '@/components/common/GenieMark';
@@ -16,6 +16,7 @@ export function TechStackMoreDialog({ onOpenChange }: { onOpenChange?: (open: bo
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

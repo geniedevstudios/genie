@@ -37,7 +37,7 @@ export function QuoteContent() {
         <Testimonials />
 
         <p className={styles.investmentStatement}>
-          We believe building a custom platform is <span>not an expense</span>, but rather an <span>investment</span> in your business's future.
+          We believe building a custom platform is <span>not an expense</span>, but rather an <span>investment</span> in your business&apos;s future.
         </p>
       </div>
 

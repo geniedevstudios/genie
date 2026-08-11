@@ -18,7 +18,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Force light theme and clear any old saved preference
     localStorage.removeItem('portfolio-theme');
     document.documentElement.setAttribute('data-theme', 'light');
-    setTheme('light');
   }, []);
 
   const toggleTheme = () => {

@@ -31,9 +31,6 @@ export const FeaturedProjects: React.FC = () => {
   const active = FEATURED_PROJECTS.find(p => p.id === activeId) ?? FEATURED_PROJECTS[0];
   const thumbSources = active ? getPortfolioThumbSources(active) : [];
 
-  useEffect(() => {
-    setImgIdx(0);
-  }, [active?.id]);
 
   useEffect(() => {
     if (thumbSources.length <= 1) return;
@@ -124,7 +121,10 @@ export const FeaturedProjects: React.FC = () => {
                       type="button"
                       aria-pressed={selected}
                       className={`${styles.featuredTileBtn} ${selected ? styles.featuredTileBtnActive : ''}`}
-                      onClick={() => setActiveId(p.id)}
+                      onClick={() => {
+                        setActiveId(p.id);
+                        setImgIdx(0);
+                      }}
                     >
                       {p.title}
                     </button>

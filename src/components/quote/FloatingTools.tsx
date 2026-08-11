@@ -5,14 +5,14 @@ import styles from './quote.module.css';
 
 // Using the real tech stack icons
 const TOOLS = [
-  { id: 'node', label: 'Node.js', iconSrc: '/node.png', size: 90, x: -280, y: -120 },
-  { id: 'react', label: 'React', iconSrc: '/react.svg', size: 100, x: 20, y: -140 },
-  { id: 'supabase', label: 'Supabase', iconSrc: '/supa.png', size: 95, x: 190, y: -90 },
-  { id: 'mongodb', label: 'MongoDB', iconSrc: '/mongo.png', size: 85, x: -220, y: 30 },
-  { id: 'vscode', label: 'VS Code', iconSrc: '/vs.png', size: 75, x: 260, y: 40 },
-  { id: 'xcode', label: 'Xcode', iconSrc: '/xcode.png', size: 85, x: -160, y: 150 },
-  { id: 'android-studio', label: 'Android Studio', iconSrc: '/android.png', size: 80, x: 0, y: 160 },
-  { id: 'django', label: 'Django', iconSrc: '/dj.png', size: 95, x: 140, y: 180 },
+  { id: 'node', label: 'Node.js', iconSrc: '/node.png', size: 90, x: -280, y: -120, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'react', label: 'React', iconSrc: '/react.svg', size: 100, x: 20, y: -140, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'supabase', label: 'Supabase', iconSrc: '/supa.png', size: 95, x: 190, y: -90, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'mongodb', label: 'MongoDB', iconSrc: '/mongo.png', size: 85, x: -220, y: 30, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'vscode', label: 'VS Code', iconSrc: '/vs.png', size: 75, x: 260, y: 40, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'xcode', label: 'Xcode', iconSrc: '/xcode.png', size: 85, x: -160, y: 150, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'android-studio', label: 'Android Studio', iconSrc: '/android.png', size: 80, x: 0, y: 160, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
+  { id: 'django', label: 'Django', iconSrc: '/dj.png', size: 95, x: 140, y: 180, duration: 4 + Math.random() * 2, delay: Math.random() * 2 },
 ];
 
 export function FloatingTools() {
@@ -38,10 +38,10 @@ export function FloatingTools() {
               x: [tool.x - 5, tool.x + 5, tool.x - 5],
             }}
             transition={{
-              duration: 4 + Math.random() * 2,
+              duration: tool.duration,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: Math.random() * 2,
+              delay: tool.delay,
             }}
           >
             {tool.iconSrc ? (

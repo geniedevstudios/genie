@@ -77,6 +77,38 @@ export const Projects: React.FC = () => {
   const [worksVideoReady, setWorksVideoReady] = useState(false);
   const worksRevealedRef = useRef(false);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, clientWidth } = scrollRef.current;
+    const center = scrollLeft + clientWidth / 2;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+    Array.from(scrollRef.current.children).forEach((child, i) => {
+      const el = child as HTMLElement;
+      // Skip non-articles if any, but all our children are articles here
+      if (el.tagName !== 'ARTICLE') return;
+      const childCenter = el.offsetLeft + el.offsetWidth / 2;
+      const diff = Math.abs(childCenter - center);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = i;
+      }
+    });
+    setActiveIndex(closestIndex);
+  };
+
+  const scrollToCard = (index: number) => {
+    if (!scrollRef.current) return;
+    const articles = Array.from(scrollRef.current.children).filter(c => c.tagName === 'ARTICLE');
+    const target = articles[index] as HTMLElement;
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
+
   const handleWorksReady = useCallback(() => {
     if (worksRevealedRef.current) return;
     worksRevealedRef.current = true;
@@ -112,7 +144,11 @@ export const Projects: React.FC = () => {
           </p>
         </header>
 
-        <div className={styles.cardGrid}>
+        <div 
+          className={styles.cardGrid} 
+          ref={scrollRef} 
+          onScroll={handleScroll}
+        >
           {/* Featured — Web */}
           <motion.article
             className={styles.cardFeatured}
@@ -201,6 +237,18 @@ export const Projects: React.FC = () => {
               </Link>
             </div>
           </motion.article>
+        </div>
+
+        <div className={styles.paginationDots} aria-hidden>
+          {[0, 1, 2, 3].map((i) => (
+            <button
+              key={i}
+              type="button"
+              className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => scrollToCard(i)}
+            />
+          ))}
         </div>
 
         <div id="portfolio-showcase" className={styles.showcaseWrap}>

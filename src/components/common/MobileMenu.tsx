@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { X, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ArrowRight } from 'lucide-react';
 import { GenieMark } from '@/components/common/GenieMark';
 import styles from './MobileMenu.module.css';
 
@@ -97,9 +97,17 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ id, isOpen, onClose }) =
 
           {/* Header row */}
           <div className={styles.overlayHeader}>
+            <button
+              className={`${styles.closeBtn} ${styles.glassCapsule}`}
+              onClick={onClose}
+              aria-label="Close navigation menu"
+            >
+              <ChevronLeft size={24} strokeWidth={2.2} />
+            </button>
+
             <Link
               href="/"
-              className={styles.overlayLogo}
+              className={`${styles.overlayLogo} ${styles.glassCapsule}`}
               onClick={onClose}
               aria-label="Home"
             >
@@ -107,13 +115,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ id, isOpen, onClose }) =
               <span>| dev</span>
             </Link>
 
-            <button
-              className={styles.closeBtn}
-              onClick={onClose}
-              aria-label="Close navigation menu"
-            >
-              <X size={20} strokeWidth={2.2} />
-            </button>
+            <div className={styles.headerSpacer} aria-hidden />
           </div>
 
           {/* Label */}
