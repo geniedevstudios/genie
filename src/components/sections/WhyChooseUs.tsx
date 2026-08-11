@@ -35,8 +35,8 @@ const FEATURE_GRID = [
 
 const ROMAN = ['I', 'II', 'III', 'IV'] as const;
 
-/** Illustrated faces for the rating stack (DiceBear notionists — lightweight SVGs, stable per seed). */
-const TRUST_AVATAR_SEEDS = ['Amara', 'Kwesi', 'Lin'] as const;
+/** Custom avatars for the rating stack */
+const TRUST_AVATARS = ['/joey logo.png', '/genie-logo.png', '/genie-logo.png'] as const;
 
 const cellMotion = {
   hidden: { opacity: 0, y: 10 },
@@ -112,10 +112,10 @@ export const WhyChooseUs: React.FC = () => {
             </p>
             <div className={styles.ratingFooter}>
               <div className={styles.avatarStack} aria-hidden>
-                {TRUST_AVATAR_SEEDS.map(seed => (
+                {TRUST_AVATARS.map((src, i) => (
                   <img
-                    key={seed}
-                    src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(seed)}&backgroundColor=e8d5f2,fbcfe8,d5e8f7`}
+                    key={`${src}-${i}`}
+                    src={src}
                     alt=""
                     className={styles.avatarImg}
                     width={36}
