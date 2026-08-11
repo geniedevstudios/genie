@@ -4,8 +4,12 @@ import { generateEmailTemplate } from '@/utils/emailTemplates';
 
 
 export async function POST(req: Request) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set in the environment variables.');
+      return NextResponse.json({ error: 'Email service is not configured' }, { status: 500 });
+    }
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const { 
       projectType, 
