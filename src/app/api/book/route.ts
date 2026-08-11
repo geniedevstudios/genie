@@ -74,7 +74,7 @@ export async function POST(req: Request) {
     const [adminRes, userRes] = await Promise.all([
       resend.emails.send({
         from: 'Genie Dev Studios <contact@geniedevstudios.com>',
-        to: 'contact@geniedevstudios.com',
+        to: process.env.EMAIL_USER || 'geniedev.noreply@gmail.com',
         replyTo: resolvedEmail,
         subject: `New Contact Request Received: ${resolvedName}`,
         html: adminEmailHtml,
