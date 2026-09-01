@@ -8,11 +8,11 @@ import styles from './quote.module.css';
 const FAQS = [
   {
     question: 'How do you price your projects?',
-    answer: 'We typically price our projects on a milestone basis, which depends on the complexity, timeline, and required tech stack. Once we understand your requirements during our discovery phase, we’ll provide a transparent, fixed-price quote so there are no surprises.',
+    answer: 'Most focused projects take 1–3 weeks; larger web, mobile, integration, and security engagements typically take 1–6 months. The estimator provides a preliminary cedi range. A fixed quote and milestones are confirmed after discovery.',
   },
   {
     question: 'How long does a typical build take?',
-    answer: 'A standard web application or MVP usually takes between 1 to 3 weeks from design to deployment. More complex systems with custom backends, payment integrations, or mobile apps may take 1 to 3 months. We establish strict, realistic timelines before any code is written.',
+    answer: 'Most focused projects take 1–3 weeks; larger web, mobile, integration, and security engagements typically take 1–6 months. We establish strict, realistic timelines before any code is written.',
   },
   {
     question: 'Do you offer ongoing maintenance?',

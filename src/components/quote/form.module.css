@@ -325,6 +325,31 @@
   cursor: not-allowed;
 }
 
+.fieldHint {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #c05621;
+}
+
+.submitError {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #c53030;
+}
+
+.noticeBoxCalm {
+  background: color-mix(in srgb, var(--brand-primary) 6%, white);
+  border-left: 4px solid var(--brand-primary);
+  padding: 1rem 1.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: #2d3748;
+  font-size: 0.95rem;
+  text-align: left;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  width: 100%;
+}
+
 .textBtn {
   background: transparent;
   border: none;

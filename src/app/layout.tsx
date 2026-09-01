@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Bodoni_Moda, Jost, Playfair_Display, Plus_Jakarta_Sa
 import './globals.css';
 import { PageBackground } from '@/components/common/PageBackground';
 import { Preloader } from '@/components/common/Preloader';
+import { PageTransition } from '@/components/common/PageTransition';
 import { ClientProvider } from '@/context/ClientProvider';
 import { GENIE_IMAGE_SRC } from '@/lib/genieAsset';
 
@@ -89,6 +90,7 @@ export default function RootLayout({
         />
         <ClientProvider>
           <Preloader />
+          <PageTransition />
           <div className="app-shell">
             <PageBackground />
             <div className="app-shell-main">{children}</div>
