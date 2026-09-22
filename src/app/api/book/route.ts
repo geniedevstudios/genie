@@ -1,59 +1,42 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { generateEmailTemplate } from '@/utils/emailTemplates';
+import { z } from 'zod';
+import { escapeHtml, generateEmailTemplate } from '@/utils/emailTemplates';
+import { contactRequest } from '@/lib/leadValidation';
+import { prepareSubmission, verifySubmission } from '@/lib/formProtection.server';
+import { submissionErrorResponse } from '@/lib/submissionError';
 
 
 export async function POST(req: Request) {
   try {
+    const submission = await prepareSubmission(req);
+    if (submission.honeypotFilled) return NextResponse.json({ message: 'Success' });
+    const input = contactRequest.parse(submission.body);
+    await verifySubmission(submission, 'contact');
+
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not set in the environment variables.');
       return NextResponse.json({ error: 'Email service is not configured' }, { status: 500 });
     }
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const body = await req.json();
-    const { name, email, purpose, firstName, lastName, privacyAccepted, phone } = body as {
-      name?: string;
-      email?: string;
-      purpose?: string;
-      firstName?: string;
-      lastName?: string;
-      privacyAccepted?: boolean;
-      phone?: string;
-    };
-
-    const resolvedName =
-      name?.trim() ||
-      [firstName?.trim(), lastName?.trim()].filter(Boolean).join(' ').trim();
-    const resolvedPurpose = purpose?.trim() || 'Contact form';
-    const resolvedEmail = email?.trim();
-
-    if (!resolvedName || !resolvedEmail) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    }
-
-    const usesSplitName = Boolean(
-      (typeof firstName === 'string' && firstName.length > 0) ||
-        (typeof lastName === 'string' && lastName.length > 0),
-    );
-    if (
-      usesSplitName &&
-      (!firstName?.trim() || !lastName?.trim() || !privacyAccepted)
-    ) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    }
+    const resolvedName = `${input.firstName} ${input.lastName}`;
+    const nameHtml = escapeHtml(resolvedName);
+    const purposeHtml = escapeHtml(input.purpose).replace(/\n/g, '<br />');
+    const emailHtml = escapeHtml(input.email);
+    const phoneHtml = escapeHtml(input.phone || 'Not provided');
 
     const adminEmailHtml = generateEmailTemplate({
       title: 'New Contact Request',
       contentHtml: `
         <h2>New Contact Request</h2>
-        <p>A new contact request has been submitted by <strong>${resolvedName}</strong>.</p>
+        <p>A new contact request has been submitted by <strong>${nameHtml}</strong>.</p>
         
         <h3>Details</h3>
         <ul>
-          <li><strong>Name:</strong> ${resolvedName}</li>
-          <li><strong>Email:</strong> ${resolvedEmail}</li>
-          <li><strong>Phone:</strong> ${phone || 'Not provided'}</li>
-          <li><strong>Purpose:</strong> ${resolvedPurpose}</li>
+          <li><strong>Name:</strong> ${nameHtml}</li>
+          <li><strong>Email:</strong> ${emailHtml}</li>
+          <li><strong>Phone:</strong> ${phoneHtml}</li>
+          <li><strong>Purpose:</strong> ${purposeHtml}</li>
         </ul>
       `
     });
@@ -61,8 +44,8 @@ export async function POST(req: Request) {
     const userEmailHtml = generateEmailTemplate({
       title: 'Thank you for your Contact Request',
       contentHtml: `
-        <h2>Hi ${resolvedName},</h2>
-        <p>Our team has received your contact request regarding "${resolvedPurpose}".</p>
+        <h2>Hi ${nameHtml},</h2>
+        <p>Our team has received your contact request.</p>
         <p>We're reviewing your details and will get back to you shortly.</p>
         <p>If you need immediate assistance, please reply directly to this email.</p>
         <br />
@@ -75,13 +58,13 @@ export async function POST(req: Request) {
       resend.emails.send({
         from: 'Genie Dev Studios <contact@geniedevstudios.com>',
         to: process.env.EMAIL_USER || 'geniedev.noreply@gmail.com',
-        replyTo: resolvedEmail,
+        replyTo: input.email,
         subject: `New Contact Request Received: ${resolvedName}`,
         html: adminEmailHtml,
       }),
       resend.emails.send({
         from: 'Genie Dev Studios <contact@geniedevstudios.com>',
-        to: resolvedEmail,
+        to: input.email,
         subject: `Thank you for reaching out to Genie Dev Studios`,
         html: userEmailHtml,
       })
@@ -92,15 +75,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Failed to send emails' }, { status: 500 });
     }
 
-    console.log('Email sent successfully for lead:', {
-      name: resolvedName,
-      email: resolvedEmail,
-      purpose: resolvedPurpose,
-      phone: typeof phone === 'string' ? phone.trim() || undefined : undefined,
-    });
-
     return NextResponse.json({ message: 'Success' }, { status: 200 });
   } catch (error) {
+    const rejection = submissionErrorResponse(error);
+    if (rejection) return rejection;
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Please check your name, email, phone, message (10–4,000 characters), and privacy consent.' }, { status: 400 });
+    }
     console.error('Booking API Error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }

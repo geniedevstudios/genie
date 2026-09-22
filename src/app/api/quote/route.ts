@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
-import { generateEmailTemplate } from '@/utils/emailTemplates';
+import { escapeHtml, generateEmailTemplate } from '@/utils/emailTemplates';
+import { quoteRequest } from '@/lib/leadValidation';
+import { prepareSubmission, verifySubmission } from '@/lib/formProtection.server';
+import { submissionErrorResponse } from '@/lib/submissionError';
 import {
   BUDGET_BANDS,
   SERVICE_LABELS,
@@ -10,36 +13,18 @@ import {
   isQuoteInputError,
 } from '@/lib/quotePricing';
 
-const QuoteRequest = z.object({
-  service: z.enum(['uiux', 'web', 'consulting', 'mobile', 'security']),
-  features: z.array(z.string()).min(1).max(12),
-  description: z.string().trim().min(10).max(4000),
-  budget: z.enum(['starter', 'standard', 'complex', 'enterprise']),
-  timeframe: z.enum(['1-3-weeks', '1-3-months', '3-6-months', 'not-sure']),
-  contact: z.object({
-    name: z.string().trim().min(2).max(100),
-    email: z.string().email().max(254),
-    whatsapp: z.string().trim().min(7).max(30),
-  }),
-});
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
 export async function POST(request: Request) {
   try {
+    const submission = await prepareSubmission(request);
+    if (submission.honeypotFilled) return NextResponse.json({ message: 'Success' });
+    const input = quoteRequest.parse(submission.body);
+    const quote = calculateQuote(input);
+    await verifySubmission(submission, 'quote');
+
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not set in the environment variables.');
       return NextResponse.json({ error: 'Email service is not configured' }, { status: 500 });
     }
-
-    const input = QuoteRequest.parse(await request.json());
-    const quote = calculateQuote(input);
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const serviceLabel = SERVICE_LABELS[input.service];
@@ -123,6 +108,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ quote }, { status: 201 });
   } catch (error) {
+    const rejection = submissionErrorResponse(error);
+    if (rejection) return rejection;
     if (error instanceof z.ZodError || isQuoteInputError(error)) {
       return NextResponse.json({ error: 'Invalid quote request' }, { status: 400 });
     }

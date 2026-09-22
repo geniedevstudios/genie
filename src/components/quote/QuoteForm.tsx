@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GenieMark } from '@/components/common/GenieMark';
 import { PhoneCountrySelect } from '@/components/common/PhoneCountrySelect';
+import { FormProtection, useFormProtection } from '@/components/common/FormProtection';
 import {
   DEFAULT_PHONE_COUNTRY_ID,
   findCountryById,
@@ -34,6 +35,7 @@ const COMPLEXITY_LABEL: Record<QuoteResult['complexity'], string> = {
 };
 
 export function QuoteForm() {
+  const protection = useFormProtection();
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +69,7 @@ export function QuoteForm() {
   };
 
   const handleSubmit = async () => {
-    if (!service || !budget || !timeframe) return;
+    if (!service || !budget || !timeframe || isLoading || !protection.turnstileToken) return;
 
     setIsLoading(true);
     setSubmitError('');
@@ -82,6 +84,8 @@ export function QuoteForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          turnstileToken: protection.turnstileToken,
+          companyWebsite: protection.companyWebsite,
           service,
           features,
           description,
@@ -96,7 +100,8 @@ export function QuoteForm() {
       });
 
       if (!response.ok) {
-        setSubmitError("We couldn't send your request. Please try again.");
+        const result = await response.json().catch(() => ({}));
+        setSubmitError(typeof result.error === 'string' ? result.error : "We couldn't send your request. Please try again.");
         return;
       }
 
@@ -112,6 +117,7 @@ export function QuoteForm() {
       console.error('Failed to submit quote:', e);
       setSubmitError("We couldn't send your request. Please try again.");
     } finally {
+      protection.resetVerification();
       setIsLoading(false);
     }
   };
@@ -314,6 +320,8 @@ export function QuoteForm() {
                   <input
                     type="text"
                     placeholder="Name"
+                    maxLength={100}
+                    autoComplete="name"
                     className={styles.inputLine}
                     value={contact.name}
                     onChange={(e) => setContact({ ...contact, name: e.target.value })}
@@ -321,6 +329,8 @@ export function QuoteForm() {
                   <input
                     type="email"
                     placeholder="Email"
+                    maxLength={254}
+                    autoComplete="email"
                     className={styles.inputLine}
                     value={contact.email}
                     onChange={(e) => setContact({ ...contact, email: e.target.value })}
@@ -337,9 +347,16 @@ export function QuoteForm() {
                     />
                   </div>
                 </div>
+                <FormProtection
+                  action="quote"
+                  onTokenChange={protection.setTurnstileToken}
+                  version={protection.verificationVersion}
+                  companyWebsite={protection.companyWebsite}
+                  onCompanyWebsiteChange={protection.setCompanyWebsite}
+                />
                 {submitError && <p className={styles.submitError} role="alert">{submitError}</p>}
                 <div className={styles.stepFooter}>
-                  <button className={styles.textBtn} onClick={prevStep}>Back</button>
+                  <button className={styles.textBtn} onClick={prevStep} disabled={isLoading}>Back</button>
                   <button
                     className={styles.primaryBtn}
                     onClick={handleSubmit}
@@ -347,6 +364,7 @@ export function QuoteForm() {
                       contact.name.trim().length < 2 ||
                       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email) ||
                       !isPhoneOk ||
+                      !protection.turnstileToken ||
                       isLoading
                     }
                   >

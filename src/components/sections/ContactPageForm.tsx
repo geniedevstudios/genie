@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { FormProtection, useFormProtection } from '@/components/common/FormProtection';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, RefreshCcw } from 'lucide-react';
 import { LinkedinIcon, InstagramIcon, XIcon, GithubIcon } from '@/components/common/BrandIcons';
@@ -22,6 +23,8 @@ const PHONE_TEL = '+233539433339';
 
 export const ContactPageForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const protection = useFormProtection();
+  const [submitError, setSubmitError] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     firstName: '',
@@ -42,7 +45,9 @@ export const ContactPageForm: React.FC = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (formData.message.trim().length < 10 || formData.message.trim().length > 4000) {
+      newErrors.message = 'Please enter a message between 10 and 4,000 characters.';
+    }
     if (!formData.privacyAccepted) newErrors.privacy = 'Please accept the privacy policy';
 
     const country =
@@ -59,7 +64,8 @@ export const ContactPageForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (status === 'loading' || !validate() || !protection.turnstileToken) return;
+    setSubmitError('');
 
     setStatus('loading');
 
@@ -74,12 +80,14 @@ export const ContactPageForm: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          turnstileToken: protection.turnstileToken,
+          companyWebsite: protection.companyWebsite,
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           phone,
           privacyAccepted: formData.privacyAccepted,
-          purpose: formData.message.trim() || 'Contact form',
+          purpose: formData.message.trim(),
         }),
       });
 
@@ -96,10 +104,15 @@ export const ContactPageForm: React.FC = () => {
           privacyAccepted: false,
         });
       } else {
+        const result = await res.json().catch(() => ({}));
+        setSubmitError(typeof result.error === 'string' ? result.error : 'Please try again in a moment.');
         setStatus('error');
       }
     } catch {
+      setSubmitError('Please check your connection and try again.');
       setStatus('error');
+    } finally {
+      protection.resetVerification();
     }
   };
 
@@ -203,7 +216,7 @@ export const ContactPageForm: React.FC = () => {
               >
                 <RefreshCcw size={52} className={styles.statusIconErr} aria-hidden />
                 <h2 className={styles.statusTitle}>Something went wrong</h2>
-                <p className={styles.statusCopy}>Please try again in a moment.</p>
+                <p className={styles.statusCopy} role="alert">{submitError || 'Please try again in a moment.'}</p>
                 <button type="button" onClick={() => setStatus('idle')} className={styles.btnGhost}>
                   Try again
                 </button>
@@ -229,6 +242,7 @@ export const ContactPageForm: React.FC = () => {
                         name="firstName"
                         type="text"
                         autoComplete="given-name"
+                        maxLength={100}
                         required
                         placeholder="First name"
                         value={formData.firstName}
@@ -247,6 +261,7 @@ export const ContactPageForm: React.FC = () => {
                         name="lastName"
                         type="text"
                         autoComplete="family-name"
+                        maxLength={100}
                         required
                         placeholder="Last name"
                         value={formData.lastName}
@@ -267,6 +282,7 @@ export const ContactPageForm: React.FC = () => {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      maxLength={254}
                       required
                       placeholder="you@company.com"
                       value={formData.email}
@@ -303,6 +319,8 @@ export const ContactPageForm: React.FC = () => {
                     <textarea
                       id="cp-message"
                       name="message"
+                      minLength={10}
+                      maxLength={4000}
                       required
                       rows={5}
                       value={formData.message}
@@ -335,10 +353,18 @@ export const ContactPageForm: React.FC = () => {
                     </span>
                   </label>
 
+                  <FormProtection
+                    action="contact"
+                    onTokenChange={protection.setTurnstileToken}
+                    version={protection.verificationVersion}
+                    companyWebsite={protection.companyWebsite}
+                    onCompanyWebsiteChange={protection.setCompanyWebsite}
+                  />
+
                   <button
                     type="submit"
                     className={styles.submit}
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || !protection.turnstileToken}
                   >
                     {status === 'loading' ? 'Sending…' : 'Send message'}
                   </button>
