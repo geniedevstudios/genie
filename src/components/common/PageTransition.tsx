@@ -98,6 +98,12 @@ export const PageTransition: React.FC = () => {
       return;
     }
 
+    try {
+      router.prefetch(href);
+    } catch {
+      // ignore prefetch errors
+    }
+
     pendingHref.current = href;
     coveredRef.current = false;
     holdStartedAt.current = 0;

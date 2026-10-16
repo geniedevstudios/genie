@@ -3,7 +3,7 @@ import { Footer } from '@/components/common/Footer';
 import { QuoteContent } from '@/components/quote/QuoteContent';
 
 export const metadata = {
-  title: 'Get a Quote | Genie │ dev',
+  title: 'Get a Quote | Genie Dev Studios',
 };
 
 export default function QuotePage() {

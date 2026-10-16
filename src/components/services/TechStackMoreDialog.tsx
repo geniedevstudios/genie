@@ -86,15 +86,14 @@ export function TechStackMoreDialog({ onOpenChange }: { onOpenChange?: (open: bo
                   These and many more
                 </h3>
                 <p className={styles.techModalBody}>
-                  The stacks above are a snapshot — we also work with adjacent tooling, CI/CD, observability, and
-                  whatever fits your roadmap. At{' '}
+                  Beyond our core stack, we integrate payment gateways (Paystack, Stripe), cloud hosting (Vercel, AWS), automated CI/CD, and real-time monitoring. At{' '}
                   <span className={styles.techModalBrand}>
                     <GenieMark width={22} className={styles.techModalMark} />
-                    <span>| dev</span>
-                  </span>, we choose technologies that ship fast, scale cleanly, and stay maintainable as your product grows.
+                    <span>| dev studios</span>
+                  </span>, we pick the right architecture for your product’s traffic, team, and budget.
                 </p>
                 <p className={styles.techModalBodySecondary}>
-                  Reach out and we&apos;ll help you plan your next big project — from first sketch to production.
+                  Tell us what you’re building and we’ll recommend a clear technical plan.
                 </p>
                 <Link
                   href="/contact"

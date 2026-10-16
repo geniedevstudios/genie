@@ -8,15 +8,15 @@ import styles from './quote.module.css';
 const FAQS = [
   {
     question: 'How do you price your projects?',
-    answer: 'Most focused projects take 1–3 weeks; larger web, mobile, integration, and security engagements typically take 1–6 months. The estimator provides a preliminary cedi range. A fixed quote and milestones are confirmed after discovery.',
+    answer: 'Every build is priced on a fixed-scope milestone basis in Ghana Cedis (GH₵)—never open-ended hourly billing. The calculator above gives you an immediate ballpark range based on your selected features, and we lock in an exact fixed quote after a brief discovery call.',
   },
   {
     question: 'How long does a typical build take?',
-    answer: 'Most focused projects take 1–3 weeks; larger web, mobile, integration, and security engagements typically take 1–6 months. We establish strict, realistic timelines before any code is written.',
+    answer: 'Focused websites, UI/UX prototypes, and security audits typically ship in 1–3 weeks. Full-stack web platforms, custom e-commerce systems, and mobile apps take 1–3 months depending on integrations, with weekly staging builds from week one.',
   },
   {
-    question: 'Do you offer ongoing maintenance?',
-    answer: 'Yes. We build systems to be maintainable and scalable from day one, but we also offer retainer packages for ongoing support, security updates, and feature additions so your product continues to perform reliably in production.',
+    question: 'Do I own the source code and infrastructure?',
+    answer: 'Yes, 100%. Upon final settlement, full repository ownership, custom designs, domains, and cloud/payment accounts belong to your business—with zero proprietary lock-in. We also offer optional retainer plans if you want our team to handle ongoing updates and monitoring.',
   }
 ];
 
@@ -34,7 +34,7 @@ export function FaqAccordion() {
           Frequently <span>asked<br />questions</span>
         </h2>
         <p className={styles.faqDesc}>
-          Have questions before we start? Here are a few common ones we get about our process, timelines, and how we deliver value.
+          Straight answers on how we scope, price, and ship software at Genie Dev Studios.
         </p>
       </div>
 

@@ -48,12 +48,12 @@ export const Footer: React.FC = () => {
             <Link href="/" className="footer-logo-link" aria-label="Home">
               <span className="footer-logo">
                 <GenieMark width={28} className="footer-logo-img" />
-                <span className="footer-logo-text">| dev</span>
+                <span className="footer-logo-text">| dev studios</span>
               </span>
             </Link>
             <p className="footer-desc">
-              Innovating at the intersection of design and technology to create exceptional digital
-              experiences that drive growth and empower businesses worldwide.
+              Software design and engineering studio based in Accra, Ghana. We build custom web platforms,
+              mobile apps, and secure payment systems that help ambitious businesses grow.
             </p>
             <div className="social-row" aria-label="Social links">
               <a
@@ -94,7 +94,7 @@ export const Footer: React.FC = () => {
               Stay in the loop
             </h2>
             <p className="footer-newsletter-copy">
-              Subscribe to our newsletter for the latest tech insights and company updates.
+              Occasional notes on product engineering, recent launches, and studio updates. No spam.
             </p>
             <form className="newsletter-form" onSubmit={onNewsletterSubmit} noValidate>
               <label htmlFor="footer-email" className="visually-hidden">
@@ -187,13 +187,13 @@ export const Footer: React.FC = () => {
         <div className="footer-bottom">
           <p
             className="footer-copyright"
-            aria-label={`© ${currentYear} GENIE | dev. All rights reserved.`}
+            aria-label={`© ${currentYear} GENIE | dev studios. All rights reserved.`}
           >
             <span aria-hidden="true">© {currentYear} </span>
             <span className="footer-copyright-mark" aria-hidden="true">
               <GenieMark width={13} />
             </span>
-            <span aria-hidden="true"> | dev. All rights reserved.</span>
+            <span aria-hidden="true"> | dev studios. All rights reserved.</span>
           </p>
           <div className="footer-legal">
             <Link href="/privacy">Privacy Policy</Link>

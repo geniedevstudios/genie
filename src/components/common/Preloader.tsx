@@ -115,14 +115,14 @@ export const Preloader: React.FC = () => {
                 <GenieMark width={50} />
               </motion.div>
 
-              {/* | dev entering from the right */}
+              {/* | dev studios entering from the right */}
               <motion.span
                 className={styles.brandText}
                 initial={{ x: 60, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.45, ease: [0.34, 1.56, 0.64, 1] }}
               >
-                | dev
+                | dev studios
               </motion.span>
             </div>
           </motion.div>

@@ -5,15 +5,15 @@ import { GenieMark } from '@/components/common/GenieMark';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Genie | DEV',
-  description: 'The terms and conditions for using GENIE | DEV services.',
+  title: 'Terms of Service | Genie Dev Studios',
+  description: 'The terms and conditions for using GENIE | dev studios services.',
 };
 
 function CompanyLogo() {
   return (
-    <span className={styles.inlineLogo} aria-label="GENIE | DEV">
+    <span className={styles.inlineLogo} aria-label="GENIE | dev studios">
       <GenieMark width={18} />
-      <span>&nbsp;| dev</span>
+      <span>&nbsp;| dev studios</span>
     </span>
   );
 }

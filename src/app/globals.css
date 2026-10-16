@@ -140,6 +140,14 @@ body {
   z-index: 1;
 }
 
+.home-main-surface {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #d3e1ef 0%, #eef3f9 50%, #f6f8fb 100%);
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
 .page-bg {
   position: fixed;
   inset: 0;

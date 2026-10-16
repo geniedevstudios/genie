@@ -5,18 +5,16 @@ import { About } from '@/components/sections/About';
 import styles from './about.module.css';
 
 export const metadata: Metadata = {
-  title: 'About | Genie │ dev',
+  title: 'About | Genie Dev Studios',
   description:
-    'How GENIE | dev works — engineering discipline, partnerships, and the team behind your next build.',
+    'Meet Genie Dev Studios — a software design and engineering studio in Accra building web platforms, mobile apps, and secure systems.',
 };
-
-import pageStyles from '@/app/page.module.css';
 
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
+      <main className={`${styles.page} home-main-surface`} data-theme="light">
         <About />
       </main>
       <Footer />

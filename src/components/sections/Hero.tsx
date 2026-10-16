@@ -33,43 +33,43 @@ const HERO_PILLS: PillDef[] = [
   {
     key: 'implement', label: 'Implement', Icon: Mouse, delay: 0.0,
     pillClass: styles.pillImplement, darkIcon: false,
-    description: 'End-to-end system deployment — infrastructure, CI/CD pipelines and architecture that ships on time.',
-    stat: '10+ systems delivered',
+    description: 'Production deployment, CI/CD pipelines, and cloud infrastructure configured to ship without downtime.',
+    stat: '20+ builds shipped',
     openDir: 'down', cardAlign: 'left',
   },
   {
     key: 'design', label: 'Design', Icon: PenLine, delay: 0.25,
     pillClass: styles.pillDesign, darkIcon: true,
-    description: 'UI/UX that converts — wireframes to polished, production-ready interfaces users love.',
-    stat: 'Figma → Production',
+    description: 'Product UI/UX designed for conversion. Interactive prototypes, component systems, and clean user flows.',
+    stat: 'Figma to Production',
     openDir: 'down', cardAlign: 'right',
   },
   {
     key: 'code', label: 'Code', Icon: Code2, delay: 0.1,
     pillClass: styles.pillCode, darkIcon: false,
-    description: 'Clean, scalable code across React, Next.js, Django and Python backends.',
+    description: 'Type-safe frontends and resilient backends built with Next.js, React, Node.js, and Django.',
     stat: 'React · Next.js · Django',
     openDir: 'down', cardAlign: 'right',
   },
   {
     key: 'manage', label: 'Manage', Icon: Database, delay: 0.35,
     pillClass: styles.pillManage, darkIcon: false,
-    description: 'Full tech stack management — monitoring, optimization and ongoing performance improvements.',
+    description: 'Database tuning, uptime monitoring, automated backups, and post-launch release management.',
     stat: '99.9% uptime target',
     openDir: 'down', cardAlign: 'left',
   },
   {
     key: 'seo', label: 'SEO', Icon: TrendingUp, delay: 0.45,
     pillClass: styles.pillSeo, darkIcon: true,
-    description: 'Search visibility strategy — technical SEO, Core Web Vitals and structured data.',
-    stat: 'Core Web Vitals A+',
+    description: 'Sub-second page loads, semantic markup, OpenGraph metadata, and Core Web Vitals optimization.',
+    stat: 'Core Web Vitals 95+',
     openDir: 'up', cardAlign: 'left',
   },
   {
     key: 'security', label: 'Security', Icon: ShieldCheck, delay: 0.55,
     pillClass: styles.pillSecurity, darkIcon: false,
-    description: 'Secure by design — authentication, encryption, and vulnerability hardening built in from day one.',
-    stat: 'OWASP compliant',
+    description: 'Role-based access control, encrypted payloads, webhook verification, and OWASP-aligned hardening.',
+    stat: 'OWASP aligned',
     openDir: 'up', cardAlign: 'right',
   },
 ];
@@ -188,18 +188,18 @@ export const Hero: React.FC = () => {
         {/* Brand mark */}
         <div className={styles.heroBrand}>
           <GenieMark width={90} />
-          <span className={styles.heroBrandText}>| dev</span>
+          <span className={styles.heroBrandText}>| dev studios</span>
         </div>
 
         {/* Subtitle */}
         <p className={styles.heroSubtitle}>
-          From idea to scale&nbsp;&mdash; we build it right.
+          Software that ships, scales, and sells.
         </p>
 
         {/* Subtext */}
         <p className={styles.heroSubtext}>
-          Design, development, security, and system management&mdash;handled
-          end-to-end to help your business grow with confidence.
+          We design and engineer custom web platforms, mobile apps, and payment-ready
+          systems for ambitious brands.
         </p>
 
         {/* CTA buttons */}

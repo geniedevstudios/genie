@@ -401,7 +401,7 @@ export function QuoteForm() {
                 </div>
 
                 <p className={styles.thankYouMsg}>
-                  Thank you for reaching out to <span className={styles.inlineLogoWrap}><GenieMark width={24} className={styles.inlineMark} /> | dev</span>. We&apos;ve received your request and will get back to you within 24 hours with a tailored proposal.
+                  Thank you for reaching out to <span className={styles.inlineLogoWrap}><GenieMark width={24} className={styles.inlineMark} /> | dev studios</span>. We&apos;ve received your request and will get back to you within 24 hours with a tailored proposal.
                 </p>
 
                 <div className={styles.successFooter}>

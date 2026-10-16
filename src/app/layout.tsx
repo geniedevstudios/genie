@@ -47,20 +47,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Genie │ dev - HOME',
-  // Using a special unicode vertical line '│' instead of standard '|' so iOS doesn't split and truncate the name
-  applicationName: 'Genie │ dev',
+  title: 'Home | Genie Dev Studios',
+  applicationName: 'Genie Dev Studios',
   appleWebApp: {
-    title: 'Genie │ dev',
+    title: 'Genie Dev Studios',
     statusBarStyle: 'default',
     capable: true,
   },
-  description: 'Expert Full-Stack Engineer and Geophysics student based in Ghana building revenue-generating systems, payment integrations, and real-time applications.',
-  keywords: ['Full-Stack Developer', 'Ghana Engineering', 'Paystack Integration', 'React Developer', 'Django', 'Geophysics', 'Systems Design'],
+  description: 'Software design and engineering studio in Accra, Ghana. We build custom web platforms, mobile apps, payment systems, and secure cloud backends.',
+  keywords: ['Genie Dev Studios', 'Software Studio Ghana', 'Web App Development', 'Mobile App Development', 'Paystack Integration', 'Next.js Studio', 'UI/UX Design Accra'],
   openGraph: {
-    title: 'Genie │ dev - HOME',
-    siteName: 'Genie │ dev',
-    description: 'Building high-performance systems that scale and handle payments.',
+    title: 'Home | Genie Dev Studios',
+    siteName: 'Genie Dev Studios',
+    description: 'Custom web platforms, mobile apps, and revenue-ready systems built in Accra, Ghana.',
     type: 'website',
   },
   icons: {
@@ -75,19 +74,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (sessionStorage.getItem('genie_preloader_played')) {
-                  document.documentElement.classList.add('hide-preloader');
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
         <ClientProvider>
           <Preloader />
           <PageTransition />

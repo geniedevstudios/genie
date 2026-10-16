@@ -6,20 +6,20 @@ import styles from './quote.module.css';
 const TESTIMONIALS = [
   {
     id: 1,
-    name: 'JOEY The brand',
-    text: 'Working with Genie dev was an absolute game-changer. They delivered our complex e-commerce platform ahead of schedule, with flawless code quality.',
+    name: 'JOEY The Brand · Storefront',
+    text: 'Genie Dev Studios took our e-commerce storefront from concept to launch ahead of schedule. Checkout is fast, mobile conversion jumped, and the site feels effortless.',
     avatar: '/joey logo.png',
   },
   {
     id: 2,
-    name: 'JOEY The brand',
-    text: 'Their deep understanding of systems architecture helped us scale from a few hundred users to tens of thousands without a single hiccup.',
+    name: 'JOEY The Brand · Admin & Ops',
+    text: 'The custom admin dashboard they built replaced our manual spreadsheets completely. Managing inventory, orders, and drops now takes minutes instead of hours.',
     avatar: '/joey logo.png',
   },
   {
     id: 3,
-    name: 'JOEY The brand',
-    text: 'Incredible attention to detail. Not only is the final product lightning fast, but the communication throughout the entire build process was top-tier.',
+    name: 'JOEY The Brand · Product UI/UX',
+    text: 'Every screen—from product discovery to back-office fulfillment—was prototyped clearly and engineered with zero friction. Communication was direct from day one.',
     avatar: '/joey logo.png',
   },
 ];

@@ -131,8 +131,8 @@ export const HomeContactSection: React.FC = () => {
               transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
             >
               <h2 id="home-booking-heading" className={styles.title}>
-                Let&apos;s build something{' '}
-                <span className={styles.titleAccent}>meaningful together</span>
+                Ready to ship your{' '}
+                <span className={styles.titleAccent}>next product?</span>
               </h2>
 
               <form className={styles.form} onSubmit={handleSubmit} noValidate>

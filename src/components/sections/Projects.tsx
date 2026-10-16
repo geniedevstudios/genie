@@ -139,8 +139,7 @@ export const Projects: React.FC = () => {
             </h2>
           </div>
           <p className={styles.lede}>
-            Deep work across web, mobile, security, and design—so you ship reliable products, protect
-            what matters, and deliver experiences worth returning to.
+            Full-stack product engineering across web, mobile, UI/UX, and security. Built in-house, scoped clearly, and shipped to production.
           </p>
         </header>
 
@@ -161,8 +160,7 @@ export const Projects: React.FC = () => {
             <div className={styles.cardFeaturedCopy}>
               <h3 className={styles.cardTitleLight}>Web &amp; Web Apps Development</h3>
               <p className={styles.cardDescLight}>
-                We build fast, scalable web products that streamline operations, engage customers,
-                and help you grow with confidence.
+                Custom storefronts, SaaS platforms, and internal admin tools engineered for speed, SEO, and seamless payment flows.
               </p>
             </div>
             <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverFeatured}>
@@ -181,7 +179,7 @@ export const Projects: React.FC = () => {
             <div className={styles.compactCopy}>
               <h3 className={styles.cardTitleDark}>Mobile Apps Development</h3>
               <p className={styles.cardDescDark}>
-                Native-quality mobile experiences that keep users engaged across iOS and Android.
+                iOS and Android apps with smooth native navigation, push notifications, and offline-ready state.
               </p>
               <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverDark}>
                 Explore
@@ -203,8 +201,7 @@ export const Projects: React.FC = () => {
             <div className={styles.compactCopy}>
               <h3 className={styles.cardTitleDark}>Cybersecurity</h3>
               <p className={styles.cardDescDark}>
-                Hardening, reviews, and architecture so your systems stay resilient under real-world
-                pressure.
+                API security audits, auth hardening, and encrypted data flows that protect customer transactions.
               </p>
               <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverDark}>
                 Explore
@@ -229,8 +226,7 @@ export const Projects: React.FC = () => {
             <div className={`${styles.compactCopy} ${styles.compactCopyEnd}`}>
               <h3 className={styles.cardTitleDark}>UI/UX Design</h3>
               <p className={styles.cardDescDark}>
-                Research-backed interfaces and design systems that clarify your product and lift
-                conversion.
+                High-converting product interfaces, interactive Figma prototypes, and scalable design systems.
               </p>
               <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverDark}>
                 Explore

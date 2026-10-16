@@ -51,31 +51,31 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
     id: 'web',
     title: 'Website and Web Apps Development',
     description:
-      'Full-stack builds, dashboards, and customer-facing experiences that stay fast as you grow.',
+      'Custom e-commerce storefronts, SaaS web apps, and internal operations dashboards built for speed and scale.',
   },
   {
     id: 'uiux',
     title: 'UI/UX Designs',
     description:
-      'Research-backed interfaces and design systems that clarify flows and lift conversion.',
+      'Conversion-focused product interfaces, interactive Figma prototypes, and multi-surface design systems.',
   },
   {
     id: 'mobile',
     title: 'Mobile Apps Development',
     description:
-      'Native-quality experiences for iOS and Android—offline-aware where the job demands it.',
+      'iOS and Android applications with native navigation, real-time sync, and offline-ready architecture.',
   },
   {
     id: 'security',
     title: 'Cybersecurity',
     description:
-      'Hardening, reviews, and architecture so your systems stay resilient under real pressure.',
+      'API hardening, authentication audits, and encrypted transaction flows for production systems.',
   },
   {
     id: 'consultancy',
     title: 'IT Consultancy',
     description:
-      'Practical roadmaps, vendor-neutral guidance, and execution support across your stack.',
+      'Technical discovery, system architecture design, and payment/cloud integration strategy.',
   },
 ];
 
@@ -85,7 +85,7 @@ export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = 
       id: 'web-joey-brand',
       title: 'JOEY The brand',
       summary:
-        'One brand across marketing site, product surfaces, UI explorations, and admin tooling—built for clarity, speed, and a cohesive experience.',
+        'Full-stack e-commerce platform and custom admin suite for JOEY The Brand. Engineered with a fast storefront, streamlined checkout, real-time inventory management, and order fulfillment tooling.',
       href: 'https://joeythebrand.com',
       thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
@@ -95,7 +95,7 @@ export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = 
       id: 'ux-joey-brand',
       title: 'JOEY The brand',
       summary:
-        'UI and UX for the JOEY brand—explorations, flows, and design-system-aligned screens from marketing through product and ops.',
+        'End-to-end product design system for JOEY The Brand, spanning mobile-first shopping flows, editorial lookbooks, checkout UX, and back-office operations screens.',
       href: 'https://joeythebrand.com',
       thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },

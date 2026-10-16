@@ -14,7 +14,6 @@ import {
 import { PortfolioProjectCard } from '@/components/portfolio/PortfolioProjectCard';
 import explorerStyles from '@/components/sections/PortfolioExplorer.module.css';
 import styles from './category.module.css';
-import pageStyles from '@/app/page.module.css';
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -27,11 +26,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params;
   if (!isPortfolioCategoryId(slug)) {
-    return { title: 'Portfolio | Genie │ dev' };
+    return { title: 'Portfolio | Genie Dev Studios' };
   }
   const cat = getPortfolioCategory(slug);
   return {
-    title: `${cat?.title ?? 'Portfolio'} | Genie │ dev`,
+    title: `${cat?.title ?? 'Portfolio'} | Genie Dev Studios`,
     description: cat?.description ?? 'Explore work by specialty.',
   };
 }
@@ -53,7 +52,7 @@ export default async function PortfolioCategoryPage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
+      <main className={`${styles.page} home-main-surface`} data-theme="light">
         <div className={styles.main}>
           <div className={styles.backRow}>
             <Link

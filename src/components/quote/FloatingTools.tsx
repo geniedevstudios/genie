@@ -19,7 +19,7 @@ export function FloatingTools() {
   return (
     <div className={styles.toolsSection}>
       <h2 className={styles.toolsTitle}>
-        Works <span>with modern and reliable tools...</span>
+        Built with <span>proven, production-grade stacks</span>
       </h2>
       
       <div className={styles.toolsContainer}>

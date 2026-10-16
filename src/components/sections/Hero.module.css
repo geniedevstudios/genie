@@ -58,7 +58,7 @@
   pointer-events: none;
 }
 
-/* Brand mark: emoji + pipe + "dev" */
+/* Brand mark: emoji + pipe + "dev studios" */
 .heroBrand {
   display: flex;
   align-items: center;
@@ -68,11 +68,12 @@
 
 .heroBrandText {
   font-family: var(--font-jakarta), sans-serif;
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-size: clamp(2.25rem, 6vw, 5rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   color: #1a202c;
   line-height: 1;
+  white-space: nowrap;
 }
 
 /* Subtitle */
@@ -164,8 +165,17 @@
 
 /* Responsive */
 @media (max-width: 480px) {
+  .heroBrand {
+    gap: 0.35rem;
+  }
+
+  .heroBrand :global(img) {
+    width: clamp(44px, 13vw, 60px) !important;
+    height: auto !important;
+  }
+
   .heroBrandText {
-    font-size: clamp(2.2rem, 12vw, 3.5rem);
+    font-size: clamp(1.45rem, 7.5vw, 2.25rem);
   }
 
   .heroCtas {

@@ -23,13 +23,13 @@ export function QuoteContent() {
                 <span className={styles.heroBrandMarkWrap}>
                   <GenieMark width={64} className={styles.heroBrandMark} />
                 </span>
-                <span className={styles.heroBrandSuffix}>| dev</span>
+                <span className={styles.heroBrandSuffix}>| dev studios</span>
               </span>
             </h1>
           </div>
           <div className={styles.heroCopy}>
             <p className={styles.heroSub}>
-              See what our clients have to say
+              Scope your project and get an instant Cedi estimate.
             </p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export function QuoteContent() {
         <Testimonials />
 
         <p className={styles.investmentStatement}>
-          We believe building a custom platform is <span>not an expense</span>, but rather an <span>investment</span>{' '}in your business&apos;s future.
+          Great software <span>pays for itself</span>—through faster operations, higher conversion, and systems that <span>scale without breaking</span>.
         </p>
       </div>
 

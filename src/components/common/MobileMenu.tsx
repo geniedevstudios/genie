@@ -166,7 +166,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ id, isOpen, onClose }) =
             <Link href="/contact" className={styles.ctaBtn} onClick={onClose}>
               Book a Strategy Call <ArrowRight size={16} strokeWidth={2.2} />
             </Link>
-            <p className={styles.tagline}>Building scalable, revenue-generating systems.</p>
+            <p className={styles.tagline}>Custom web, mobile, and systems engineering.</p>
           </motion.div>
         </motion.div>
       )}

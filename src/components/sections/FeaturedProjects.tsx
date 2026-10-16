@@ -62,7 +62,7 @@ export const FeaturedProjects: React.FC = () => {
             </h2>
           </div>
           <p className={styles.lede}>
-            Preview a build below — then browse the tiles to explore each project&apos;s summary.
+            Real platforms designed, engineered, and launched for our clients.
           </p>
         </header>
 
@@ -136,9 +136,9 @@ export const FeaturedProjects: React.FC = () => {
 
           <div className={styles.featuredClosingWrap}>
             <p className={styles.featuredClosing}>
-              Want to be featured here?{' '}
+              Have a product in mind?{' '}
               <Link href="/contact" className={styles.featuredClosingLink} prefetch={false}>
-                Reach out to us
+                Start a conversation
               </Link>
               .
             </p>

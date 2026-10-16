@@ -8,12 +8,11 @@ import { Footer } from '@/components/common/Footer';
 import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
 import { AnimatedTechGrid } from '@/components/services/AnimatedTechGrid';
 import styles from './services.module.css';
-import pageStyles from '@/app/page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Services | Genie │ dev',
+  title: 'Our Services | Genie Dev Studios',
   description:
-    'Website and web apps, UI/UX, mobile apps, cybersecurity, and IT consultancy — built for clarity, scale, and outcomes.',
+    'Custom web platforms, product UI/UX, iOS & Android mobile apps, security audits, and technical architecture by Genie Dev Studios.',
 };
 
 const sections = [
@@ -21,11 +20,11 @@ const sections = [
     id: 'web-apps',
     title: 'Website and Web Apps Development',
     lead:
-      'Fast, accessible sites and web applications engineered for performance, SEO, and maintainability — from marketing pages to data-driven dashboards.',
+      'From high-converting marketing sites to full-scale SaaS platforms, e-commerce storefronts, and internal operations dashboards.',
     bullets: [
-      'Next.js / React frontends and robust API integrations',
-      'CMS-ready content structures and component systems',
-      'Performance, Core Web Vitals, and deployment pipelines',
+      'Next.js and React applications with server-side rendering and fast page loads',
+      'Payment gateway integrations (Paystack, Stripe, mobile money) and custom admin portals',
+      'Automated CI/CD pipelines, SEO structure, and Core Web Vitals optimization',
     ],
     visualTag: 'Systems',
   },
@@ -33,11 +32,11 @@ const sections = [
     id: 'ui-ux',
     title: 'User Interface & User Experience Design (UI/UX)',
     lead:
-      'Interfaces that feel intentional: clear hierarchy, consistent patterns, and motion that supports comprehension — not noise.',
+      'Product interfaces designed around how real customers browse, decide, and buy. Clean hierarchy, zero clutter, and ready for engineering.',
     bullets: [
-      'User research and persona development',
-      'Wireframing and user flow mapping',
-      'Design systems and accessible contrast & typography',
+      'User flows, information architecture, and low-friction checkout journeys',
+      'Interactive Figma prototypes you can test before a single line of code is written',
+      'Reusable design systems with consistent typography, contrast, and motion',
     ],
     visualTag: 'Flows',
   },
@@ -45,11 +44,11 @@ const sections = [
     id: 'mobile-apps',
     title: 'Mobile Apps Development',
     lead:
-      'Native-feeling experiences on iOS and Android — offline-aware, notification-ready, and tuned for real devices in the field.',
+      'iOS and Android applications built for real-world network conditions, smooth gesture navigation, and reliable background sync.',
     bullets: [
-      'Cross-platform and native-aligned architecture',
-      'Secure auth, storage, and API communication',
-      'Store submission and release hygiene',
+      'Cross-platform and native-grade builds for iOS and Android',
+      'Biometric auth, push notifications, offline caching, and secure API sync',
+      'End-to-end App Store and Google Play submission and release management',
     ],
     visualTag: 'Devices',
   },
@@ -57,11 +56,11 @@ const sections = [
     id: 'cybersecurity',
     title: 'Cybersecurity',
     lead:
-      'Practical hardening for apps and infrastructure: reduce attack surface, protect user data, and build confidence with stakeholders.',
+      'Practical security engineering for web and mobile platforms that handle customer data, accounts, and financial transactions.',
     bullets: [
-      'Threat modeling aligned to your stack and risk profile',
-      'Secure configuration, secrets handling, and dependency hygiene',
-      'Guidance on compliance-minded practices (without the jargon dump)',
+      'API vulnerability audits, rate limiting, and webhook signature verification',
+      'Role-based access control, secrets management, and encrypted data storage',
+      'OWASP-aligned remediation and infrastructure hardening before and after launch',
     ],
     visualTag: 'Shield',
   },
@@ -69,11 +68,11 @@ const sections = [
     id: 'it-consultancy',
     title: 'IT Consultancy',
     lead:
-      'Straightforward advice on architecture, vendor choices, and delivery — so you invest in the right systems at the right time.',
+      'Direct technical guidance when you need to scope a new product, untangle a slow codebase, or choose the right cloud and payment stack.',
     bullets: [
-      'Technical discovery and roadmap workshops',
-      'Integration strategy (payments, identity, data)',
-      'Ongoing advisory for growing teams',
+      'Product scoping workshops, technical specifications, and milestone roadmaps',
+      'Architecture reviews for payments, third-party APIs, and database scaling',
+      'Hands-on engineering advisory for founders and growing product teams',
     ],
     visualTag: 'Roadmap',
   },
@@ -218,15 +217,13 @@ export default function ServicesPage() {
   return (
     <>
       <Navbar />
-      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
+      <main className={`${styles.page} home-main-surface`} data-theme="light">
         <div className={styles.main}>
           <header className={styles.intro}>
             <h1 className={styles.title}>Services</h1>
             <p className={styles.lead}>
-              Navigate our comprehensive suite of services, where technical innovation meets strategic business
-              thinking. We specialize in building scalable digital tools and providing end-to-end support that turns
-              operational hurdles into competitive advantages. Learn more about our capabilities and how we deliver the
-              precision and scale your company needs to succeed.
+              We take digital products from initial scope and UI design to production code and infrastructure hardening.
+              Every engagement is structured around clear milestones, clean architecture, and measurable business outcomes.
             </p>
           </header>
 
@@ -285,17 +282,16 @@ export default function ServicesPage() {
                 <h2
                   id="tech-stack-heading"
                   className={styles.techHeading}
-                  aria-label="Technologies used at GENIE dev"
+                  aria-label="Technologies used at GENIE dev studios"
                 >
                   <span className={styles.techHeadingInner}>
                     Technologies used at{' '}
                     <GenieMark width={34} className={styles.techHeadingMark} />{' '}
-                    <span className={styles.techHeadingSuffix}>| dev</span>
+                    <span className={styles.techHeadingSuffix}>| dev studios</span>
                   </span>
                 </h2>
                 <p className={styles.techLead}>
-                  Modern tooling across the stack — from polished interfaces and APIs to dependable cloud foundations.
-                  We choose technologies that ship fast, scale cleanly, and stay maintainable as your product grows.
+                  Battle-tested frameworks, databases, and mobile toolchains we use every day to ship fast, secure, and maintainable software.
                 </p>
               </header>
               <div className={styles.techRightPanel}>

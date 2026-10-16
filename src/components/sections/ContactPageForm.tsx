@@ -122,26 +122,26 @@ export const ContactPageForm: React.FC = () => {
         <aside className={styles.aside}>
           <div className={styles.mapBg} aria-hidden />
           <h1 id="contact-hero-heading" className={styles.heroTitle}>
-            Let us hear from you
+            Start a project
           </h1>
           <p className={styles.headline}>
-            We are always ready to assist you, anywhere in the world.
+            Tell us what you’re building. You’ll hear back from an engineer within 24 hours.
           </p>
           <p className={styles.lede}>
-            Our team is focused on clear communication and solid delivery. Whether you have a specific build in mind or
-            a question about scope, we&apos;re here to help you move forward with confidence.
+            Whether you have a full specification or a rough product idea, share your goals below and we’ll follow up
+            with concrete next steps, timeline options, and a clear scope.
           </p>
 
           <div className={styles.contactGrid}>
             <div className={styles.contactBlock}>
-              <h3>Support</h3>
-              <p>Our friendly team is here to help.</p>
+              <h3>Direct Email</h3>
+              <p>For project inquiries &amp; partnerships.</p>
               <a className={styles.contactLink} href={`mailto:${SUPPORT_EMAIL}`}>
                 {SUPPORT_EMAIL}
               </a>
             </div>
             <div className={styles.contactBlock}>
-              <h3>Phone</h3>
+              <h3>Phone &amp; WhatsApp</h3>
               <p>Mon–Fri, 8am–5pm (GMT).</p>
               <a className={styles.contactLink} href={`tel:${PHONE_TEL}`}>
                 {PHONE_DISPLAY}
@@ -229,9 +229,9 @@ export const ContactPageForm: React.FC = () => {
                 transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
               >
                 <h2 className={styles.formTitle} id="contact-form-heading">
-                  Get in touch
+                  Send a brief
                 </h2>
-                <p className={styles.formSubtitle}>Our friendly team would love to hear from you.</p>
+                <p className={styles.formSubtitle}>Share a few details and we’ll reply within one business day.</p>
 
                 <form className={styles.form} onSubmit={handleSubmit} noValidate aria-labelledby="contact-form-heading">
                   <div className={styles.row2}>

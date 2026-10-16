@@ -28,8 +28,8 @@ const TEAM: TeamMember[] = [
   {
     id: 'emil',
     name: 'Emil',
-    role: 'Founder . Full Stack Developer',
-    bio: 'Emil develops complete web applications and platforms, from user interfaces to backend systems and integrations. His approach prioritizes clean architecture, reliable performance, and systems that remain maintainable as they scale.',
+    role: 'Founder · Lead Full-Stack Engineer',
+    bio: 'Emil leads architecture and full-stack engineering at Genie Dev Studios. He specializes in building high-throughput web applications, custom e-commerce systems, payment integrations, and clean admin tooling that teams can rely on.',
     portraitSrc: EMIL_AVATAR,
     thumbSrc: EMIL_THUMB,
     links: [
@@ -84,25 +84,24 @@ export const About: React.FC = () => {
       <section className={styles.hero} aria-labelledby="about-hero-title">
         <div className={styles.heroGrid}>
           <div className={styles.heroTitleBlock}>
-            <h1 id="about-hero-title" className={styles.heroTitleGroup} aria-label="About Genie dev">
+            <h1 id="about-hero-title" className={styles.heroTitleGroup} aria-label="About Genie dev studios">
               <span className={styles.heroDisplay}>About</span>
               <span className={styles.heroBrandLine}>
                 <span className={styles.heroBrandMarkWrap} aria-hidden="true">
                   <GenieMark width={64} className={styles.heroBrandMark} />
                 </span>
-                <span className={styles.heroBrandSuffix}>| dev</span>
+                <span className={styles.heroBrandSuffix}>| dev studios</span>
               </span>
             </h1>
           </div>
           <div className={styles.heroCopy}>
             <p className={styles.heroSub}>
-              See how we work—and what shapes every build.
+              Built in Accra. Engineered for production.
             </p>
             <p className={styles.heroLead}>
-              We&apos;re a Ghana-based development practice building web platforms, mobile applications, and
-              integrations that perform reliably in real-world conditions. We combine clear strategy,
-              solid execution, and realistic timelines so your product can scale without breaking
-              expectations.
+              Genie Dev Studios is a software design and engineering practice building custom web platforms,
+              mobile apps, and payment-ready systems. We skip the agency bloat—pairing you directly with
+              builders who scope honestly, write clean code, and ship on schedule.
             </p>
           </div>
         </div>
@@ -113,14 +112,14 @@ export const About: React.FC = () => {
           <div className={styles.storyGrid}>
             <div className={styles.storyText}>
               <p>
-                We work as a team focused on results, not presentations. That means uncovering real
-                constraints early, designing systems that remain flexible as you grow, and delivering
-                features you can test in staging before they reach production.
+                Most software projects fail in the gap between a flashy slide deck and actual engineering.
+                We started Genie Dev Studios to close that gap: every project begins with a concrete technical
+                scope, interactive prototypes, and architecture designed around your real business workflows.
               </p>
               <p>
-                As technology evolves, we stay current—and apply the same level of care across
-                everything we build, from payment systems and APIs to user interfaces. We prioritize
-                long-term partnerships, making each release smoother and more efficient than the last.
+                Whether we are launching a custom storefront with Paystack checkout, building a cross-platform
+                mobile app, or hardening an existing backend, you get staging links you can test every week
+                and a codebase your business truly owns.
               </p>
             </div>
             <div className={styles.storyMedia}>
@@ -165,11 +164,11 @@ export const About: React.FC = () => {
                 id="about-metrics-heading"
                 className={styles.metricsHeadline}
               >
-                Building Smarter Digital Experiences
+                Software Built for Real Operations
               </h2>
               <p className={styles.metricsLead}>
-                We design and develop scalable platforms and applications that help businesses operate
-                efficiently, grow faster, and stay ahead in a digital-first world.
+                From customer-facing checkout flows to back-office inventory and reporting tools, we engineer systems
+                that eliminate manual bottlenecks and hold up under daily traffic.
               </p>
             </div>
             <div
@@ -184,31 +183,31 @@ export const About: React.FC = () => {
                     <Star key={i} className={styles.star} size={18} fill="currentColor" strokeWidth={0} />
                   ))}
                 </div>
-                <p className={styles.starsFootnote}>(based on 1000+ reviews)</p>
+                <p className={styles.starsFootnote}>(5.0 client satisfaction across 30+ partnerships)</p>
               </div>
-              <p className={styles.trustTitle}>Disciplined execution from start to finish</p>
+              <p className={styles.trustTitle}>Direct-to-engineer execution</p>
               <p className={styles.trustCaption}>
-                Every project follows a structured process with defined milestones, transparent updates,
-                and clean handoffs—so your product stays stable, scalable, and easy to evolve.
+                Fixed Cedi milestones, weekly staging builds, and clean documentation—so you always know what is
+                shipping and when.
               </p>
             </div>
           </div>
           <div className={styles.statsRow}>
             <div>
               <div className={styles.statValue}>20+</div>
-              <p className={styles.statLabel}>Completed builds and feature releases</p>
+              <p className={styles.statLabel}>Production systems &amp; releases shipped</p>
             </div>
             <div>
               <div className={styles.statValue}>100%</div>
-              <p className={styles.statLabel}>Defined requirements before development</p>
+              <p className={styles.statLabel}>Scoped with milestones before code</p>
             </div>
             <div>
               <div className={styles.statValue}>30+</div>
-              <p className={styles.statLabel}>Businesses worked with</p>
+              <p className={styles.statLabel}>Brands &amp; businesses partnered with</p>
             </div>
             <div>
-              <div className={styles.statValue}>24h</div>
-              <p className={styles.statLabel}>Response window</p>
+              <div className={styles.statValue}>&lt; 24h</div>
+              <p className={styles.statLabel}>Direct response window</p>
             </div>
           </div>
         </div>
@@ -220,20 +219,19 @@ export const About: React.FC = () => {
             <h2
               id="about-team-heading"
               className={styles.teamHeading}
-              aria-label="Meet the Genie dev team"
+              aria-label="Meet the Genie dev studios team"
             >
               <span className={styles.teamHeadingRow} aria-hidden="true">
                 <span>Meet the </span>
                 <span className={styles.teamHeadingBrand}>
                   <GenieMark width={40} className={styles.teamHeadingMark} />
-                  <span className={styles.teamHeadingSuffix}>| dev</span>
+                  <span className={styles.teamHeadingSuffix}>| dev studios</span>
                 </span>
                 <span> team</span>
               </span>
             </h2>
             <p className={styles.teamLede}>
-              We bring together focused builders who care about craft, clarity, and execution—creating
-              an environment where great work is the standard, not the exception.
+              Senior product builders focused on clean architecture, sharp interfaces, and reliable delivery.
             </p>
           </div>
 

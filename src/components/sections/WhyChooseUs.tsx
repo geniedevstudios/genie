@@ -9,27 +9,27 @@ import styles from './WhyChooseUs.module.css';
 const FEATURE_GRID = [
   {
     key: 'innovative',
-    title: 'Innovative',
+    title: 'Production-Ready',
     description:
-      'Modern web and mobile stacks, clear architecture, and patterns that scale with your product.',
+      'We don’t ship fragile prototypes. Every build is architected for real traffic, fast loads, and clean scaling.',
   },
   {
     key: 'ethical',
-    title: 'Ethical',
+    title: 'Transparent Scope',
     description:
-      'Fair scope, honest timelines, and plain-language updates — integrity in how we ship and how we treat users and data.',
+      'Fixed milestones, upfront Cedi pricing, and direct communication with the engineers writing your code.',
   },
   {
     key: 'experienced',
-    title: 'Experienced',
+    title: 'Full-Stack Depth',
     description:
-      'Seasoned engineers who have shipped production systems — not throwaway demos or endless prototypes.',
+      'From pixel-accurate UI and mobile apps to payment webhooks and database tuning, we own the entire stack.',
   },
   {
     key: 'sustainable',
-    title: 'Sustainable',
+    title: 'Clean Handoff',
     description:
-      'Milestones you can plan around, maintainable codebases, and ownership that lasts beyond launch.',
+      'Well-documented repositories, automated deployments, and zero vendor lock-in so you truly own your product.',
   },
 ] as const;
 
@@ -61,14 +61,14 @@ export const WhyChooseUs: React.FC = () => {
             <motion.h2
               id="why-hero-heading"
               className={styles.heroTitle}
-              aria-label="Why Partner with Genie | dev?"
+              aria-label="Why Partner with Genie | dev studios?"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
             >
               <span className={styles.heroTitleLine} aria-hidden>
-                Why Partner with <GenieMark width={34} className={styles.heroTitleGenie} /> | dev?
+                Why Partner with <GenieMark width={34} className={styles.heroTitleGenie} /> | dev studios?
               </span>
             </motion.h2>
             <motion.p
@@ -78,8 +78,7 @@ export const WhyChooseUs: React.FC = () => {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: 0.06, ease: [0.19, 1, 0.22, 1] }}
             >
-              Our expert team is dedicated to delivering high-performance web and mobile solutions
-              tailored to your needs.
+              You work directly with senior builders who scope clearly, ship on schedule, and stand behind every release.
             </motion.p>
           </div>
 
@@ -104,11 +103,10 @@ export const WhyChooseUs: React.FC = () => {
                 />
               ))}
             </div>
-            <p className={styles.ratingEyebrow}>Client-rated excellence</p>
-            <p className={styles.ratingHeadline}>Trusted by 200+ businesses</p>
+            <p className={styles.ratingEyebrow}>Production track record</p>
+            <p className={styles.ratingHeadline}>Trusted by 30+ growing brands</p>
             <p className={styles.ratingTagline}>
-              From lean MVPs to production rollouts — shipped with clarity, scope discipline, and code you can
-              grow into.
+              From e-commerce storefronts to custom internal tools, scoped upfront and engineered to last.
             </p>
             <div className={styles.ratingFooter}>
               <div className={styles.avatarStack} aria-hidden>
@@ -125,7 +123,7 @@ export const WhyChooseUs: React.FC = () => {
                   />
                 ))}
               </div>
-              <span className={styles.ratingChip}>500+ deliverables shipped</span>
+              <span className={styles.ratingChip}>20+ systems shipped</span>
             </div>
           </motion.aside>
         </div>

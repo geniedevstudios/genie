@@ -6,26 +6,22 @@ import styles from '../services/services.module.css';
 import hero from './portfolio.module.css';
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Genie │ dev',
+  title: 'Portfolio | Genie Dev Studios',
   description:
-    'Featured digital work—from polished websites to complex systems—showing how we turn concepts into reliable solutions and lasting partnerships.',
+    'Selected web platforms, e-commerce systems, product interfaces, and custom software built by Genie Dev Studios.',
 };
-
-import pageStyles from '@/app/page.module.css';
 
 export default function PortfolioPage() {
   return (
     <>
       <Navbar />
-      <main className={`${styles.page} ${pageStyles.homeMain}`} data-theme="light">
+      <main className={`${styles.page} home-main-surface`} data-theme="light">
         <div className={styles.main}>
           <header className={hero.hero}>
             <h1 className={hero.title}>Portfolio</h1>
             <p className={hero.lead}>
-              Discover our featured portfolio, highlighting key digital transformations that drove business growth and
-              fostered strong partnerships. From polished websites to complex systems, this collection demonstrates our
-              versatility and dedication to quality. Explore our work to see how we turn concepts into digital
-              solutions.
+              Selected platforms, storefronts, and product interfaces engineered by Genie Dev Studios.
+              Browse by discipline below to inspect live builds, design systems, and admin workflows in production.
             </p>
           </header>
           <PortfolioExplorer />

@@ -10,7 +10,7 @@ import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main className={styles.homeMain} data-theme="light">
+    <main className={`${styles.homeMain} home-main-surface`} data-theme="light">
       <Navbar />
       <Hero />
       <Projects />
