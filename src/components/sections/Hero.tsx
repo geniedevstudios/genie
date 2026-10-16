@@ -192,9 +192,9 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Subtitle */}
-        <p className={styles.heroSubtitle}>
+        <h1 className={styles.heroSubtitle}>
           Software that ships, scales, and sells.
-        </p>
+        </h1>
 
         {/* Subtext */}
         <p className={styles.heroSubtext}>

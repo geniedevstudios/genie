@@ -29,9 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Portfolio | Genie Dev Studios' };
   }
   const cat = getPortfolioCategory(slug);
+  const title = `${cat?.title ?? 'Portfolio'} | Genie Dev Studios`;
+  const description = cat?.description ?? 'Explore work by specialty.';
   return {
-    title: `${cat?.title ?? 'Portfolio'} | Genie Dev Studios`,
-    description: cat?.description ?? 'Explore work by specialty.',
+    title,
+    description,
+    alternates: {
+      canonical: `/portfolio/${slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+    },
   };
 }
 

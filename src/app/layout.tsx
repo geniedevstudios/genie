@@ -47,6 +47,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://geniedevstudios.com'),
   title: 'Home | Genie Dev Studios',
   applicationName: 'Genie Dev Studios',
   appleWebApp: {
@@ -56,16 +57,59 @@ export const metadata: Metadata = {
   },
   description: 'Software design and engineering studio in Accra, Ghana. We build custom web platforms, mobile apps, payment systems, and secure cloud backends.',
   keywords: ['Genie Dev Studios', 'Software Studio Ghana', 'Web App Development', 'Mobile App Development', 'Paystack Integration', 'Next.js Studio', 'UI/UX Design Accra'],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Home | Genie Dev Studios',
     siteName: 'Genie Dev Studios',
     description: 'Custom web platforms, mobile apps, and revenue-ready systems built in Accra, Ghana.',
+    url: 'https://geniedevstudios.com',
+    locale: 'en_GH',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Home | Genie Dev Studios',
+    description: 'Custom web platforms, mobile apps, and revenue-ready systems built in Accra, Ghana.',
   },
   icons: {
     icon: [{ url: GENIE_IMAGE_SRC, type: 'image/png' }],
     apple: [{ url: GENIE_IMAGE_SRC, type: 'image/png' }],
   },
+};
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://geniedevstudios.com/#website',
+      url: 'https://geniedevstudios.com',
+      name: 'Genie Dev Studios',
+      alternateName: ['Genie | dev studios', 'Genie Dev'],
+      description:
+        'Software design and engineering studio in Accra, Ghana. We build custom web platforms, mobile apps, payment systems, and secure cloud backends.',
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://geniedevstudios.com/#organization',
+      name: 'Genie Dev Studios',
+      url: 'https://geniedevstudios.com',
+      logo: 'https://geniedevstudios.com/genie-logo.png',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Accra',
+        addressCountry: 'GH',
+      },
+      sameAs: [
+        'https://www.instagram.com/thesarkodieemil/',
+        'https://www.linkedin.com/in/emil-sarkodie-7b3262319/',
+        'https://x.com/yourfavgenie',
+        'https://github.com/heavyhitter69',
+      ],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -76,6 +120,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <ClientProvider>
           <Preloader />
           <PageTransition />

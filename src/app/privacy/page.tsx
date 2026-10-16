@@ -7,6 +7,9 @@ import styles from '../legal.module.css';
 export const metadata: Metadata = {
   title: 'Privacy Policy | Genie Dev Studios',
   description: 'How GENIE | dev studios collects, uses, and protects your information.',
+  alternates: {
+    canonical: '/privacy',
+  },
 };
 
 function CompanyLogo() {

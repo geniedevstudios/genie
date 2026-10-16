@@ -7,6 +7,9 @@ import styles from '../legal.module.css';
 export const metadata: Metadata = {
   title: 'Terms of Service | Genie Dev Studios',
   description: 'The terms and conditions for using GENIE | dev studios services.',
+  alternates: {
+    canonical: '/terms',
+  },
 };
 
 function CompanyLogo() {

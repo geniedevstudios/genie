@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   title: 'Our Services | Genie Dev Studios',
   description:
     'Custom web platforms, product UI/UX, iOS & Android mobile apps, security audits, and technical architecture by Genie Dev Studios.',
+  alternates: {
+    canonical: '/services',
+  },
+  openGraph: {
+    title: 'Our Services | Genie Dev Studios',
+    description:
+      'Custom web platforms, product UI/UX, iOS & Android mobile apps, security audits, and technical architecture by Genie Dev Studios.',
+  },
 };
 
 const sections = [

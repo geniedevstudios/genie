@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   title: 'About | Genie Dev Studios',
   description:
     'Meet Genie Dev Studios — a software design and engineering studio in Accra building web platforms, mobile apps, and secure systems.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About | Genie Dev Studios',
+    description:
+      'Meet Genie Dev Studios — a software design and engineering studio in Accra building web platforms, mobile apps, and secure systems.',
+  },
 };
 
 export default function AboutPage() {

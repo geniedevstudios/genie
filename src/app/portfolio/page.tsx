@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   title: 'Portfolio | Genie Dev Studios',
   description:
     'Selected web platforms, e-commerce systems, product interfaces, and custom software built by Genie Dev Studios.',
+  alternates: {
+    canonical: '/portfolio',
+  },
+  openGraph: {
+    title: 'Portfolio | Genie Dev Studios',
+    description:
+      'Selected web platforms, e-commerce systems, product interfaces, and custom software built by Genie Dev Studios.',
+  },
 };
 
 export default function PortfolioPage() {
