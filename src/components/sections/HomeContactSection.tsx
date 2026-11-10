@@ -131,8 +131,8 @@ export const HomeContactSection: React.FC = () => {
               transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
             >
               <h2 id="home-booking-heading" className={styles.title}>
-                Ready to ship your{' '}
-                <span className={styles.titleAccent}>next product?</span>
+                Tell us{' '}
+                <span className={styles.titleAccent}>what you want to build.</span>
               </h2>
 
               <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -227,7 +227,7 @@ export const HomeContactSection: React.FC = () => {
                       required
                     />
                     <span>
-                      You agree to our friendly{' '}
+                      You agree to our{' '}
                       <Link href="/privacy" className={styles.privacyLink}>
                         privacy policy
                       </Link>

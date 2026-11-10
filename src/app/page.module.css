@@ -1,11 +1,24 @@
 .homeMain {
+  --home-text: #f4f3f7;
+  --home-muted: #aaa7b5;
+  --home-accent: #cbb0ee;
+  --home-panel: #202024;
+  --home-line: #ffffff20;
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
-  /* Light sky background to match the quote page */
-  background: linear-gradient(180deg, #d3e1ef 0%, #eef3f9 50%, #f6f8fb 100%);
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
+  color: var(--home-text);
+  background: transparent;
 }
+
+.homeMain[data-theme='dark'] :global(.site-footer) {
+  background: transparent;
+  position: relative;
+  --footer-accent: #cbb0ee;
+  --footer-muted: #aaa7b5;
+}
+.homeMain[data-theme='dark'] :global(.footer-bottom) { border-top: 0; }
+.homeMain[data-theme='dark'] :global(.newsletter-join) { color: #21182b; }
 
 .page {
   --background: #fafafa;

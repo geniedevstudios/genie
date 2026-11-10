@@ -1,62 +1,52 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
-import { Check } from 'lucide-react';
-import { GenieMark } from '@/components/common/GenieMark';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
-import { TechStackMoreDialog } from '@/components/services/TechStackMoreDialog';
-import { AnimatedTechGrid } from '@/components/services/AnimatedTechGrid';
+import { FloatingTools } from '@/components/quote/FloatingTools';
 import styles from './services.module.css';
 
 export const metadata: Metadata = {
   title: 'Our Services | Genie Dev Studios',
-  description:
-    'Custom web platforms, product UI/UX, iOS & Android mobile apps, security audits, and technical architecture by Genie Dev Studios.',
-  alternates: {
-    canonical: '/services',
-  },
-  openGraph: {
-    title: 'Our Services | Genie Dev Studios',
-    description:
-      'Custom web platforms, product UI/UX, iOS & Android mobile apps, security audits, and technical architecture by Genie Dev Studios.',
-  },
+  description: 'Six disciplines. One team. Web and mobile apps, custom software, UI/UX design, cybersecurity, and IT consultancy.',
+  alternates: { canonical: '/services' },
 };
 
 const sections = [
   {
     id: 'web-apps',
-    title: 'Website and Web Apps Development',
+    title: 'Web development',
     lead:
-      'From high-converting marketing sites to full-scale SaaS platforms, e-commerce storefronts, and internal operations dashboards.',
+      'Your next great first impression. Websites, web apps, and online shops built around the people who use them.',
     bullets: [
-      'Next.js and React applications with server-side rendering and fast page loads',
-      'Payment gateway integrations (Paystack, Stripe, mobile money) and custom admin portals',
-      'Automated CI/CD pipelines, SEO structure, and Core Web Vitals optimization',
+      'Public sites and web applications people can actually use',
+      'Admin dashboards, customer portals, and tools for day-to-day operations',
+      'Connections to payments, email, or other services when the project needs them',
     ],
     visualTag: 'Systems',
   },
   {
     id: 'ui-ux',
-    title: 'User Interface & User Experience Design (UI/UX)',
+    title: 'UI/UX design',
     lead:
-      'Product interfaces designed around how real customers browse, decide, and buy. Clean hierarchy, zero clutter, and ready for engineering.',
+      'Feels right. Works beautifully. We turn complicated journeys into clear, thoughtful screens.',
     bullets: [
-      'User flows, information architecture, and low-friction checkout journeys',
-      'Interactive Figma prototypes you can test before a single line of code is written',
-      'Reusable design systems with consistent typography, contrast, and motion',
+      'Flows and screen structure agreed before build',
+      'Prototypes you can click through before development starts',
+      'A consistent visual system the product can grow with',
     ],
     visualTag: 'Flows',
   },
   {
     id: 'mobile-apps',
-    title: 'Mobile Apps Development',
+    title: 'Mobile apps',
     lead:
-      'iOS and Android applications built for real-world network conditions, smooth gesture navigation, and reliable background sync.',
+      'Big possibilities. Pocket-sized. Useful iPhone and Android apps for life beyond the desk.',
     bullets: [
-      'Cross-platform and native-grade builds for iOS and Android',
-      'Biometric auth, push notifications, offline caching, and secure API sync',
-      'End-to-end App Store and Google Play submission and release management',
+      'Apps for customers, staff, or both',
+      'Notifications, sign-in, and offline use when the work requires them',
+      'Store submission and release support when you are ready to publish',
     ],
     visualTag: 'Devices',
   },
@@ -64,258 +54,76 @@ const sections = [
     id: 'cybersecurity',
     title: 'Cybersecurity',
     lead:
-      'Practical security engineering for web and mobile platforms that handle customer data, accounts, and financial transactions.',
+      'Confidence, built in. Practical reviews and improvements for your accounts, data, and connected systems.',
     bullets: [
-      'API vulnerability audits, rate limiting, and webhook signature verification',
-      'Role-based access control, secrets management, and encrypted data storage',
-      'OWASP-aligned remediation and infrastructure hardening before and after launch',
+      'Review of access, accounts, and sensitive data',
+      'Checks on APIs and incoming webhooks when those are in scope',
+      'A practical plan to address the risks we find',
     ],
     visualTag: 'Shield',
   },
   {
-    id: 'it-consultancy',
-    title: 'IT Consultancy',
+    id: 'software-development',
+    title: 'Software development',
     lead:
-      'Direct technical guidance when you need to scope a new product, untangle a slow codebase, or choose the right cloud and payment stack.',
+      'Made for the way you work. Custom tools, business systems, and integrations that help your team move forward.',
     bullets: [
-      'Product scoping workshops, technical specifications, and milestone roadmaps',
-      'Architecture reviews for payments, third-party APIs, and database scaling',
-      'Hands-on engineering advisory for founders and growing product teams',
+      'Business systems and workflows tailored to your team',
+      'APIs and integrations that connect the tools you already use',
+      'Testing, deployment, and a clear handover for ongoing development',
+    ],
+    visualTag: 'Software',
+  },
+  {
+    id: 'it-consultancy',
+    title: 'IT consultancy',
+    lead:
+      'A clearer path forward. Bring us the problem, and we’ll help you choose what to build, improve, or connect.',
+    bullets: [
+      'A conversation about the work, the users, and a sensible first scope',
+      'A written approach, milestones, and a price agreed before development',
+      'Advice on existing systems when you need to improve what you already have',
     ],
     visualTag: 'Roadmap',
   },
 ] as const;
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V'] as const;
-
-const TECH_STACK = [
-  {
-    id: 'node',
-    label: 'Node.js',
-    title: 'Node.js',
-    description:
-      'JavaScript on the server for APIs, integrations, and tooling — fast iteration with a rich package ecosystem and production-grade observability.',
-  },
-  {
-    id: 'react',
-    label: 'React',
-    title: 'React',
-    description:
-      'Component-driven UIs with predictable patterns — ideal for marketing sites, dashboards, and design systems that stay accessible and maintainable.',
-  },
-  {
-    id: 'supabase',
-    label: 'Supabase',
-    title: 'Supabase',
-    description:
-      'Postgres, auth, storage, and realtime in one managed layer — great for shipping features quickly without reinventing backend fundamentals.',
-  },
-  {
-    id: 'mongodb',
-    label: 'MongoDB',
-    title: 'MongoDB',
-    description:
-      'Flexible document storage when your domain model evolves quickly — paired with thoughtful indexing and schema discipline where it matters.',
-  },
-  {
-    id: 'vscode',
-    label: 'Visual Studio Code',
-    title: 'Visual Studio Code',
-    description:
-      'Our daily driver editor — extensions, debugging, and Git integration keep the whole team moving in the same productive workflow.',
-  },
-  {
-    id: 'xcode',
-    label: 'Xcode',
-    title: 'Xcode',
-    description:
-      'Apple platform builds, signing, and profiling — the toolchain we use when shipping native-quality iOS experiences.',
-  },
-  {
-    id: 'android-studio',
-    label: 'Android Studio',
-    title: 'Android Studio',
-    description:
-      'Gradle, emulators, and Android-specific diagnostics — essential for robust mobile delivery on the Play ecosystem.',
-  },
-  {
-    id: 'django',
-    label: 'Django',
-    title: 'Django',
-    description:
-      'Batteries-included Python web framework for secure admin, ORM, and rapid backend iteration when the problem fits a structured server stack.',
-  },
-] as const;
-
-type TechStackId = (typeof TECH_STACK)[number]['id'];
-
-const TECH_ICON_SRC: Record<TechStackId, string | null> = {
-  node: '/node.png',
-  react: '/react.svg',
-  supabase: '/supa.png',
-  mongodb: '/mongo.png',
-  vscode: '/vs.png',
-  xcode: '/xcode.png',
-  'android-studio': '/android.png',
-  django: '/dj.png',
+const ART: Record<string, { position: string; color: string }> = {
+  'web-apps': { position: '0% 0%', color: '#80e8b4' },
+  'ui-ux': { position: '0% 100%', color: '#cdb4f6' },
+  'mobile-apps': { position: '50% 0%', color: '#ffa49e' },
+  'cybersecurity': { position: '50% 100%', color: '#f1cd75' },
+  'software-development': { position: '100% 0%', color: '#a1b8ff' },
+  'it-consultancy': { position: '100% 100%', color: '#c3a1fa' },
 };
 
-function TechBrandIcon({ id }: { id: TechStackId }) {
-  const src = TECH_ICON_SRC[id];
-  if (src) {
-    return (
-      <Image
-        src={src}
-        alt=""
-        width={48}
-        height={48}
-        className={styles.techBrandImg}
-        sizes="48px"
-      />
-    );
-  }
-
-  return (
-    <svg className={styles.techSvg} viewBox="-11.5 -10.25 23 20.5" aria-hidden>
-      <circle cx="0" cy="0" r="2.05" fill="#61dafb" />
-      <g stroke="#61dafb" strokeWidth="1" fill="none">
-        <ellipse rx="11" ry="4.2" />
-        <ellipse rx="11" ry="4.2" transform="rotate(60)" />
-        <ellipse rx="11" ry="4.2" transform="rotate(-60)" />
-      </g>
-    </svg>
-  );
-}
-
-function ServiceIllustration({ tag }: { tag: string }) {
-  return (
-    <div className={styles.visual}>
-      <div className={styles.visualGlow} aria-hidden />
-      <div className={styles.visualFrame}>
-        <div className={styles.visualTopBar}>
-          <span className={styles.visualDot} />
-          <span className={styles.visualDot} />
-          <span className={styles.visualDot} />
-        </div>
-        <div className={styles.visualCanvas}>
-          <div className={styles.visualCard}>
-            <div className={styles.visualCardLine} />
-            <div className={styles.visualCardLineShort} />
-            <div className={styles.visualCardBlocks}>
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-          <div className={styles.visualConnect} aria-hidden />
-          <div className={styles.visualCardAlt}>
-            <div className={styles.visualCardLine} />
-            <div className={styles.visualTag}>
-              <span className={styles.visualTagGlow} />
-              {tag}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function ServicesPage() {
-  return (
-    <>
-      <Navbar />
-      <main className={`${styles.page} home-main-surface`} data-theme="light">
-        <div className={styles.main}>
-          <header className={styles.intro}>
-            <h1 className={styles.title}>Services</h1>
-            <p className={styles.lead}>
-              We take digital products from initial scope and UI design to production code and infrastructure hardening.
-              Every engagement is structured around clear milestones, clean architecture, and measurable business outcomes.
-            </p>
-          </header>
-
-          <div className={styles.stack}>
-            {sections.map((s, index) => {
-              const roman = ROMAN[index] ?? String(index + 1);
-              const reverse = index % 2 === 1;
-
-              return (
-                <section
-                  key={s.id}
-                  id={s.id}
-                  className={`${styles.row} ${reverse ? styles.rowReverse : ''}`}
-                  aria-labelledby={`${s.id}-heading`}
-                >
-                  <div className={styles.rowInner}>
-                    <div className={styles.copy}>
-                      <span className={styles.watermark} aria-hidden="true">
-                        {roman}
-                      </span>
-                      <h2 id={`${s.id}-heading`} className={styles.sectionTitle}>
-                        {s.title}
-                      </h2>
-                      <p className={styles.sectionLead}>{s.lead}</p>
-                      <ul className={styles.featureList}>
-                        {s.bullets.map((b) => (
-                          <li key={b} className={styles.featureItem}>
-                            <span className={styles.featureIcon} aria-hidden="true">
-                              <Check strokeWidth={2.75} size={12} />
-                            </span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Link href="/contact" className={styles.cta}>
-                        Discuss this service
-                      </Link>
-                    </div>
-                    <div className={styles.visualCol}>
-                      <ServiceIllustration tag={s.visualTag} />
-                    </div>
-                  </div>
-                </section>
-              );
-            })}
+  return <>
+    <Navbar />
+    <main className={styles.page}>
+      <header className={styles.intro}>
+        <span className="studio-eyebrow">Six disciplines. One team.</span>
+        <h1 className="studio-title">A specialist for every chapter.</h1>
+        <p>From the first spark to the next release. Find the right kind of magic for your idea.</p>
+      </header>
+      <nav className={styles.serviceNav} aria-label="Explore services">
+        {sections.map(service => <a href={`#${service.id}`} key={service.id}>{service.title}</a>)}
+      </nav>
+      <div className={styles.stack}>
+        {sections.map((service, index) => <section key={service.id} id={service.id} className={styles.card}
+          aria-labelledby={`${service.id}-heading`} style={{ '--service-color': ART[service.id].color, '--sprite-position': ART[service.id].position } as CSSProperties}>
+          <div className={styles.visual} aria-hidden="true"><div className={styles.character} /><span className={styles.number}>0{index + 1}</span></div>
+          <div className={styles.copy}>
+            <h2 id={`${service.id}-heading`}>{service.title}</h2>
+            <p>{service.lead}</p>
+            <ul>{service.bullets.map(bullet => <li key={bullet}><Check size={16} aria-hidden /><span>{bullet}</span></li>)}</ul>
+            <Link href="/quote">Let’s build it <ArrowUpRight size={17} aria-hidden /></Link>
           </div>
-
-          <section id="tech-stack" className={styles.techStack} aria-labelledby="tech-stack-heading">
-            <span className={styles.techWatermark} aria-hidden="true">
-              TECH
-              <br />
-              STACK
-            </span>
-            <div className={styles.techInner}>
-              <header className={styles.techHead}>
-                <h2
-                  id="tech-stack-heading"
-                  className={styles.techHeading}
-                  aria-label="Technologies used at GENIE dev studios"
-                >
-                  <span className={styles.techHeadingInner}>
-                    Technologies used at{' '}
-                    <GenieMark width={34} className={styles.techHeadingMark} />{' '}
-                    <span className={styles.techHeadingSuffix}>| dev studios</span>
-                  </span>
-                </h2>
-                <p className={styles.techLead}>
-                  Battle-tested frameworks, databases, and mobile toolchains we use every day to ship fast, secure, and maintainable software.
-                </p>
-              </header>
-              <div className={styles.techRightPanel}>
-                <AnimatedTechGrid 
-                  items={TECH_STACK.map(t => ({
-                    id: t.id,
-                    label: t.label,
-                    iconSrc: TECH_ICON_SRC[t.id]
-                  }))} 
-                />
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
+        </section>)}
+      </div>
+      <div className={styles.tools}><FloatingTools /></div>
+      <div className={styles.closing}><h2>Not sure where to start?</h2><p>Tell us what you have in mind. We’ll find the next step together.</p><Link href="/contact">Start a conversation ↗</Link></div>
+    </main>
+    <Footer />
+  </>;
 }

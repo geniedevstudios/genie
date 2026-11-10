@@ -1,812 +1,199 @@
-/* ─── Hero Section ───────────────────────────────────────────────── */
-.heroSection {
+.heroFrame {
   width: 100%;
-  /* Mobile browsers: 100vh can disagree with the visible viewport; prefer dynamic/small vh */
-  min-height: 100vh;
-  min-height: 100svh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  /* Must not clip pill popovers (genie cards) that extend past the section edge */
-  overflow: clip;
-  padding-top: var(--nav-height);
-  /* Transparent to show global background */
   background: transparent;
-  color: #1a202c;
 }
 
-/* Tall narrow portrait (e.g. Galaxy S8+, Fold outer cover) — cover crops heavily; anchor focal slightly higher */
-@media (max-aspect-ratio: 9 / 18) {
-  .heroSection {
-    min-height: 100svh;
-    min-height: 100dvh;
-    background-position: center 28%;
-  }
-}
-
-/* Extra-tall displays (very narrow width vs height) */
-@media (max-aspect-ratio: 2 / 5) {
-  .heroSection {
-    background-position: center 22%;
-  }
-}
-
-/* Wide / unfolded tablet-style (e.g. Z Fold inner, landscape tablets) — avoid “only middle strip” feel */
-@media (orientation: landscape) and (min-aspect-ratio: 4 / 3) {
-  .heroSection {
-    min-height: 100svh;
-    min-height: 100dvh;
-    background-position: center 42%;
-  }
+.heroSection {
+  position: relative;
+  isolation: isolate;
+  min-height: 820px;
+  height: 100svh;
+  max-height: 1100px;
+  overflow: hidden;
+  background: transparent;
+  color: #fafafa;
 }
 
 
-
-/* ─── Centered Hero Content ──────────────────────────────────────── */
 .heroContent {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 12vh 1.5rem 0;
-  gap: 0;
-  pointer-events: none;
+  padding: clamp(28px, 5vh, 66px) 24px 0;
 }
 
-/* Brand mark: emoji + pipe + "dev studios" */
-.heroBrand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.heroBrandText {
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: clamp(2.25rem, 6vw, 5rem);
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  color: #1a202c;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* Subtitle */
-.heroSubtitle {
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: clamp(1rem, 2.2vw, 1.3rem);
-  font-weight: 400;
-  color: #1a202c;
-  letter-spacing: 0.01em;
-  line-height: 1.5;
-  margin-bottom: 0.75rem;
-  max-width: none;
-}
-
-/* Supporting subtext */
-.heroSubtext {
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
-  font-weight: 400;
-  color: #4a5568;
-  letter-spacing: 0.01em;
-  line-height: 1.6;
-  margin-bottom: 3.5rem;
-  max-width: 480px;
-}
-
-/* CTA row */
-.heroCtas {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  pointer-events: auto;
-}
-
-/* "Browse Portfolio" — frosted outline */
-.btnOutline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 0.75rem;
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #1a202c;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  transition: background 0.22s ease, border-color 0.22s ease, transform 0.18s ease;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.btnOutline:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
-}
-
-/* "Get a Quote" — amber solid */
-.btnSolid {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 0.75rem;
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #fff;
-  background: linear-gradient(135deg, #b68fd4 0%, #9e72c3 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 28px rgba(158, 114, 195, 0.45);
-  transition: opacity 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.btnSolid:hover {
-  opacity: 0.92;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(158, 114, 195, 0.6);
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .heroBrand {
-    gap: 0.35rem;
-  }
-
-  .heroBrand :global(img) {
-    width: clamp(44px, 13vw, 60px) !important;
-    height: auto !important;
-  }
-
-  .heroBrandText {
-    font-size: clamp(1.45rem, 7.5vw, 2.25rem);
-  }
-
-  .heroCtas {
-    flex-direction: column;
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .btnOutline,
-  .btnSolid {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-
-/* ─── Container ──────────────────────────────────────────────────── */
-.heroContainer {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 var(--container-padding);
-  min-height: calc(100vh - var(--nav-height));
-  display: flex;
-  align-items: center;
-}
-
-/* ─── Layout ─────────────────────────────────────────────────────── */
-.heroLayout {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 5vw;
-  width: 100%;
-  flex-wrap: nowrap;
-}
-
-/* ─── Image ──────────────────────────────────────────────────────── */
-.heroImageWrapper {
-  flex: 0 0 400px;
-  width: 400px;
-  aspect-ratio: 1 / 1.1;
-  position: relative;
-  border-radius: 2rem;
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-  background: var(--bg-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 2;
-}
-
-.heroImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-expo);
-}
-
-/* ─── Text Content ───────────────────────────────────────────────── */
-.heroTextContent {
-  flex: 1 1 auto;
-  min-width: 0;
-  text-align: left;
-  z-index: 2;
+.eyebrow {
+  color: #bbb9c1;
+  font-size: 12px;
+  letter-spacing: .025em;
+  margin-bottom: 22px;
 }
 
 .heroTitle {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5vw, 4.2rem);
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: #fff;
-  letter-spacing: -0.02em;
-}
-
-.heroDescription {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  line-height: 1.6;
-  color: var(--fg-secondary);
-  margin-bottom: 3.5rem;
-  max-width: 580px;
-}
-
-.ctaGroup {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.projectsLink {
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--fg-primary);
-  padding-bottom: 2px;
-  transition: opacity 0.2s ease;
-  color: #fff;
-}
-
-.projectsLink:hover {
-  opacity: 0.7;
-}
-
-/* ─── Floating Pills container ──────────────────────────────────── */
-.heroPills {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  overflow: visible;
-  /* only pills themselves capture events */
-}
-
-.heroPill {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.55rem 0.85rem 0.55rem 1rem;
-  border-radius: 9999px;
-  font-family: var(--font-label);
-  font-size: 0.65rem;
+  font-size: clamp(44px, 4.8vw, 74px);
+  line-height: 1.13;
+  letter-spacing: -.045em;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-  /* ── new: interactive ── */
-  cursor: pointer;
-  pointer-events: auto;
-  user-select: none;
-  z-index: 1;
-  transition: box-shadow 0.2s ease;
+  color: #f8f8fa;
 }
-
-.heroPillActive {
-  z-index: 20;
-  box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.3),
-    0 0 24px rgba(255, 255, 255, 0.15);
+.heroTitle span { color: #f8f8fa; }
+.heroDescription {
+  margin-top: 22px;
+  max-width: 540px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #95949f;
 }
-
-.pillIcon {
-  width: 1.65rem;
-  height: 1.65rem;
+.heroCtas { display: flex; align-items: center; justify-content: center; gap: 26px; margin-top: 27px; }
+.primaryCta, .secondaryCta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #fff;
-}
-
-/* ─── Individual Pill Colors & Positions ─────────────────────────── */
-/* Edge-only layout keeps the center column clear for headline + CTAs. */
-/* Amber-Orange — top left */
-.pillImplement {
-  top: 22%;
-  left: 20%;
-  right: auto;
-  bottom: auto;
-  background: linear-gradient(165deg, #fb923c 0%, #c2410c 100%);
-  box-shadow:
-    0 0 0 1px rgba(253, 186, 116, 0.45),
-    0 14px 40px rgba(249, 115, 22, 0.55),
-    0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* Cyan-Teal — top right */
-.pillDesign {
-  top: 22%;
-  right: 20%;
-  left: auto;
-  bottom: auto;
-  background: linear-gradient(165deg, #22d3ee 0%, #0e7490 100%);
-  color: rgba(5, 25, 35, 0.95);
-  text-shadow: none;
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow:
-    0 0 0 1px rgba(103, 232, 249, 0.5),
-    0 14px 40px rgba(6, 182, 212, 0.55),
-    0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* Rose-Pink — mid right (below nav / clear of title band) */
-.pillCode {
-  top: 45%;
-  right: 14%;
-  left: auto;
-  bottom: auto;
-  background: linear-gradient(165deg, #f472b6 0%, #be185d 100%);
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow:
-    0 0 0 1px rgba(249, 168, 212, 0.45),
-    0 14px 40px rgba(236, 72, 153, 0.55),
-    0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* Dark icon variant for yellow Code pill */
-.pillIconDark {
-  background: rgba(0, 0, 0, 0.12) !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  color: rgba(15, 12, 5, 0.95) !important;
-}
-
-/* Indigo-Violet — mid left (mirror of Code; clears center) */
-.pillManage {
-  top: 45%;
-  left: 14%;
-  right: auto;
-  bottom: auto;
-  background: linear-gradient(165deg, #818cf8 0%, #4338ca 100%);
-  box-shadow:
-    0 0 0 1px rgba(165, 180, 252, 0.45),
-    0 14px 40px rgba(99, 102, 241, 0.55),
-    0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* Lime-Gold — bottom left (above scroll chevron, clear of CTAs) */
-.pillSeo {
-  bottom: 26%;
-  left: 20%;
-  top: auto;
-  right: auto;
-  background: linear-gradient(165deg, #d9f99d 0%, #84cc16 100%);
-  color: rgba(26, 46, 5, 0.95);
-  text-shadow: none;
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow:
-    0 0 0 1px rgba(190, 242, 100, 0.55),
-    0 14px 40px rgba(132, 204, 22, 0.5),
-    0 4px 14px rgba(0, 0, 0, 0.3);
-}
-
-/* Jade-Teal — bottom right */
-.pillSecurity {
-  bottom: 26%;
-  right: 20%;
-  left: auto;
-  top: auto;
-  background: linear-gradient(165deg, #34d399 0%, #065f46 100%);
-  box-shadow:
-    0 0 0 1px rgba(52, 211, 153, 0.45),
-    0 14px 40px rgba(16, 185, 129, 0.5),
-    0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* ─── Scroll Chevron ─────────────────────────────────────────────── */
-.scrollChevron {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #1a202c;
-}
-
-/* ─── Genie Card ─────────────────────────────────────────────────── */
-.pillCard {
-  position: absolute;
-  width: 215px;
-  max-width: min(215px, calc(100vw - 1.5rem));
-  max-width: min(215px, calc(100dvw - 1.5rem));
-  max-height: min(320px, 48vh);
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  background: rgba(8, 10, 20, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 1rem;
-  padding: 1rem 1.1rem 0.85rem;
-  pointer-events: auto;
-  white-space: normal;
-  text-align: left;
-  z-index: 30;
-}
-
-:global([data-theme='light']) .pillCard {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
-  box-shadow: 0 4px 16px rgba(11, 13, 27, 0.1);
-}
-
-/* vertical placement */
-.pillCardAbove {
-  bottom: calc(100% + 0.65rem);
-}
-
-.pillCardBelow {
-  top: calc(100% + 0.65rem);
-}
-
-/* horizontal alignment */
-.pillCardLeft {
-  left: 0;
-}
-
-.pillCardRight {
-  right: 0;
-}
-
-/* top accent line — inherits the pill's colour via CSS custom property */
-.pillCard::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 1rem 1rem 0 0;
-}
-
-:global([data-theme='light']) .pillCard::before {
-  background: color-mix(in srgb, var(--palette-ink) 10%, transparent);
-}
-
-.pillCardLabel {
-  font-family: var(--font-label);
-  font-size: 0.56rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  margin-bottom: 0.45rem;
-  max-width: none;
-}
-
-:global([data-theme='light']) .pillCardLabel {
-  color: color-mix(in srgb, var(--palette-ink) 55%, transparent);
-}
-
-.pillCardDesc {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.88);
-  margin-bottom: 0.75rem;
-  max-width: none;
-}
-
-:global([data-theme='light']) .pillCardDesc {
-  color: color-mix(in srgb, var(--palette-ink) 85%, transparent);
-}
-
-.pillCardStat {
-  display: block;
-  font-family: var(--font-label);
-  font-size: 0.56rem;
+  gap: 12px;
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  padding-top: 0.55rem;
+  min-height: 44px;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
 }
+.primaryCta { padding: 0 20px; border-radius: 10px; background: #efedf5; color: #222127; }
+.primaryCta:hover { background: #d9cdf9; transform: translateY(-2px); }
+.secondaryCta { color: #c1beca; }
+.secondaryCta:hover { color: #fff; transform: translateX(3px); }
+.heroSection a:focus-visible, .cardButton:focus-visible { outline: 3px solid #ded4ff; outline-offset: 5px; }
 
-:global([data-theme='light']) .pillCardStat {
-  color: color-mix(in srgb, var(--palette-ink) 55%, transparent);
-  border-top-color: color-mix(in srgb, var(--palette-ink) 12%, transparent);
+
+.deck {
+  position: absolute;
+  bottom: -62px;
+  left: 50%;
+  width: min(100%, 1320px);
+  height: 390px;
+  transform: translateX(-50%);
+  z-index: 3;
+  /* The deck box is taller than the cards and overlaps the buttons. */
+  pointer-events: none;
 }
-
-/* ─── Responsive ─────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .heroPill {
-    font-size: 0.58rem;
-    padding: 0.45rem 0.7rem 0.45rem 0.85rem;
-  }
-
-  .pillImplement {
-    top: 15%;
-    left: 10%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillDesign {
-    top: 15%;
-    right: 10%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillManage {
-    top: 40%;
-    left: 8%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillCode {
-    top: 40%;
-    right: 8%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillSeo {
-    bottom: 22%;
-    left: 10%;
-    top: auto;
-    right: auto;
-  }
-
-  .pillSecurity {
-    bottom: 22%;
-    right: 10%;
-    left: auto;
-    top: auto;
-  }
+.serviceCard {
+  --angle: 0deg;
+  --offset: 0px;
+  position: absolute;
+  left: calc(50% + (var(--card-index) - 2.5) * 14%);
+  bottom: var(--offset);
+  width: 23%;
+  max-width: 280px;
+  height: 360px;
+  transform: translateX(-50%) rotate(var(--angle));
+  transform-origin: center bottom;
+  pointer-events: auto;
+  /* Keep the hit area and stacking order still while the surface lifts. */
 }
-
-/* ── Small phones (≤ 480 px) ───────────────────────────────────── */
-@media (max-width: 480px) {
-
-  /* Stack layout vertically */
-  .heroLayout {
-    flex-direction: column;
-    text-align: center;
-    gap: 2rem;
-    padding-top: 1.5rem;
-  }
-
-  .heroImageWrapper {
-    width: 200px;
-    flex: 0 0 200px;
-    aspect-ratio: 1 / 1;
-    border-radius: 1.25rem;
-  }
-
-  .heroTextContent {
-    text-align: center;
-  }
-
-  .heroTitle {
-    font-size: 1.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .heroDescription {
-    font-size: 0.95rem;
-    margin: 0 auto 2rem;
-  }
-
-  .ctaGroup {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .desktopOnly {
-    display: none;
-  }
-
-  /* Pills — smaller size */
-  .heroPill {
-    font-size: 0.5rem;
-    padding: 0.35rem 0.55rem 0.35rem 0.7rem;
-    gap: 0.35rem;
-  }
-
-  .pillIcon {
-    width: 1.2rem;
-    height: 1.2rem;
-  }
-
-  /* Edge columns only — keeps center free for headline + CTAs + trailer */
-  .pillImplement {
-    top: 15%;
-    left: 5%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillDesign {
-    top: 15%;
-    right: 5%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillManage {
-    top: 35%;
-    left: 2%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillCode {
-    top: 35%;
-    right: 2%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillSeo {
-    bottom: 25%;
-    left: 5%;
-    top: auto;
-    right: auto;
-  }
-
-  .pillSecurity {
-    bottom: 25%;
-    right: 5%;
-    left: auto;
-    top: auto;
-  }
-
-  /* Genie card — narrower on small screens */
-  .pillCard {
-    width: 170px;
-  }
+.cardSurface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 29px;
+  background: var(--card-color);
+  border: 1px solid #ffffff55;
+  box-shadow: 0 -7px 32px #0002, 0 20px 35px #0005, inset 0 1px 1px #fff5;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition: transform 520ms cubic-bezier(.22, 1, .36, 1);
 }
-
-/* ── Extra-small (≤ 360 px) ────────────────────────────────────── */
-@media (max-width: 360px) {
-  .heroTitle {
-    font-size: 1.65rem;
-  }
-
-  .heroDescription {
-    font-size: 0.88rem;
-  }
-
-  .heroImageWrapper {
-    width: 160px;
-    flex: 0 0 160px;
-  }
-
-  .pillImplement {
-    top: 14%;
-    left: 2%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillDesign {
-    top: 14%;
-    right: 2%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillManage {
-    top: 32%;
-    left: 2%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillCode {
-    top: 32%;
-    right: 2%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillSeo {
-    bottom: 26%;
-    left: 2%;
-    top: auto;
-    right: auto;
-  }
-
-  .pillSecurity {
-    bottom: 26%;
-    right: 2%;
-    left: auto;
-    top: auto;
-  }
-
-  .pillCard {
-    width: 150px;
-  }
+.serviceCard.cardActive .cardSurface,
+.serviceCard:has(:focus-visible) .cardSurface { transform: translate3d(0, -24px, 0); }
+@media (hover: hover) and (pointer: fine) {
+  .serviceCard:hover .cardSurface { transform: translate3d(0, -16px, 0); }
+  .serviceCard.cardActive:hover .cardSurface { transform: translate3d(0, -24px, 0); }
 }
+.serviceCard:nth-child(1) { --angle: -12deg; --offset: -25px; z-index: 1; }
+.serviceCard:nth-child(2) { --angle: -8deg; --offset: 22px; z-index: 3; }
+.serviceCard:nth-child(3) { --angle: -2deg; --offset: 62px; z-index: 5; }
+.serviceCard:nth-child(4) { --angle: 5deg; --offset: 42px; z-index: 4; }
+.serviceCard:nth-child(5) { --angle: 11deg; --offset: 6px; z-index: 2; }
+.serviceCard:nth-child(6) { --angle: 14deg; --offset: -36px; z-index: 1; }
+.serviceCard.cardActive, .serviceCard:has(:focus-visible) { z-index: 8; }
+.cardButton { position: relative; display: block; width: 100%; height: 100%; border: 0; background: none; color: #fff; text-align: left; cursor: pointer; font-family: var(--font-jakarta), sans-serif; }
+.cardButton:focus-visible { outline-offset: -6px; border-radius: 29px; }
+.cardHeading { position: absolute; top: 25px; left: 22px; right: 22px; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: clamp(20px, 2vw, 28px); font-weight: 700; letter-spacing: -.045em; }
+.cardIcon { display: inline-flex; align-items: center; justify-content: center; width: 29px; height: 29px; border: 1px solid #ffffff60; border-radius: 50%; background: #00000015; flex-shrink: 0; }
+.cardSubtitle { position: absolute; top: 65px; left: 23px; right: 12px; z-index: 2; font-size: 10px; font-weight: 500; color: #fff; text-shadow: 0 1px 4px #0003; }
+.serviceCard:nth-child(n+4) .cardHeading { left: 76px; }
+.serviceCard:nth-child(n+4) .cardSubtitle { left: 77px; font-size: 9px; }
+.serviceCard:nth-child(6) .cardHeading { justify-content: flex-end; }
+.serviceCard:nth-child(6) .cardIcon { display: none; }
+.character { position: absolute; left: -1%; bottom: -6px; width: 102%; aspect-ratio: 1; background-image: url('/hero/service-characters.png'); background-size: 300% 200%; background-position: var(--sprite-position); mask-image: linear-gradient(transparent, #000 18%); }
+.cardHint { position: absolute; z-index: 2; bottom: 20px; left: 23px; right: 20px; display: flex; justify-content: space-between; font-size: 9px; font-weight: 600; opacity: 0; transition: opacity .2s; }
+.cardActive .cardHint { opacity: 1; }
+.cardDetails { position: absolute; z-index: 3; left: 12px; right: 12px; top: 108px; padding: 20px 18px; border-radius: 17px; background: #17151ffa; box-shadow: 0 8px 28px #0003; }
+.cardDetails p { font-size: 13px; line-height: 1.65; color: #e2dfe8; }
+.cardDetails a { margin-top: 14px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; color: #fff; }
+.mobileHint { display: none; }
 
-/* Short viewports (e.g. landscape phones): keep pills in corners, away from centered CTAs */
-@media (max-height: 480px) and (orientation: landscape) {
-  .pillImplement {
-    top: 10%;
-    left: 8%;
-    right: auto;
-    bottom: auto;
-  }
+@media (min-width: 1500px) {
+  .heroContent { padding-top: 58px; }
+  .deck { height: 440px; }
+  .serviceCard { height: 400px; }
+}
+@media (max-width: 1100px) and (min-width: 701px) {
+  .heroSection { min-height: 780px; }
+  .heroSection { height: min(100svh, 880px); }
+  .heroTitle { font-size: 54px; }
+  .serviceCard { height: 315px; width: 24%; left: calc(50% + (var(--card-index) - 2.5) * 12.5%); }
+  .serviceCard:nth-child(1) { --angle: -8deg; }
+  .serviceCard:nth-child(6) { --angle: 8deg; }
+  .cardHeading { left: 17px; right: 15px; font-size: 23px; }
+  .cardSubtitle { left: 18px; font-size: 9px; }
+  .serviceCard:nth-child(n+4) .cardHeading { left: 33%; font-size: 21px; }
+  .serviceCard:nth-child(n+4) .cardSubtitle { left: 33%; font-size: 8px; }
+  .serviceCard:nth-child(n+4) .cardIcon { display: none; }
+  .serviceCard:nth-child(1) .cardHeading, .serviceCard:nth-child(6) .cardHeading { font-size: 17px; }
+  .serviceCard:nth-child(1) .cardIcon { display: none; }
+  .serviceCard:nth-child(6) .cardHeading { left: 80px; right: 13px; }
+  .serviceCard:nth-child(6) .cardSubtitle { left: 90px; }
 
-  .pillDesign {
-    top: 10%;
-    right: 8%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillManage {
-    top: 35%;
-    left: 5%;
-    right: auto;
-    bottom: auto;
-  }
-
-  .pillCode {
-    top: 35%;
-    right: 5%;
-    left: auto;
-    bottom: auto;
-  }
-
-  .pillSeo {
-    bottom: 18%;
-    left: 8%;
-    top: auto;
-    right: auto;
-  }
-
-  .pillSecurity {
-    bottom: 18%;
-    right: 8%;
-    left: auto;
-    top: auto;
-  }
+}
+@media (min-width: 701px) and (max-height: 800px) {
+  .heroSection { min-height: 720px; }
+  .heroContent { padding-top: 14px; }
+  .eyebrow { margin-bottom: 14px; }
+  .heroTitle { font-size: clamp(42px, 4.6vw, 60px); }
+  .heroDescription { margin-top: 17px; font-size: 13px; }
+  .heroCtas { margin-top: 19px; }
+  .serviceCard { height: 300px; }
+  .character { width: 92%; left: 4%; }
+}
+@media (max-width: 700px) {
+  .heroSection { min-height: 830px; height: auto; max-height: none; }
+  .heroContent { padding: 36px 20px 0; }
+  .eyebrow { font-size: 10px; margin-bottom: 20px; }
+  .heroTitle { font-size: clamp(36px, 7.8vw, 52px); line-height: 1.16; }
+  .heroDescription { font-size: 13px; max-width: 350px; margin-top: 19px; }
+  .desktopBreak { display: none; }
+  .heroCtas { gap: 17px; margin-top: 23px; flex-wrap: wrap; }
+  .primaryCta, .secondaryCta { font-size: 11px; gap: 7px; }
+  .primaryCta { padding: 0 15px; }
+  .deck { position: relative; left: auto; bottom: auto; transform: none; width: 100%; height: 332px; margin-top: 35px; padding: 22px 27px 8px; display: flex; gap: 15px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; scroll-padding-inline: 27px; }
+  .serviceCard:nth-child(n) { position: relative; left: auto; bottom: auto; width: 225px; height: 300px; max-width: none; flex: 0 0 225px; transform: rotate(-3deg); border-radius: 23px; scroll-snap-align: center; }
+  .serviceCard:nth-child(even) { transform: rotate(3deg); }
+  .cardSurface { border-radius: 23px; }
+  .serviceCard.cardActive .cardSurface, .serviceCard:has(:focus-visible) .cardSurface { transform: translate3d(0, -8px, 0); }
+  .cardHeading { font-size: 25px; top: 22px; }
+  .cardSubtitle { top: 60px; }
+  .serviceCard:nth-child(n+4) .cardHeading { left: 22px; }
+  .serviceCard:nth-child(n+4) .cardSubtitle { left: 23px; font-size: 10px; }
+  .serviceCard:nth-child(6) .cardHeading { justify-content: flex-start; }
+  .cardDetails { top: 90px; padding: 14px; }
+  .cardDetails p { font-size: 12px; }
+  .mobileHint { display: flex; justify-content: center; align-items: center; gap: 9px; color: #95949f; font-size: 10px; padding: 17px 0 22px; letter-spacing: .035em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cardSurface, .primaryCta, .secondaryCta, .cardHint { transition: none; }
+  .serviceCard .cardSurface { transform: none !important; will-change: auto; }
+  .deck { scroll-behavior: auto; }
 }

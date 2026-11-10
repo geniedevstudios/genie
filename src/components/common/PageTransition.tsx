@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { GenieMark } from '@/components/common/GenieMark';
+import { LogoLockup } from '@/components/common/LogoLockup';
 import styles from './PageTransition.module.css';
 
 const COVER_EASE: [number, number, number, number] = [0.77, 0, 0.175, 1];
@@ -206,8 +206,7 @@ export const PageTransition: React.FC = () => {
               }}
             >
               <div className={styles.brandGroup}>
-                <GenieMark width={50} />
-                <span className={styles.brandText}>| dev studios</span>
+                <LogoLockup />
               </div>
             </motion.div>
           </div>

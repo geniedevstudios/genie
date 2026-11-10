@@ -1,9 +1,9 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+import { HomeBackdrop } from './HomeBackdrop';
+
 export function PageBackground() {
-  return (
-    <div className="page-bg" aria-hidden="true">
-      <div className="page-bg-scrim" />
-    </div>
-  );
+  const pathname = usePathname();
+  return <div className="page-bg" aria-hidden="true"><HomeBackdrop showTools={pathname === '/'} /></div>;
 }

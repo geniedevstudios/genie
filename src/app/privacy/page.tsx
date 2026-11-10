@@ -1,24 +1,18 @@
 ﻿import type { Metadata } from 'next';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
-import { GenieMark } from '@/components/common/GenieMark';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Genie Dev Studios',
-  description: 'How GENIE | dev studios collects, uses, and protects your information.',
+  description: 'How Genie Dev Studios collects, uses, and protects your information.',
   alternates: {
     canonical: '/privacy',
   },
 };
 
 function CompanyLogo() {
-  return (
-    <span className={styles.inlineLogo} aria-label="GENIE | dev studios">
-      <GenieMark width={18} />
-      <span>&nbsp;| dev studios</span>
-    </span>
-  );
+  return <span className={styles.inlineLogo}>Genie Dev Studios</span>;
 }
 
 export default function PrivacyPage() {

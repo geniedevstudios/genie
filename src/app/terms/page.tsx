@@ -1,24 +1,18 @@
 ﻿import type { Metadata } from 'next';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
-import { GenieMark } from '@/components/common/GenieMark';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | Genie Dev Studios',
-  description: 'The terms and conditions for using GENIE | dev studios services.',
+  description: 'The terms and conditions for using Genie Dev Studios services.',
   alternates: {
     canonical: '/terms',
   },
 };
 
 function CompanyLogo() {
-  return (
-    <span className={styles.inlineLogo} aria-label="GENIE | dev studios">
-      <GenieMark width={18} />
-      <span>&nbsp;| dev studios</span>
-    </span>
-  );
+  return <span className={styles.inlineLogo}>Genie Dev Studios</span>;
 }
 
 export default function TermsPage() {

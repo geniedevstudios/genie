@@ -16,9 +16,9 @@ export interface EmailTemplateProps {
 export function generateEmailTemplate({ title, previewText, contentHtml }: EmailTemplateProps): string {
   // Brand Colors
   const colors = {
-    bgLight: '#f6f8fb', // Whitish blue background
-    ink: '#0f1120',     // Dark ink
-    accent: '#2563eb',  // Blue
+    bgLight: '#e6e6fa',
+    ink: '#1c0b22',
+    accent: '#800080',
     white: '#ffffff',
     text: '#334155',
     textMuted: '#64748b'

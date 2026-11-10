@@ -3,70 +3,11 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { SpecialtyShowcase } from './SpecialtyShowcase';
 import { GENIE_IMAGE_SRC } from '@/lib/genieAsset';
 import styles from './Projects.module.css';
 
-/** Decorative browser window — matches reference “web” illustration */
-function WebIllustration() {
-  return (
-    <div className={styles.illuWeb} aria-hidden>
-      <div className={styles.illuWebChrome}>
-        <span className={styles.illuWebDot} />
-        <span className={styles.illuWebDot} />
-        <span className={styles.illuWebDot} />
-      </div>
-      <div className={styles.illuWebCanvas}>
-        <div className={styles.illuWebHero} />
-        <div className={styles.illuWebRow}>
-          <div className={styles.illuWebCol} />
-          <div className={styles.illuWebCol} />
-        </div>
-        <div className={styles.illuWebBarLong} />
-      </div>
-    </div>
-  );
-}
-
-function PhoneIllustration() {
-  return (
-    <div className={styles.illuPhone} aria-hidden>
-      <div className={styles.illuPhoneNotch} />
-      <div className={styles.illuPhoneBody}>
-        <div className={styles.illuPhoneAvatar} />
-        <div className={styles.illuPhoneLines}>
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ShieldIllustration() {
-  return (
-    <div className={styles.illuShield} aria-hidden>
-      <div className={styles.illuShieldRing} />
-      <div className={styles.illuShieldCore} />
-    </div>
-  );
-}
-
-function UiIllustration() {
-  return (
-    <div className={styles.illuUi} aria-hidden>
-      <div className={styles.illuUiGrid}>
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className={styles.illuUiPen} />
-    </div>
-  );
-}
-
-const PORTFOLIO_SHOWCASE_HREF = '/portfolio#portfolio-showcase';
 const PORTFOLIO_SECTION_HREF = '/portfolio';
 
 export const Projects: React.FC = () => {
@@ -77,38 +18,6 @@ export const Projects: React.FC = () => {
   const [worksVideoReady, setWorksVideoReady] = useState(false);
   const worksRevealedRef = useRef(false);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleScroll = () => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, clientWidth } = scrollRef.current;
-    const center = scrollLeft + clientWidth / 2;
-    let closestIndex = 0;
-    let minDiff = Infinity;
-    Array.from(scrollRef.current.children).forEach((child, i) => {
-      const el = child as HTMLElement;
-      // Skip non-articles if any, but all our children are articles here
-      if (el.tagName !== 'ARTICLE') return;
-      const childCenter = el.offsetLeft + el.offsetWidth / 2;
-      const diff = Math.abs(childCenter - center);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closestIndex = i;
-      }
-    });
-    setActiveIndex(closestIndex);
-  };
-
-  const scrollToCard = (index: number) => {
-    if (!scrollRef.current) return;
-    const articles = Array.from(scrollRef.current.children).filter(c => c.tagName === 'ARTICLE');
-    const target = articles[index] as HTMLElement;
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-  };
-
   const handleWorksReady = useCallback(() => {
     if (worksRevealedRef.current) return;
     worksRevealedRef.current = true;
@@ -118,135 +27,33 @@ export const Projects: React.FC = () => {
   useEffect(() => {
     const v = videoRef.current;
     if (!v || !worksVideoOk) return;
-    void v.play().catch(() => {});
+    let visible = false;
+    const updatePlayback = () => {
+      if (visible && !document.hidden) void v.play().catch(() => {});
+      else v.pause();
+    };
+    updatePlayback();
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      updatePlayback();
+    });
+    observer.observe(v);
+    document.addEventListener('visibilitychange', updatePlayback);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', updatePlayback);
+      v.pause();
+    };
   }, [worksVideoOk]);
 
   return (
     <section
       id="portfolio"
       aria-labelledby="portfolio-heading"
-      className={`${styles.section} section-spacing`}
+      className={styles.section}
     >
+      <SpecialtyShowcase />
       <div className="container">
-        <header className={styles.sectionHeader}>
-          <div className={styles.titleBlock}>
-            <div className={styles.ghostStack} aria-hidden>
-              <span>OUR</span>
-              <span>SPECIALTY</span>
-            </div>
-            <h2 id="portfolio-heading" className={styles.title}>
-              Our specialty
-            </h2>
-          </div>
-          <p className={styles.lede}>
-            Full-stack product engineering across web, mobile, UI/UX, and security. Built in-house, scoped clearly, and shipped to production.
-          </p>
-        </header>
-
-        <div 
-          className={styles.cardGrid} 
-          ref={scrollRef} 
-          onScroll={handleScroll}
-        >
-          {/* Featured — Web */}
-          <motion.article
-            className={styles.cardFeatured}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <WebIllustration />
-            <div className={styles.cardFeaturedCopy}>
-              <h3 className={styles.cardTitleLight}>Web &amp; Web Apps Development</h3>
-              <p className={styles.cardDescLight}>
-                Custom storefronts, SaaS platforms, and internal admin tools engineered for speed, SEO, and seamless payment flows.
-              </p>
-            </div>
-            <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverFeatured}>
-              Explore
-            </Link>
-          </motion.article>
-
-          {/* Stacked — Mobile */}
-          <motion.article
-            className={`${styles.cardCompact} ${styles.mediaRight}`}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.45, delay: 0.05, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <div className={styles.compactCopy}>
-              <h3 className={styles.cardTitleDark}>Mobile Apps Development</h3>
-              <p className={styles.cardDescDark}>
-                iOS and Android apps with smooth native navigation, push notifications, and offline-ready state.
-              </p>
-              <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverDark}>
-                Explore
-              </Link>
-            </div>
-            <div className={styles.compactMedia}>
-              <PhoneIllustration />
-            </div>
-          </motion.article>
-
-          {/* Cybersecurity */}
-          <motion.article
-            className={`${styles.cardCompact} ${styles.mediaRight}`}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.45, delay: 0.1, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <div className={styles.compactCopy}>
-              <h3 className={styles.cardTitleDark}>Cybersecurity</h3>
-              <p className={styles.cardDescDark}>
-                API security audits, auth hardening, and encrypted data flows that protect customer transactions.
-              </p>
-              <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverDark}>
-                Explore
-              </Link>
-            </div>
-            <div className={styles.compactMedia}>
-              <ShieldIllustration />
-            </div>
-          </motion.article>
-
-          {/* UI/UX — graphic left */}
-          <motion.article
-            className={`${styles.cardCompact} ${styles.mediaLeft}`}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.45, delay: 0.15, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <div className={styles.compactMedia}>
-              <UiIllustration />
-            </div>
-            <div className={`${styles.compactCopy} ${styles.compactCopyEnd}`}>
-              <h3 className={styles.cardTitleDark}>UI/UX Design</h3>
-              <p className={styles.cardDescDark}>
-                High-converting product interfaces, interactive Figma prototypes, and scalable design systems.
-              </p>
-              <Link href={PORTFOLIO_SHOWCASE_HREF} className={styles.discoverDark}>
-                Explore
-              </Link>
-            </div>
-          </motion.article>
-        </div>
-
-        <div className={styles.paginationDots} aria-hidden>
-          {[0, 1, 2, 3].map((i) => (
-            <button
-              key={i}
-              type="button"
-              className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => scrollToCard(i)}
-            />
-          ))}
-        </div>
-
         <div id="portfolio-showcase" className={styles.showcaseWrap}>
           <motion.div
             className={styles.infinityStage}
@@ -264,8 +71,7 @@ export const Projects: React.FC = () => {
                 muted
                 loop
                 playsInline
-                autoPlay
-                preload="auto"
+                preload="metadata"
                 onCanPlay={handleWorksReady}
                 onPlaying={handleWorksReady}
                 onTimeUpdate={(e) => {
@@ -289,15 +95,15 @@ export const Projects: React.FC = () => {
             viewport={{ once: true, margin: '-20px' }}
             transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
           >
-            <p className={styles.wishKicker}>make a wish</p>
+            <p className={styles.wishKicker}>Make a wish</p>
             <p className={styles.wishLine}>
-              <span className={styles.wishLead}>tap on</span>{' '}
+              <span className={styles.wishLead}>Tap</span>{' '}
               <Link
                 href={PORTFOLIO_SECTION_HREF}
                 className={styles.genieLink}
-                aria-label="Open portfolio — see more of our work"
+                aria-label="See more of our work"
               >
-                <img
+                <Image
                   src={GENIE_IMAGE_SRC}
                   alt=""
                   width={44}
@@ -306,7 +112,7 @@ export const Projects: React.FC = () => {
                   draggable={false}
                 />
               </Link>{' '}
-              <span className={styles.wishTrail}>to see more of our works</span>
+              <span className={styles.wishTrail}>to see more of our work.</span>
             </p>
           </motion.div>
         </div>

@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Bodoni_Moda, Jost, Playfair_Display, Plus_Jakarta_Sa
 import './globals.css';
 import { PageBackground } from '@/components/common/PageBackground';
 import { Preloader } from '@/components/common/Preloader';
-import { PageTransition } from '@/components/common/PageTransition';
 import { ClientProvider } from '@/context/ClientProvider';
 import { GENIE_IMAGE_SRC } from '@/lib/genieAsset';
 
@@ -55,15 +54,15 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     capable: true,
   },
-  description: 'Software design and engineering studio in Accra, Ghana. We build custom web platforms, mobile apps, payment systems, and secure cloud backends.',
-  keywords: ['Genie Dev Studios', 'Software Studio Ghana', 'Web App Development', 'Mobile App Development', 'Paystack Integration', 'Next.js Studio', 'UI/UX Design Accra'],
+  description: 'Custom software studio in Accra, Ghana. We design and develop websites, applications, business systems, and digital platforms.',
+  keywords: ['Genie Dev Studios', 'Custom Software Ghana', 'Web Application Development', 'Mobile App Development', 'Business Systems', 'UI/UX Design Accra', 'Genie Platforms'],
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Home | Genie Dev Studios',
     siteName: 'Genie Dev Studios',
-    description: 'Custom web platforms, mobile apps, and revenue-ready systems built in Accra, Ghana.',
+    description: 'We design and develop websites, applications, business systems, and digital platforms in Accra, Ghana.',
     url: 'https://geniedevstudios.com',
     locale: 'en_GH',
     type: 'website',
@@ -71,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Home | Genie Dev Studios',
-    description: 'Custom web platforms, mobile apps, and revenue-ready systems built in Accra, Ghana.',
+    description: 'We design and develop websites, applications, business systems, and digital platforms in Accra, Ghana.',
   },
   icons: {
     icon: [{ url: GENIE_IMAGE_SRC, type: 'image/png' }],
@@ -89,7 +88,7 @@ const structuredData = {
       name: 'Genie Dev Studios',
       alternateName: ['Genie | dev studios', 'Genie Dev'],
       description:
-        'Software design and engineering studio in Accra, Ghana. We build custom web platforms, mobile apps, payment systems, and secure cloud backends.',
+        'Custom software studio in Accra, Ghana. We design and develop websites, applications, business systems, and digital platforms.',
     },
     {
       '@type': 'Organization',
@@ -118,7 +117,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="dark" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} ${jost.variable} ${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"
@@ -126,7 +125,6 @@ export default function RootLayout({
         />
         <ClientProvider>
           <Preloader />
-          <PageTransition />
           <div className="app-shell">
             <PageBackground />
             <div className="app-shell-main">{children}</div>

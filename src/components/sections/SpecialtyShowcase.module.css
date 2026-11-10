@@ -1,0 +1,142 @@
+.specialties {
+  --slot-width: clamp(190px, 18.5vw, 250px);
+  padding: 88px 0 34px;
+  color: var(--home-text);
+  background: transparent;
+}
+.header {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
+}
+.eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .16em; color: var(--home-muted); margin-bottom: 12px; }
+.title { font-size: clamp(29px, 3.2vw, 43px); font-weight: 700; letter-spacing: -.045em; }
+.title span { color: #9a71d2; }
+.headerRight { display: flex; align-items: center; gap: 35px; }
+.headerRight p { font-size: 13px; line-height: 1.8; color: var(--home-muted); }
+.arrows { display: flex; gap: 8px; }
+.arrows button {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--home-line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--home-text);
+  cursor: pointer;
+  transition: background 180ms, color 180ms;
+}
+.arrows button:hover:not(:disabled) { background: #242331; color: white; }
+.arrows button:disabled { opacity: .25; cursor: default; }
+.specialties button:focus-visible, .specialties a:focus-visible { outline: 3px solid #8d65c0; outline-offset: 5px; }
+.carousel { margin: 0 auto; max-width: 1480px; }
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 130px calc(50% - var(--slot-width) / 2) 45px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.slot {
+  position: relative;
+  flex: 0 0 var(--slot-width);
+  width: var(--slot-width);
+  height: 380px;
+  scroll-snap-align: center;
+}
+.card {
+  position: relative;
+  height: 100%;
+  color: var(--card-ink);
+  transform: translate3d(0, 18px, 0) scale(.82) rotate(var(--lean));
+  transform-origin: center 60%;
+  transition: transform 600ms cubic-bezier(.22, 1, .36, 1);
+}
+.selected { z-index: 2; }
+.selected .card { transform: translate3d(0, -4px, 0) scale(1.1) rotate(0); }
+.cardBackground {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 0 0, #ffffff30, transparent 70%), linear-gradient(155deg, var(--card-color), var(--card-end));
+  border-radius: 44px 33px 45px 33px;
+  box-shadow: 0 20px 24px -24px #23213360;
+}
+.cardBackground::after { content: ''; position: absolute; inset: 1px; border: 1px solid #ffffff25; border-radius: inherit; }
+.artwork {
+  position: absolute;
+  z-index: 1;
+  width: 108%;
+  aspect-ratio: 1;
+  left: -4%;
+  top: -100px;
+  background: url('/specialty/specialty-characters.png');
+  background-size: 300% 200%;
+  background-position: var(--sprite-position);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(transparent, #000 4%, #000 88%, transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+}
+.selectCard { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 40px; background: transparent; cursor: pointer; }
+.selectCard:focus-visible { outline-offset: 6px !important; }
+.copy { position: relative; padding: 158px 23px 0; pointer-events: none; z-index: 3; }
+.kicker { display: block; font-size: 9px; font-weight: 500; letter-spacing: .01em; margin-bottom: 8px; opacity: .75; }
+.copy h3 { font-size: 25px; line-height: 1.13; font-weight: 800; letter-spacing: -.04em; }
+.copy p { font-size: 12px; line-height: 1.55; margin-top: 12px; opacity: .8; }
+.cardFooter { position: absolute; z-index: 4; bottom: 19px; left: 23px; right: 18px; display: flex; align-items: center; justify-content: space-between; gap: 7px; }
+.cardFooter > span { display: flex; align-items: center; gap: 6px; font-size: 9px; font-weight: 500; }
+.cardFooter > span svg { flex-shrink: 0; }
+.cardFooter a { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border: 1px solid #ffffff50; border-radius: 12px; background: #ffffff20; transition: background 180ms; }
+.cardFooter a:hover { background: #ffffff40; }
+.carouselFooter { max-width: 1264px; margin: 8px auto 0; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.count { font-size: 11px; font-family: var(--font-jakarta), sans-serif; color: #94939d; letter-spacing: .08em; }
+.count strong { color: var(--home-text); font-weight: 600; }
+.dots { display: flex; align-items: center; gap: 2px; }
+.dots button { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; }
+.dots span { width: 5px; height: 5px; border-radius: 50%; background: #686370; transition: background 200ms, transform 200ms; }
+.dots [aria-current] span { transform: scale(1.4); background: #d3b7f3; }
+.allServices { font-size: 11px; display: flex; align-items: center; gap: 8px; color: var(--home-muted); }
+@media (min-width: 1500px) { .specialties { --slot-width: 260px; } }
+@media (max-width: 1100px) {
+  .specialties { --slot-width: 220px; }
+  .header { padding: 0 32px; }
+  .headerRight { gap: 20px; }
+  .headerRight p { max-width: 220px; }
+  .slot { height: 380px; }
+  .copy { padding-top: 135px; }
+  .copy h3 { font-size: 24px; }
+  .copy p { font-size: 12px; }
+  .artwork { top: -94px; }
+  .cardFooter > span { max-width: 110px; }
+}
+@media (max-width: 600px) {
+  .specialties { --slot-width: 258px; padding-top: 56px; }
+  .header { padding: 0 24px; align-items: center; gap: 14px; }
+  .eyebrow { font-size: 8px; letter-spacing: .12em; }
+  .title { font-size: 30px; }
+  .headerRight p { display: none; }
+  .arrows { gap: 6px; }
+  .arrows button { width: 36px; height: 36px; }
+  .track { padding-top: 124px; padding-bottom: 35px; }
+  .slot { height: 390px; }
+  .selected .card { transform: translate3d(0, 0, 0) scale(1) rotate(0); }
+  .copy { padding-top: 171px; }
+  .copy h3 { font-size: 25px; }
+  .copy p { font-size: 12px; }
+  .artwork { top: -100px; }
+  .carouselFooter { padding: 0 24px; gap: 8px; }
+  .dots { gap: 0; }
+  .dots button { width: 23px; }
+  .allServices { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .dots span, .arrows button, .cardFooter a { transition: none; }
+}

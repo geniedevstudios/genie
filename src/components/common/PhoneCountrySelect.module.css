@@ -259,7 +259,7 @@
 }
 
 .itemDial {
-  color: hsl(210, 45%, 58%);
+  color: var(--palette-purple);
   font-weight: 600;
   font-size: 0.8125rem;
   flex-shrink: 0;
@@ -438,3 +438,8 @@
 .wrap[data-theme="light-box"] .itemDial {
   color: #a0aec0;
 }
+
+.wrap[data-theme="dark"] .row { background: var(--bg-primary); border-color: var(--border-subtle); }
+.wrap[data-theme="dark"] .row:focus-within { border-color: var(--brand-primary); box-shadow: 0 0 0 3px var(--brand-surface); }
+.wrap[data-theme="dark"] .dropdown { background: #202024; backdrop-filter: none; }
+.wrap[data-theme="dark"] .itemDial { color: var(--brand-primary); }

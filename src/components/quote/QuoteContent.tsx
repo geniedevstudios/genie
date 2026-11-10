@@ -1,49 +1,26 @@
-'use client';
-
-import { GenieMark } from '@/components/common/GenieMark';
 import { Testimonials } from './Testimonials';
 import { FloatingTools } from './FloatingTools';
 import { FaqAccordion } from './FaqAccordion';
 import { QuoteForm } from './QuoteForm';
+import { StudioCharacter } from '@/components/common/StudioCharacter';
 import styles from './quote.module.css';
 
 export function QuoteContent() {
   return (
     <div className={styles.quoteWrapper}>
-      {/* Background clouds */}
-      <div className={`${styles.cloud} ${styles.cloud1}`} />
-      <div className={`${styles.cloud} ${styles.cloud2}`} />
-      
-      <div className={styles.container}>
-        <div className={styles.heroGrid}>
-          <div className={styles.heroTitleBlock}>
-            <h1 className={styles.heroTitleGroup}>
-              <span className={styles.heroDisplay}>Quote</span>
-              <span className={styles.heroBrandLine}>
-                <span className={styles.heroBrandMarkWrap}>
-                  <GenieMark width={64} className={styles.heroBrandMark} />
-                </span>
-                <span className={styles.heroBrandSuffix}>| dev studios</span>
-              </span>
-            </h1>
-          </div>
-          <div className={styles.heroCopy}>
-            <p className={styles.heroSub}>
-              Scope your project and get an instant Cedi estimate.
-            </p>
-          </div>
-        </div>
-        
-        <Testimonials />
-
-        <p className={styles.investmentStatement}>
-          Great software <span>pays for itself</span>—through faster operations, higher conversion, and systems that <span>scale without breaking</span>.
-        </p>
-      </div>
-
+      <header className={styles.hero}>
+        <span className="studio-eyebrow">Your next great build starts here</span>
+        <h1 className="studio-title">Make a wish.<br />Let’s make a plan.</h1>
+        <p>Tell us what you have in mind. We’ll shape the scope, map out the next steps, and agree a price before the work begins.</p>
+        <StudioCharacter character="together" />
+      </header>
       <QuoteForm />
-
       <div className={styles.container}>
+        <section aria-labelledby="client-notes-heading">
+          <span className="studio-eyebrow">From the people we build with</span>
+          <h2 id="client-notes-heading" className={styles.sectionTitle}>Good work. Shared stories.</h2>
+          <Testimonials />
+        </section>
         <FloatingTools />
         <FaqAccordion />
       </div>

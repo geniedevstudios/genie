@@ -1,0 +1,28 @@
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  color: #fff;
+  font-family: var(--font-jakarta), sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.054em;
+  white-space: nowrap;
+}
+
+.mark {
+  display: block;
+  width: 1.538em;
+  height: 1.538em;
+  filter: brightness(1.7) drop-shadow(0 0 0.2em #9c5bce33);
+}
+
+.divider {
+  color: #8b8b97;
+  margin: 0 0.19em 0 0;
+  font-weight: 400;
+}
+
+.dev {
+  font-weight: 600;
+}

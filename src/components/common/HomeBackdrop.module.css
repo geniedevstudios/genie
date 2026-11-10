@@ -1,0 +1,56 @@
+/* Both tools and grid lines share the same plane and cell coordinates. */
+.gridScene { position: absolute; inset: 88px 0 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.gridLeft, .gridRight {
+  --grid-width: clamp(48px, 5.6vw, 82px);
+  --grid-height: clamp(76px, 7vw, 100px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 36%;
+  background-image: linear-gradient(#ffffff0c 1px, transparent 1px), linear-gradient(90deg, #ffffff0c 1px, transparent 1px);
+  background-size: var(--grid-width) var(--grid-height);
+  mask-image: linear-gradient(transparent, black 110px);
+}
+.gridLeft { left: 0; transform: skewY(9deg); transform-origin: left center; }
+.gridRight { right: 0; transform: skewY(-9deg); transform-origin: right center; background-position: right top; }
+.toolWindow {
+  position: absolute;
+  width: var(--grid-width);
+  height: var(--grid-height);
+  /* A recessed cell, not a separate tile sitting over the wall. */
+  overflow: hidden;
+  background: linear-gradient(110deg, #08080a99, transparent 75%);
+}
+.toolWindow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-left: 1px solid #ffffff12;
+  border-bottom: 1px solid #ffffff20;
+  box-shadow: inset 8px 0 9px -8px #000, inset 0 -8px 10px -9px #000;
+}
+.toolLogo {
+  width: 115%;
+  height: 115%;
+  max-width: none;
+  object-fit: contain;
+  position: absolute;
+  top: 12%;
+  left: -12%;
+  transform: skewY(-9deg) rotate(-14deg);
+  filter: drop-shadow(3px 5px 5px #0008);
+}
+.gridRight .toolLogo { transform: skewY(9deg) rotate(12deg); left: 4%; }
+.xcode { left: var(--grid-width); top: var(--grid-height); }
+.vscode { left: calc(var(--grid-width) * 3); top: calc(var(--grid-height) * 3); opacity: .55; }
+.android { right: var(--grid-width); top: calc(var(--grid-height) * 2); }
+.react { right: calc(var(--grid-width) * 3); top: 0; opacity: .4; }
+
+@media (max-width: 700px) {
+  .toolWindow { opacity: .55; }
+  .gridLeft, .gridRight { width: 40%; --grid-width: 44px; --grid-height: 76px; }
+  .xcode { left: 0; top: var(--grid-height); }
+  .vscode { left: var(--grid-width); top: calc(var(--grid-height) * 4); }
+  .react { right: 0; top: var(--grid-height); }
+  .android { right: var(--grid-width); top: calc(var(--grid-height) * 4); }
+}

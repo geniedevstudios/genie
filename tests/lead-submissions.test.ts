@@ -75,9 +75,8 @@ const contactPayload = {
   turnstileToken: 'contact-valid', companyWebsite: '',
 };
 const quotePayload = {
-  service: 'web', features: ['Custom E-commerce'],
-  description: 'Hi, I need an e-commerce website.', budget: 'standard', timeframe: '1-3-months',
-  contact: { name: 'Ama Mensah', email: 'ama@example.com', whatsapp: '+233539433339' },
+  name: 'Ama Mensah', email: 'ama@example.com', phone: '+233539433339',
+  message: 'Hi, I need an e-commerce website.', privacyAccepted: true,
   turnstileToken: 'quote-valid', companyWebsite: '',
 };
 
@@ -94,12 +93,11 @@ for (const [label, handler, payload] of [
 ] as const) {
   test(`${label}: valid enquiry verifies before sending both emails`, async () => {
     const response = await handler(request(payload));
-    assert.equal(response.status, label === 'quote' ? 201 : 200);
+    assert.equal(response.status, 200);
     assert.equal(verificationRequests.length, 1);
     assert.equal(verificationRequests[0].remoteip, '203.0.113.10');
     assert.equal(sentEmails.length, 2);
     assert.equal(sentEmails[0].reply_to, 'ama@example.com');
-    if (label === 'quote') assert.ok((await response.json()).quote.estimate);
   });
 
   for (const token of [undefined, '', ' ', 123, 'x'.repeat(2049)]) {
@@ -197,9 +195,21 @@ test('international names and a useful reference link are accepted and HTML is e
   assert.doesNotMatch(sentEmails[1].html, /https:\/\/example.com/);
 });
 
-test('quote: rejects features outside the chosen service', async () => {
-  assert.equal((await quote(request({ ...quotePayload, features: ['Made up feature'] }))).status, 400);
-  assert.equal(sentEmails.length, 0);
+for (const patch of [
+  { name: 'A' }, { email: 'invalid-email' }, { phone: '0539433339' },
+  { message: 'hello' }, { privacyAccepted: false }, { privacyAccepted: 'true' },
+]) {
+  test(`quote: invalid field ${Object.keys(patch)[0]} is rejected`, async () => {
+    assert.equal((await quote(request({ ...quotePayload, ...patch }))).status, 400);
+    assert.equal(sentEmails.length, 0);
+  });
+}
+
+test('quote: escapes project details in the notification email', async () => {
+  const response = await quote(request({ ...quotePayload, message: 'Please build <b>our app</b> for the shop' }));
+  assert.equal(response.status, 200);
+  assert.match(sentEmails[0].html, /&lt;b&gt;our app&lt;\/b&gt;/);
+  assert.doesNotMatch(sentEmails[0].html, /<b>our app<\/b>/);
 });
 
 test('both routes share a limit, including concurrent attempts and spoofed IP headers', async () => {

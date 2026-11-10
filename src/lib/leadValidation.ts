@@ -25,14 +25,9 @@ export const contactRequest = z.object({
 });
 
 export const quoteRequest = z.object({
-  service: z.enum(['uiux', 'web', 'consulting', 'mobile', 'security']),
-  features: z.array(z.string().max(100)).min(1).max(12),
-  description: leadMessage,
-  budget: z.enum(['starter', 'standard', 'complex', 'enterprise']),
-  timeframe: z.enum(['1-3-weeks', '1-3-months', '3-6-months', 'not-sure']),
-  contact: z.object({
-    name: leadName.refine((value) => value.length >= 2, 'Enter your name.'),
-    email: leadEmail,
-    whatsapp: leadPhone,
-  }),
+  name: leadName.refine((value) => value.length >= 2, 'Enter your name.'),
+  email: leadEmail,
+  phone: leadPhone,
+  message: leadMessage,
+  privacyAccepted: z.literal(true),
 });

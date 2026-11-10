@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, X } from 'lucide-react';
-import { GenieMark } from '@/components/common/GenieMark';
+import { LogoLockup } from '@/components/common/LogoLockup';
 import { buildGenieVariants } from '@/lib/genieCardMotion';
 import styles from '@/app/services/services.module.css';
 
@@ -86,22 +86,19 @@ export function TechStackMoreDialog({ onOpenChange }: { onOpenChange?: (open: bo
                   These and many more
                 </h3>
                 <p className={styles.techModalBody}>
-                  Beyond our core stack, we integrate payment gateways (Paystack, Stripe), cloud hosting (Vercel, AWS), automated CI/CD, and real-time monitoring. At{' '}
-                  <span className={styles.techModalBrand}>
-                    <GenieMark width={22} className={styles.techModalMark} />
-                    <span>| dev studios</span>
-                  </span>, we pick the right architecture for your product’s traffic, team, and budget.
+                  When a project needs them, we have connected payment gateways such as Paystack and Stripe, and hosted work on Vercel or AWS. Those are options for a scope, not services on every project. At{' '}
+                  <LogoLockup className={styles.techModalLockup} />, we pick the right architecture for your product’s traffic, team, and budget.
                 </p>
                 <p className={styles.techModalBodySecondary}>
-                  Tell us what you’re building and we’ll recommend a clear technical plan.
+                  Tell us the problem or the product. We will recommend an approach before any build starts.
                 </p>
                 <Link
-                  href="/contact"
+                  href="/quote"
                   className={styles.techModalCta}
                   prefetch={false}
                   onClick={() => setOpen(false)}
                 >
-                  Reach out
+                  Discuss your project
                 </Link>
               </motion.div>
             </div>

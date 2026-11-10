@@ -11,8 +11,8 @@ import {
   PORTFOLIO_CATEGORY_IDS,
   PORTFOLIO_PROJECTS,
 } from '@/lib/portfolioData';
-import { PortfolioProjectCard } from '@/components/portfolio/PortfolioProjectCard';
-import explorerStyles from '@/components/sections/PortfolioExplorer.module.css';
+import { ProjectShowcase } from '@/components/sections/FeaturedProjects';
+import { StudioCharacter } from '@/components/common/StudioCharacter';
 import styles from './category.module.css';
 
 type Props = {
@@ -61,11 +61,11 @@ export default async function PortfolioCategoryPage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main className={`${styles.page} home-main-surface`} data-theme="light">
+      <main className={`${styles.page} home-main-surface`} data-theme="dark">
         <div className={styles.main}>
           <div className={styles.backRow}>
             <Link
-              href="/portfolio#portfolio-showcase"
+              href="/portfolio#featured-projects"
               className={styles.backLink}
               prefetch
               aria-label="Back to portfolio"
@@ -85,20 +85,13 @@ export default async function PortfolioCategoryPage({ params }: Props) {
 
           <section className={styles.gridSection} aria-label="Projects in this category">
             {items.length === 0 ? (
-              <div className={explorerStyles.emptyStateWrap}>
-                <p className={explorerStyles.emptyState}>Projects for this category are on the way.</p>
+              <div className={styles.emptyStateWrap}>
+                <StudioCharacter character="curiosity" />
+                <p className={styles.emptyState}>A little room for what’s next. No published projects in this category yet.</p>
               </div>
             ) : (
               <div className={styles.projectGrid}>
-                {items.map((project, index) => (
-                  <PortfolioProjectCard
-                    key={project.id}
-                    project={project}
-                    index={index}
-                    TitleTag="h2"
-                    variant="page"
-                  />
-                ))}
+                {items.map(project => <ProjectShowcase key={project.id} project={project} category={category.title} />)}
               </div>
             )}
           </section>

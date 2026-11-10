@@ -3,33 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Mail, MapPin, Phone } from 'lucide-react';
-import { GenieMark } from '@/components/common/GenieMark';
+import { LogoLockup } from '@/components/common/LogoLockup';
 import { LinkedinIcon, InstagramIcon, XIcon, GithubIcon } from '@/components/common/BrandIcons';
 import { SOCIAL_LINKS } from '@/lib/socialLinks';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState('');
-  const [joined, setJoined] = useState(false);
-  const [error, setError] = useState('');
   const [mapOpen, setMapOpen] = useState(false);
-
-  const onNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    if (!email.trim()) {
-      setError('Email is required');
-      return;
-    } else if (!emailPattern.test(email)) {
-      setError('Please enter a valid email address');
-      return;
-    }
-
-    setError('');
-    setJoined(true);
-    setEmail('');
-  };
 
   useEffect(() => {
     if (!mapOpen) return;
@@ -47,13 +27,11 @@ export const Footer: React.FC = () => {
           <div className="footer-brand">
             <Link href="/" className="footer-logo-link" aria-label="Home">
               <span className="footer-logo">
-                <GenieMark width={28} className="footer-logo-img" />
-                <span className="footer-logo-text">| dev studios</span>
+                <LogoLockup />
               </span>
             </Link>
             <p className="footer-desc">
-              Software design and engineering studio based in Accra, Ghana. We build custom web platforms,
-              mobile apps, and secure payment systems that help ambitious businesses grow.
+              A little imagination. A lot of engineering. We’re the software studio of Genie Platforms, based in Accra and building websites, apps, and systems with you.
             </p>
             <div className="social-row" aria-label="Social links">
               <a
@@ -90,45 +68,9 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="footer-connect">
-            <h2 id="footer-loop-heading" className="footer-heading">
-              Stay in the loop
-            </h2>
-            <p className="footer-newsletter-copy">
-              Occasional notes on product engineering, recent launches, and studio updates. No spam.
-            </p>
-            <form className="newsletter-form" onSubmit={onNewsletterSubmit} noValidate>
-              <label htmlFor="footer-email" className="visually-hidden">
-                Email address
-              </label>
-              <div className="newsletter-field">
-                <input
-                  id="footer-email"
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (error) setError('');
-                  }}
-                  className={`newsletter-input ${error ? 'input-error' : ''}`}
-                />
-                <button type="submit" className="newsletter-join">
-                  Join
-                </button>
-              </div>
-              {error ? (
-                <p className="error-hint" role="alert">
-                  {error}
-                </p>
-              ) : null}
-            </form>
-            {joined ? (
-              <p className="newsletter-thanks" role="status">
-                Thanks — you&apos;re on the list.
-              </p>
-            ) : null}
+            <h2 id="footer-loop-heading" className="footer-heading">Have a little spark?</h2>
+            <p className="footer-newsletter-copy">An idea, a question, a tricky problem. Let’s see what we can build together.</p>
+            <Link href="/quote" className="footer-start">Let’s build something ↗</Link>
 
             <div className="footer-contact-lines">
               <a
@@ -176,25 +118,26 @@ export const Footer: React.FC = () => {
             <h2 id="footer-services-heading" className="footer-heading">
               Services
             </h2>
-            <Link href="/services#web-apps">Website and Web Apps Development</Link>
-            <Link href="/services#ui-ux">UI/UX Designs</Link>
-            <Link href="/services#mobile-apps">Mobile Apps Development</Link>
+            <Link href="/services#web-apps">Web development</Link>
+            <Link href="/services#ui-ux">UI/UX design</Link>
+            <Link href="/services#mobile-apps">Mobile apps</Link>
+            <Link href="/services#software-development">Software development</Link>
             <Link href="/services#cybersecurity">Cybersecurity</Link>
-            <Link href="/services#it-consultancy">IT Consultancy</Link>
+            <Link href="/services#it-consultancy">IT consultancy</Link>
           </nav>
         </div>
 
+        <div className="footer-wordmark" role="img" aria-label="Genie Dev Studios">
+          <svg className="footer-wordmark-wide" viewBox="0 0 1600 260" aria-hidden="true" focusable="false">
+            <text x="800" y="204" textAnchor="middle" textLength="1560" lengthAdjust="spacingAndGlyphs">Genie Dev Studios</text>
+          </svg>
+          <svg className="footer-wordmark-small" viewBox="0 0 800 370" aria-hidden="true" focusable="false">
+            <text x="400" y="165" textAnchor="middle" textLength="770" lengthAdjust="spacingAndGlyphs">Genie Dev</text>
+            <text x="400" y="345" textAnchor="middle" textLength="770" lengthAdjust="spacingAndGlyphs">Studios</text>
+          </svg>
+        </div>
         <div className="footer-bottom">
-          <p
-            className="footer-copyright"
-            aria-label={`© ${currentYear} GENIE | dev studios. All rights reserved.`}
-          >
-            <span aria-hidden="true">© {currentYear} </span>
-            <span className="footer-copyright-mark" aria-hidden="true">
-              <GenieMark width={13} />
-            </span>
-            <span aria-hidden="true"> | dev studios. All rights reserved.</span>
-          </p>
+          <p className="footer-copyright">© {currentYear} Genie Dev Studios. All rights reserved.</p>
           <div className="footer-legal">
             <Link href="/privacy">Privacy Policy</Link>
             <Link href="/terms">Terms of Service</Link>
@@ -240,11 +183,11 @@ export const Footer: React.FC = () => {
 
       <style jsx>{`
         .site-footer {
-          --footer-bg: #cb5c24;
-          --footer-muted: hsla(0, 0%, 100%, 0.82);
+          --footer-bg: transparent;
+          --footer-muted: #aaa7b5;
           --footer-heading: #fffefc;
-          --footer-accent: hsl(210, 100%, 52%);
-          --footer-accent-hover: hsl(210, 100%, 58%);
+          --footer-accent: #cbb0ee;
+          --footer-accent-hover: #e0c9fa;
           --footer-input-bg: rgba(255, 255, 255, 0.12);
           --footer-social-bg: rgba(255, 255, 255, 0.14);
 
@@ -252,6 +195,24 @@ export const Footer: React.FC = () => {
           color: var(--footer-muted);
           padding: clamp(3rem, 6vw, 5rem) 0 2rem;
         }
+
+        .footer-wordmark {
+          width: calc(100vw - 2.5rem);
+          margin: clamp(4.5rem, 8vw, 7rem) 0 0;
+          margin-left: calc(50% - 50vw + 1.25rem);
+          color: var(--footer-heading);
+          line-height: 0;
+        }
+        .footer-wordmark svg { display: block; width: 100%; height: auto; overflow: visible; }
+        .footer-wordmark .footer-wordmark-small { display: none; }
+        @media (max-width: 640px) {
+          .footer-wordmark .footer-wordmark-wide { display: none; }
+          .footer-wordmark .footer-wordmark-small { display: block; }
+          .footer-wordmark { margin-bottom: 0.5rem; }
+        }
+        .footer-wordmark text { fill: currentColor; font-family: var(--font-jakarta), sans-serif; font-size: 180px; font-weight: 800; letter-spacing: -0.06em; }
+        .footer-connect :global(.footer-start) { display: inline-flex; padding: .7rem 1.1rem; margin-bottom: 1.5rem; border-radius: 999px; background: var(--footer-accent); color: #21182b; font: 600 .8rem var(--font-heading); }
+        .footer-connect :global(.footer-start:focus-visible) { outline: 2px solid #cbb0ee; outline-offset: 5px; }
 
         .footer-inner {
           max-width: var(--max-width);
@@ -270,7 +231,6 @@ export const Footer: React.FC = () => {
           display: grid;
           grid-template-columns: 1.35fr 1.25fr 0.85fr 0.85fr;
           gap: clamp(2rem, 4vw, 3.5rem);
-          margin-bottom: clamp(2.5rem, 5vw, 4rem);
         }
 
         .footer-logo-link {
@@ -283,22 +243,8 @@ export const Footer: React.FC = () => {
         .footer-logo {
           display: inline-flex;
           align-items: center;
-          gap: 0.35rem;
-          color: inherit;
-        }
-
-        .footer-logo-img {
-          display: block;
-          flex-shrink: 0;
-        }
-
-        .footer-logo-text {
-          font-family: var(--font-jakarta), sans-serif;
-          font-size: 1.2rem;
-          font-weight: 700;
-          letter-spacing: -0.03em;
           color: #fff;
-          text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+          font-size: 18px;
           line-height: 1;
         }
 
@@ -368,80 +314,6 @@ export const Footer: React.FC = () => {
           line-height: 1.55;
           margin-bottom: 1.25rem;
           max-width: 22rem;
-        }
-
-        .newsletter-form {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .newsletter-input {
-          flex: 1 1 140px;
-          min-width: 0;
-          padding: 0.65rem 1rem;
-          border-radius: 10px;
-          border: 1px solid hsla(0, 0%, 100%, 0.22);
-          background: var(--footer-input-bg);
-          color: var(--footer-heading);
-          font-size: 1rem;
-          outline: none;
-          transition: border-color 0.2s ease;
-        }
-
-        .newsletter-input::placeholder {
-          color: hsla(0, 0%, 100%, 0.45);
-        }
-
-        .newsletter-input:focus-visible {
-          border-color: var(--footer-accent);
-        }
-
-        .newsletter-join {
-          padding: 0.65rem 1.35rem;
-          border-radius: 10px;
-          border: none;
-          background: var(--footer-accent);
-          color: #fff;
-          font-weight: 600;
-          font-size: 0.875rem;
-          cursor: pointer;
-          transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .newsletter-join:hover {
-          background: var(--footer-accent-hover);
-        }
-
-        .newsletter-join:active {
-          transform: scale(0.98);
-        }
-
-        .newsletter-field {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          width: 100%;
-        }
-
-        .error-hint {
-          font-size: 0.75rem;
-          color: #f87171;
-          margin-top: 0.4rem;
-          font-weight: 500;
-          width: 100%;
-        }
-
-        .input-error {
-          border-color: #f87171 !important;
-          box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15) !important;
-        }
-
-        .newsletter-thanks {
-          font-size: 0.8125rem;
-          color: var(--footer-accent);
-          margin-bottom: 1rem;
         }
 
         .footer-contact-lines {
@@ -585,8 +457,8 @@ export const Footer: React.FC = () => {
         }
 
         .footer-bottom {
-          padding-top: 1.75rem;
-          border-top: 1px solid hsla(0, 0%, 100%, 0.18);
+          padding-top: 1rem;
+          border-top: 0;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
@@ -652,12 +524,13 @@ export const Footer: React.FC = () => {
 
         @media (max-width: 640px) {
           .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 2.75rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.75rem 1.5rem;
             text-align: center;
           }
 
           .footer-brand, .footer-connect {
+            grid-column: 1 / -1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -668,7 +541,7 @@ export const Footer: React.FC = () => {
             margin-right: auto;
           }
 
-          .social-row, .newsletter-form, .footer-contact-lines {
+          .social-row, .footer-contact-lines {
             justify-content: center;
           }
 

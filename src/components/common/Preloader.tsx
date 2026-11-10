@@ -2,12 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GenieMark } from '@/components/common/GenieMark';
+import { LogoLockup } from '@/components/common/LogoLockup';
 import styles from './Preloader.module.css';
 
 export const Preloader: React.FC = () => {
   const [show, setShow] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     // If the inline script already hid it, we don't need to do anything
@@ -21,7 +20,6 @@ export const Preloader: React.FC = () => {
     const MAX_DURATION = 8000; // Absolute fallback so we never block forever
 
     let isFinished = false;
-    let maxTimer: NodeJS.Timeout;
 
     const finishLoading = () => {
       if (isFinished) return;
@@ -38,10 +36,11 @@ export const Preloader: React.FC = () => {
     };
 
     // Fallback timer
-    maxTimer = setTimeout(finishLoading, MAX_DURATION);
+    const maxTimer = setTimeout(finishLoading, MAX_DURATION);
 
     const checkMedia = () => {
-      const videos = Array.from(document.querySelectorAll('video'));
+      // Offscreen, metadata-only videos must not hold up the first screen.
+      const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('video[autoplay], video[preload="auto"]'));
       // Only wait for priority/eager images or large hero images to avoid waiting for every tiny icon
       const images = Array.from(document.querySelectorAll('img[loading="eager"], img[priority]')) as HTMLImageElement[];
       
@@ -105,26 +104,14 @@ export const Preloader: React.FC = () => {
               transition: { duration: 0.8, ease: [0.19, 1, 0.22, 1] } 
             }}
           >
-            <div className={styles.brandGroup}>
-              {/* Genie Mark entering from the left */}
-              <motion.div
-                initial={{ x: -60, opacity: 0, rotate: -20 }}
-                animate={{ x: 0, opacity: 1, rotate: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-              >
-                <GenieMark width={50} />
-              </motion.div>
-
-              {/* | dev studios entering from the right */}
-              <motion.span
-                className={styles.brandText}
-                initial={{ x: 60, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.45, ease: [0.34, 1.56, 0.64, 1] }}
-              >
-                | dev studios
-              </motion.span>
-            </div>
+            <motion.div
+              className={styles.brandGroup}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+            >
+              <LogoLockup />
+            </motion.div>
           </motion.div>
         </motion.div>
       )}

@@ -327,7 +327,7 @@
 }
 
 .projectCardRowSurface {
-  --card-page-bg: hsl(226, 42%, 11%);
+  --card-page-bg: #1c0b22;
   padding: clamp(1.25rem, 3vw, 1.85rem);
   border-radius: 22px;
   border: 1px solid hsla(0, 0%, 100%, 0.1);
@@ -755,7 +755,7 @@
   border-radius: 16px;
   overflow: hidden;
   isolation: isolate;
-  background: color-mix(in srgb, var(--card-page-bg, hsl(226, 42%, 11%)) 88%, black);
+  background: color-mix(in srgb, var(--card-page-bg, #1c0b22) 88%, black);
 }
 
 .projectCardRowSurface .projectCardPageFigureInner {

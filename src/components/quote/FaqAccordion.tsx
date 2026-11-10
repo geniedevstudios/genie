@@ -1,18 +1,14 @@
-'use client';
-
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import styles from './quote.module.css';
 
 const FAQS = [
   {
     question: 'How do you price your projects?',
-    answer: 'Every build is priced on a fixed-scope milestone basis in Ghana Cedis (GH₵)—never open-ended hourly billing. The calculator above gives you an immediate ballpark range based on your selected features, and we lock in an exact fixed quote after a brief discovery call.',
+    answer: 'The price is agreed on before work starts, against a written scope. Send what you know, or describe the problem if you are not sure what to build. We reply with a recommended approach and a price.',
   },
   {
     question: 'How long does a typical build take?',
-    answer: 'Focused websites, UI/UX prototypes, and security audits typically ship in 1–3 weeks. Full-stack web platforms, custom e-commerce systems, and mobile apps take 1–3 months depending on integrations, with weekly staging builds from week one.',
+    answer: 'A focused website or a small internal tool can take a few weeks. A web platform, mobile app, or larger business system usually takes longer, depending on the scope and any integrations. We confirm the timeline when the price and scope are agreed.',
   },
   {
     question: 'Do I own the source code and infrastructure?',
@@ -21,51 +17,13 @@ const FAQS = [
 ];
 
 export function FaqAccordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggle = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
-  };
-
-  return (
-    <div className={styles.faqSection}>
-      <div className={styles.faqLeft}>
-        <h2 className={styles.faqTitle}>
-          Frequently <span>asked<br />questions</span>
-        </h2>
-        <p className={styles.faqDesc}>
-          Straight answers on how we scope, price, and ship software at Genie Dev Studios.
-        </p>
-      </div>
-
-      <div className={styles.faqList}>
-        {FAQS.map((faq, idx) => {
-          const isOpen = openIndex === idx;
-          return (
-            <div key={idx} className={styles.faqItem} data-open={isOpen}>
-              <button className={styles.faqHeader} onClick={() => toggle(idx)}>
-                <Plus size={20} strokeWidth={2.5} className={styles.faqIcon} />
-                {faq.question}
-              </button>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div className={styles.faqContent}>
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
+  return <section className={styles.faqSection} aria-labelledby="faq-heading">
+    <div><span className="studio-eyebrow">Before we begin</span><h2 id="faq-heading" className={styles.sectionTitle}>A few things<br />you might wonder.</h2><p className={styles.faqDesc}>Clear answers, so you can take the next step with confidence.</p></div>
+    <div className={styles.faqList}>
+      {FAQS.map((faq, index) => <details className={styles.faqItem} key={faq.question} open={index === 0}>
+        <summary className={styles.faqHeader}>{faq.question}<Plus size={20} className={styles.faqIcon} aria-hidden /></summary>
+        <p className={styles.faqContent}>{faq.answer}</p>
+      </details>)}
     </div>
-  );
+  </section>;
 }

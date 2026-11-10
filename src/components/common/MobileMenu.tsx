@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronLeft, ArrowRight } from 'lucide-react';
-import { GenieMark } from '@/components/common/GenieMark';
+import { ArrowUpRight } from 'lucide-react';
 import styles from './MobileMenu.module.css';
 
 interface MobileMenuProps {
@@ -15,161 +13,83 @@ interface MobileMenuProps {
 }
 
 const NAV_LINKS = [
-  { label: 'Services', href: '/services', accent: '#fb923c' },
-  { label: 'Portfolio', href: '/portfolio', accent: '#818cf8' },
-  { label: 'About', href: '/about', accent: '#22d3ee' },
-  { label: 'Contact Us', href: '/contact', accent: '#f472b6' },
+  { label: 'Services', href: '/services' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
-/* Overlay slides in from right */
-const overlayVariants: Variants = {
-  hidden:  { x: '100%', opacity: 0 },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: { duration: 0.42, ease: [0.19, 1, 0.22, 1] as const },
-  },
-  exit: {
-    x: '100%',
-    opacity: 0,
-    transition: { duration: 0.32, ease: [0.4, 0, 0.6, 1] as const },
-  },
-};
+function placeUnderBar(dialog: HTMLDialogElement) {
+  const header = dialog.closest('header');
+  const nav = header?.querySelector('nav');
+  const bottom = Math.max((nav ?? header)?.getBoundingClientRect().bottom ?? 0, 0);
+  dialog.style.top = `${bottom}px`;
+  dialog.style.height = `calc(100dvh - ${bottom}px)`;
+}
 
-/* Each nav item staggers in from the right */
-const itemVariants: Variants = {
-  hidden:  { opacity: 0, x: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: 0.18 + i * 0.07,
-      duration: 0.5,
-      ease: [0.19, 1, 0.22, 1] as const,
-    },
-  }),
-  exit: (i: number) => ({
-    opacity: 0,
-    x: 30,
-    transition: {
-      delay: i * 0.04,
-      duration: 0.22,
-      ease: [0.4, 0, 0.6, 1] as const,
-    },
-  }),
-};
-
-const footerVariants: Variants = {
-  hidden:  { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.5, duration: 0.5, ease: [0.19, 1, 0.22, 1] as const },
-  },
-  exit: { opacity: 0, transition: { duration: 0.15 } },
-};
-
-export const MobileMenu: React.FC<MobileMenuProps> = ({ id, isOpen, onClose }) => {
+export function MobileMenu({ id, isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  /* Lock body scroll while open */
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const place = () => placeUnderBar(dialog);
+    place();
+    window.addEventListener('resize', place);
+    if (!isOpen) {
+      if (dialog.open) dialog.close();
+      return () => window.removeEventListener('resize', place);
+    }
+    if (!dialog.open) dialog.show();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('resize', place);
+    };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, onClose]);
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          id={id}
-          className={styles.overlay}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-          variants={overlayVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          {/* Background layers */}
-          <div className={styles.overlayBg} aria-hidden />
-
-          {/* Header row */}
-          <div className={styles.overlayHeader}>
-            <button
-              className={`${styles.closeBtn} ${styles.glassCapsule}`}
-              onClick={onClose}
-              aria-label="Close navigation menu"
-            >
-              <ChevronLeft size={24} strokeWidth={2.2} />
-            </button>
-
-            <Link
-              href="/"
-              className={`${styles.overlayLogo} ${styles.glassCapsule}`}
-              onClick={onClose}
-              aria-label="Home"
-            >
-              <GenieMark width={32} />
-              <span>| dev</span>
-            </Link>
-
-            <div className={styles.headerSpacer} aria-hidden />
-          </div>
-
-          {/* Label */}
-          <p className={styles.menuLabel} aria-hidden>Navigation</p>
-
-          {/* Nav links */}
-          <nav className={styles.overlayNav} aria-label="Mobile Navigation">
-            {NAV_LINKS.map(({ label, href, accent }, i) => {
-              const isActive = pathname === href;
-              return (
-              <motion.div
-                key={label}
-                className={styles.navItemWrap}
-                custom={i}
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
-                <Link
-                  href={href}
-                  className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
-                  style={{ '--nav-accent': accent } as React.CSSProperties}
-                  onClick={onClose}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  <span className={styles.navItemText}>{label}</span>
-                  <ArrowRight
-                    size={18}
-                    strokeWidth={1.8}
-                    className={styles.navItemArrow}
-                    aria-hidden
-                  />
-                </Link>
-              </motion.div>
-            );
-            })}
-          </nav>
-
-          {/* Footer CTA */}
-          <motion.div
-            className={styles.overlayFooter}
-            variants={footerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <Link href="/contact" className={styles.ctaBtn} onClick={onClose}>
-              Book a Strategy Call <ArrowRight size={16} strokeWidth={2.2} />
-            </Link>
-            <p className={styles.tagline}>Custom web, mobile, and systems engineering.</p>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <dialog ref={dialogRef} id={id} className={styles.overlay} aria-label="Navigation menu"
+      onKeyDown={(event) => {
+        if (event.key !== 'Tab') return;
+        const controls = event.currentTarget.querySelectorAll<HTMLElement>('a[href], button');
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }}>
+      <nav className={styles.overlayNav} aria-label="Mobile navigation">
+        <span className={styles.eyebrow}>Explore the studio</span>
+        {NAV_LINKS.map(({ label, href }) => {
+          const active = pathname === href || (href === '/portfolio' && pathname.startsWith('/portfolio/'));
+          return <Link key={href} href={href} className={`${styles.navItem} ${active ? styles.navItemActive : ''}`}
+            onClick={onClose} aria-current={active ? 'page' : undefined}>
+            {label}<ArrowUpRight size={24} strokeWidth={1.5} aria-hidden />
+          </Link>;
+        })}
+      </nav>
+      <div className={styles.overlayFooter}>
+        <Link href="/quote" className={styles.ctaBtn} onClick={onClose}>
+          Let’s build something <ArrowUpRight size={18} aria-hidden />
+        </Link>
+        <p className={styles.tagline}>A little imagination. A lot of engineering.</p>
+      </div>
+    </dialog>
   );
-};
+}

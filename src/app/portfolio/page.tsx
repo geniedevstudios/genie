@@ -1,41 +1,22 @@
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/common/Navbar';
 import { Footer } from '@/components/common/Footer';
-import { PortfolioExplorer } from '@/components/sections/PortfolioExplorer';
-import styles from '../services/services.module.css';
-import hero from './portfolio.module.css';
+import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
 
 export const metadata: Metadata = {
   title: 'Portfolio | Genie Dev Studios',
   description:
-    'Selected web platforms, e-commerce systems, product interfaces, and custom software built by Genie Dev Studios.',
+    'Selected client work by Genie Dev Studios, including the JOEY The Brand storefront and admin.',
   alternates: {
     canonical: '/portfolio',
   },
   openGraph: {
     title: 'Portfolio | Genie Dev Studios',
     description:
-      'Selected web platforms, e-commerce systems, product interfaces, and custom software built by Genie Dev Studios.',
+      'Selected client work by Genie Dev Studios, including the JOEY The Brand storefront and admin.',
   },
 };
 
 export default function PortfolioPage() {
-  return (
-    <>
-      <Navbar />
-      <main className={`${styles.page} home-main-surface`} data-theme="light">
-        <div className={styles.main}>
-          <header className={hero.hero}>
-            <h1 className={hero.title}>Portfolio</h1>
-            <p className={hero.lead}>
-              Selected platforms, storefronts, and product interfaces engineered by Genie Dev Studios.
-              Browse by discipline below to inspect live builds, design systems, and admin workflows in production.
-            </p>
-          </header>
-          <PortfolioExplorer />
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
+  return <><Navbar /><main><FeaturedProjects standalone /></main><Footer /></>;
 }

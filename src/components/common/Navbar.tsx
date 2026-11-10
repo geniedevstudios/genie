@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, LayoutGroup } from 'framer-motion';
-import { GenieMark } from '@/components/common/GenieMark';
-import { MobileMenu } from './MobileMenu';
+import { ChevronRight } from 'lucide-react';
+import { LogoLockup } from '@/components/common/LogoLockup';
+import { MobileMenu } from '@/components/common/MobileMenu';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'About', href: '/about' },
   { label: 'Contact Us', href: '/contact' },
-] as const;
+];
 
 function getActiveNavIndex(pathname: string | null): number {
   if (!pathname) return -1;
@@ -25,88 +25,94 @@ function getActiveNavIndex(pathname: string | null): number {
   return -1;
 }
 
-export const Navbar: React.FC = () => {
-  const [open, setOpen] = useState(false);
+export const Navbar: React.FC<{ blend?: boolean }> = ({ blend = false }) => {
   const pathname = usePathname();
   const activeIndex = useMemo(() => getActiveNavIndex(pathname), [pathname]);
+  const menuId = useId();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPath, setMenuPath] = useState(pathname);
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setMenuOpen(false);
+  }
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 641px)');
+    const closeOnDesktop = () => { if (desktop.matches) setMenuOpen(false); };
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
+  }, []);
 
   return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <Link href="/" className={styles.logoAnchor} aria-label="Home" prefetch>
-            <span className={`${styles.logoLink} ${styles.glassCapsule}`}>
-              <GenieMark width={28} />
-              <span className={styles.logoText}>| dev</span>
-            </span>
-          </Link>
-
-          <LayoutGroup id="nav">
-            <nav
-              className={`${styles.glassNav} ${styles.glassCapsule}`}
-              aria-label="Main Navigation"
+    <header
+      className={`${styles.heroHeader} ${blend ? styles.heroHeaderBlend : ''} ${menuOpen ? styles.heroHeaderOpen : ''}`}
+    >
+      <nav className={styles.heroNav} aria-label="Main navigation">
+        <div className={styles.heroNavSide}>
+          {NAV_LINKS.slice(0, 2).map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={activeIndex === i ? styles.heroNavLinkActive : undefined}
+              aria-current={activeIndex === i ? 'page' : undefined}
             >
-              <div className={styles.navTrack}>
-                {NAV_LINKS.map((link, i) => {
-                  const isActive = i === activeIndex;
-                  
-                  return (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      className={`${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}
-                      aria-current={isActive ? 'page' : undefined}
-                      draggable={false}
-                    >
-                      <span className={styles.navLinkLabel}>{link.label}</span>
-                      
-                      {isActive && (
-                        <motion.div
-                          layoutId="nav-pill-bg"
-                          className={styles.navPill}
-                          initial={false}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 400,
-                            damping: 35,
-                            mass: 1,
-                          }}
-                          style={{
-                            zIndex: 1,
-                            pointerEvents: 'none',
-                          }}
-                        />
-                      )}
-                    </Link>
-                  );
-                })}
-              </div>
-            </nav>
-          </LayoutGroup>
-
-          <button
-            className={`${styles.hamburger} ${open ? styles.hamburgerOpen : ''}`}
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="Open navigation menu"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-          >
-            <span className={styles.barWrap} aria-hidden>
-              <span className={styles.bar} />
-              <span className={styles.bar} />
-              <span className={styles.bar} />
-            </span>
-          </button>
+              {link.label}
+            </Link>
+          ))}
         </div>
-      </header>
-
+        <Link href="/" className={styles.heroLogo} aria-label="Genie Dev home">
+          <LogoLockup />
+        </Link>
+        <div className={`${styles.heroNavSide} ${styles.heroNavRight}`}>
+          {NAV_LINKS.slice(2).map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={activeIndex === i + 2 ? styles.heroNavLinkActive : undefined}
+              aria-current={activeIndex === i + 2 ? 'page' : undefined}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <button
+          type="button"
+          className={styles.menuButton}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls={menuId}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span className={styles.menuGlyph} aria-hidden>
+            <span
+              className={styles.menuBars}
+              style={{
+                opacity: menuOpen ? 0 : 1,
+                transform: menuOpen ? 'translateX(8px)' : 'translateX(0)',
+              }}
+            >
+              <svg width="22" height="22" viewBox="0 0 32 32">
+                <path fill="currentColor" d="M4 7h24v2H4zm0 8h24v2H4zm0 8h24v2H4z" />
+              </svg>
+            </span>
+            <span
+              className={styles.menuChevron}
+              style={{
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? 'translateX(0)' : 'translateX(-8px)',
+              }}
+            >
+              <ChevronRight size={22} strokeWidth={2.2} />
+            </span>
+          </span>
+        </button>
+      </nav>
       <MobileMenu
-        id="mobile-menu"
-        isOpen={open}
-        onClose={() => setOpen(false)}
+        id={menuId}
+        isOpen={menuOpen}
+        onClose={closeMenu}
       />
-    </>
+    </header>
   );
 };

@@ -1,214 +1,137 @@
-/* ─── Header shell ───────────────────────────────────────────────── */
-.header {
-  position: fixed;
-  top: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 2rem);
-  max-width: 80rem;
-  z-index: 100;
-  pointer-events: none;
-  box-sizing: border-box;
-}
-
-@media (min-width: 640px) {
-  .header { width: calc(100% - 3rem); }
-}
-
-.headerInner {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  pointer-events: none;
-}
-
-/* ─── Shared frosted-glass capsule ──────────────────────────────── */
-.glassCapsule {
+.heroHeader {
   position: relative;
-  isolation: isolate;
-  border-radius: 9999px;
-  background: rgba(18, 22, 32, 0.58);
-  backdrop-filter: blur(44px) saturate(210%);
-  -webkit-backdrop-filter: blur(44px) saturate(210%);
-  will-change: backdrop-filter;
-  transform: translateZ(0);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-top-color: rgba(255, 255, 255, 0.6);
-  border-bottom-color: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 18px 60px rgba(0, 0, 0, 0.62),
-    0 6px 18px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.38),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
-  pointer-events: auto;
+  z-index: 10;
+  padding: 29px 5.2%;
+  background: transparent;
+  color: #bdbdc5;
 }
 
-/* ─── Logo ───────────────────────────────────────────────────────── */
-.logoAnchor {
-  text-decoration: none;
-  color: inherit;
-  flex-shrink: 0;
-  pointer-events: auto;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-}
+/* Navigation shares the continuous page backdrop. */
+.heroHeaderBlend { background: transparent; }
+.heroHeaderOpen { z-index: 220; }
 
-.logoLink {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-  transition: opacity 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  min-height: 4rem;
-  padding: 0.85rem 1.35rem;
-}
-
-.logoAnchor:hover .logoLink { opacity: 0.9; }
-
-.logoText {
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #fff;
-  text-shadow: 0 2px 14px rgba(0,0,0,0.55);
-}
-
-/* ─── Desktop nav ────────────────────────────────────────────────── */
-.glassNav {
-  pointer-events: all;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  flex-shrink: 0;
-  margin-left: auto;
-  min-height: 4rem;
-  padding: 0.85rem 1.5rem;
-  white-space: nowrap;
-}
-
-@media (min-width: 1024px) {
-  .glassNav {
-    display: flex;
-    width: fit-content;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-}
-
-.navTrack {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  z-index: 1;
-}
-
-.navLink {
-  position: relative;
-  font-family: var(--font-jakarta), sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.82);
-  text-decoration: none;
-  transition: color 0.25s ease;
-  padding: 0.6rem 1.15rem;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navLinkLabel {
+.heroNav {
   position: relative;
   z-index: 2;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  min-height: 48px;
 }
 
-.navLink:hover {
-  color: #fff;
-}
-
-.navLinkActive {
-  color: #fff;
+.heroNavSide {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.2vw, 52px);
+  color: #bdbdc5;
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 15px;
   font-weight: 700;
 }
 
-.navPill {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-top-color: rgba(255, 255, 255, 0.45);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+.heroNavRight { justify-content: flex-end; }
+.heroNavSide a { padding: 12px 0; transition: color 180ms; }
+.heroNavSide a:hover,
+.heroNavLinkActive { color: #fff; }
+.heroNav a:focus-visible { outline: 2px solid #c6b4ff; outline-offset: 7px; border-radius: 4px; }
+.heroLogo {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menuButton:active,
+.menuButton:focus {
+  outline: none;
+  background: transparent;
+}
+
+.menuButton:focus-visible {
+  outline: 2px solid #c6b4ff;
+  outline-offset: 3px;
+}
+
+.menuGlyph {
+  position: relative;
+  width: 22px;
+  height: 22px;
   pointer-events: none;
 }
 
-/* ─── Hamburger ──────────────────────────────────────────────────── */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(18, 22, 32, 0.58);
-  backdrop-filter: blur(44px) saturate(210%);
-  -webkit-backdrop-filter: blur(44px) saturate(210%);
-  will-change: backdrop-filter;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-top-color: rgba(255, 255, 255, 0.6);
-  border-bottom-color: rgba(255, 255, 255, 0.18);
-  cursor: pointer;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 14px;
-  color: #fff;
-  pointer-events: auto;
-  transition: transform 0.15s ease;
-  box-shadow:
-    0 18px 60px rgba(0, 0, 0, 0.62),
-    0 6px 18px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.38),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+.menuBars,
+.menuChevron {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  transition: opacity 420ms ease, transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hamburger:hover { transform: scale(1.06); }
-.hamburger:active { transform: scale(0.96); }
+.menuBars svg,
+.menuChevron svg { display: block; }
 
-.barWrap {
-  width: 20px;
-  height: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.menuChevron { opacity: 0; transform: translateX(-8px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .menuBars,
+  .menuChevron { transition: none; }
 }
 
-.bar {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: rgba(255,255,255,0.95);
-  border-radius: 2px;
-  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.25s ease;
-}
+@media (max-width: 640px) {
+  .heroHeader {
+    --header-pad-x: 16px;
+    padding: 14px 16px 8px;
+  }
 
-.hamburgerOpen .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.hamburgerOpen .bar:nth-child(2) { opacity: 0; }
-.hamburgerOpen .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .heroNav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 58px;
+    padding: 6px 8px 6px 14px;
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04) 46%, rgba(255, 255, 255, 0.02)),
+      rgba(21, 21, 23, 0.42);
+    -webkit-backdrop-filter: blur(22px) saturate(1.8);
+    backdrop-filter: blur(22px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.38);
+  }
 
-@media (max-width: 1023px) {
-  .hamburger { display: flex; }
+  .heroNav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 22px;
+    right: 22px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    pointer-events: none;
+  }
+
+  .heroNavSide { display: none; }
+  .heroLogo { position: relative; z-index: 1; font-size: 22px; }
+  .menuButton { position: relative; z-index: 1; display: inline-flex; }
 }

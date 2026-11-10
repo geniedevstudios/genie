@@ -1,4 +1,4 @@
-export type PortfolioCategoryId = 'web' | 'uiux' | 'mobile' | 'security' | 'consultancy';
+export type PortfolioCategoryId = 'web' | 'uiux' | 'mobile' | 'software' | 'security' | 'consultancy';
 
 export type PortfolioCategory = {
   id: PortfolioCategoryId;
@@ -13,7 +13,7 @@ export type PortfolioItem = {
   href: string;
   /** Served from `public/` — URL path is `/filename.ext` (not `/public/...`) */
   thumbSrc?: string;
-  /** Multiple previews — rotate on a timer in cards and the home featured strip */
+  /** Multiple previews — selectable on the homepage, rotating in portfolio cards */
   thumbSrcs?: string[];
 };
 
@@ -26,7 +26,7 @@ export function getPortfolioThumbSources(item: PortfolioItem): string[] {
   return [];
 }
 
-/** Shared previews for JOEY The brand (web + UI/UX listings) */
+/** Shared previews for JOEY The Brand (web + UI/UX listings) */
 const JOEY_THE_BRAND_THUMB_SRCS = [
   '/joey-portfolio.png',
   '/joey-app.png',
@@ -38,6 +38,7 @@ export const PORTFOLIO_CATEGORY_IDS: PortfolioCategoryId[] = [
   'web',
   'uiux',
   'mobile',
+  'software',
   'security',
   'consultancy',
 ];
@@ -49,43 +50,49 @@ export function isPortfolioCategoryId(slug: string): slug is PortfolioCategoryId
 export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
     id: 'web',
-    title: 'Website and Web Apps Development',
+    title: 'Web development',
     description:
-      'Custom e-commerce storefronts, SaaS web apps, and internal operations dashboards built for speed and scale.',
+      'Websites, web applications, internal tools, and online shops designed around how an organization works.',
   },
   {
     id: 'uiux',
-    title: 'UI/UX Designs',
+    title: 'UI/UX design',
     description:
-      'Conversion-focused product interfaces, interactive Figma prototypes, and multi-surface design systems.',
+      'Interfaces and prototypes for the people who will use the product.',
   },
   {
     id: 'mobile',
-    title: 'Mobile Apps Development',
+    title: 'Mobile apps',
     description:
-      'iOS and Android applications with native navigation, real-time sync, and offline-ready architecture.',
+      'Mobile apps for tasks that need to happen on a phone.',
+  },
+  {
+    id: 'software',
+    title: 'Software development',
+    description: 'Custom software and business systems built around the way your team works.',
   },
   {
     id: 'security',
     title: 'Cybersecurity',
     description:
-      'API hardening, authentication audits, and encrypted transaction flows for production systems.',
+      'Reviews of access, data, and how systems connect.',
   },
   {
     id: 'consultancy',
-    title: 'IT Consultancy',
+    title: 'IT consultancy',
     description:
-      'Technical discovery, system architecture design, and payment/cloud integration strategy.',
+      'Help choosing an approach, a scope, and a price before a build starts.',
   },
 ];
 
+/** Keep each category newest first: the homepage features the first entry and archives the rest. */
 export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = {
   web: [
     {
       id: 'web-joey-brand',
-      title: 'JOEY The brand',
+      title: 'JOEY The Brand',
       summary:
-        'Full-stack e-commerce platform and custom admin suite for JOEY The Brand. Engineered with a fast storefront, streamlined checkout, real-time inventory management, and order fulfillment tooling.',
+        'Client work for JOEY The Brand: a custom storefront and admin for products, checkout, inventory, orders, and fulfillment.',
       href: 'https://joeythebrand.com',
       thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
@@ -93,14 +100,15 @@ export const PORTFOLIO_PROJECTS: Record<PortfolioCategoryId, PortfolioItem[]> = 
   uiux: [
     {
       id: 'ux-joey-brand',
-      title: 'JOEY The brand',
+      title: 'JOEY The Brand',
       summary:
-        'End-to-end product design system for JOEY The Brand, spanning mobile-first shopping flows, editorial lookbooks, checkout UX, and back-office operations screens.',
+        'Interface design for JOEY The Brand, covering the shop screens and the back-office screens used to run it.',
       href: 'https://joeythebrand.com',
       thumbSrcs: [...JOEY_THE_BRAND_THUMB_SRCS],
     },
   ],
   mobile: [],
+  software: [],
   security: [],
   consultancy: [],
 };

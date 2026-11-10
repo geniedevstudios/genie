@@ -1,377 +1,94 @@
-'use client';
-
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import type { CSSProperties } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Target, ShieldCheck, Star } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Code2, MapPin, MessageCircle } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from '@/components/common/BrandIcons';
-import { GenieMark } from '@/components/common/GenieMark';
 import { SOCIAL_LINKS } from '@/lib/socialLinks';
 import styles from './About.module.css';
 
-type SocialIconType = 'linkedin' | 'x' | 'instagram' | 'github';
-
-type TeamMember = {
-  id: string;
-  name: string;
-  role: string;
-  bio: string;
-  portraitSrc: string;
-  thumbSrc: string;
-  links: { label: string; href: string; icon: SocialIconType }[];
-};
-
-const EMIL_AVATAR = '/emil.jpeg';
-const EMIL_THUMB = '/emil.jpeg';
-
-const TEAM: TeamMember[] = [
-  {
-    id: 'emil',
-    name: 'Emil',
-    role: 'Founder · Lead Full-Stack Engineer',
-    bio: 'Emil leads architecture and full-stack engineering at Genie Dev Studios. He specializes in building high-throughput web applications, custom e-commerce systems, payment integrations, and clean admin tooling that teams can rely on.',
-    portraitSrc: EMIL_AVATAR,
-    thumbSrc: EMIL_THUMB,
-    links: [
-      { label: 'Instagram', href: SOCIAL_LINKS.instagram, icon: 'instagram' },
-      { label: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: 'linkedin' },
-      { label: 'X', href: SOCIAL_LINKS.x, icon: 'x' },
-      { label: 'GitHub', href: SOCIAL_LINKS.github, icon: 'github' },
-    ],
-  },
+const VALUES = [
+  { title: 'Always curious.', label: '01 / THE MINDSET', copy: 'We ask questions, explore possibilities, and find the idea worth building.', image: '/about/curiosity.png', color: '#91e8b5', end: '#55bc9c' },
+  { title: 'Made together.', label: '02 / THE METHOD', copy: 'Your knowledge. Our craft. One team turning a little spark into something real.', image: '/about/together.png', color: '#b7a0ec', end: '#7c69be' },
+  { title: 'Built with care.', label: '03 / THE PROMISE', copy: 'Thoughtful screens, dependable foundations, and a product you can call your own.', image: '/about/care.png', color: '#f5dc8c', end: '#dcb454' },
 ];
 
-function SocialIcon({ type }: { type: SocialIconType }) {
-  const s = 18;
-  switch (type) {
-    case 'github':
-      return <GithubIcon size={s} />;
-    case 'linkedin':
-      return <LinkedinIcon size={s} />;
-    case 'instagram':
-      return <InstagramIcon size={s} />;
-    case 'x':
-      return <XIcon size={s} />;
-    default:
-      return null;
-  }
-}
+const STEPS = [
+  { title: 'Find the spark', copy: 'We listen to your idea and the problem behind it. Together, we decide what matters most.' },
+  { title: 'Shape the plan', copy: 'Clear screens, a useful first scope, and an agreed price. You know where we’re headed.' },
+  { title: 'Bring it to life', copy: 'Design, build, test, and share. You see progress and help shape the details along the way.' },
+  { title: 'Make it yours', copy: 'We launch with you, hand over the code and setup, and plan any support you’d like next.' },
+];
 
-export const About: React.FC = () => {
-  const [memberIdx, setMemberIdx] = useState(0);
-  const member = TEAM[memberIdx] ?? TEAM[0];
-
-  const storyVideoRef = useRef<HTMLVideoElement>(null);
-  const [storyVideoOk, setStoryVideoOk] = useState(true);
-  const [storyVideoReady, setStoryVideoReady] = useState(false);
-  const storyRevealedRef = useRef(false);
-
-  const handleStoryReady = useCallback(() => {
-    if (storyRevealedRef.current) return;
-    storyRevealedRef.current = true;
-    setStoryVideoReady(true);
-  }, []);
-
-  useEffect(() => {
-    const v = storyVideoRef.current;
-    if (!v || !storyVideoOk) return;
-    void v.play().catch(() => {});
-  }, [storyVideoOk]);
-
+export function About() {
   return (
-    <div className={styles.root}>
-      <div className={styles.aboutForeground}>
-      <section className={styles.hero} aria-labelledby="about-hero-title">
-        <div className={styles.heroGrid}>
-          <div className={styles.heroTitleBlock}>
-            <h1 id="about-hero-title" className={styles.heroTitleGroup} aria-label="About Genie dev studios">
-              <span className={styles.heroDisplay}>About</span>
-              <span className={styles.heroBrandLine}>
-                <span className={styles.heroBrandMarkWrap} aria-hidden="true">
-                  <GenieMark width={64} className={styles.heroBrandMark} />
-                </span>
-                <span className={styles.heroBrandSuffix}>| dev studios</span>
-              </span>
-            </h1>
-          </div>
-          <div className={styles.heroCopy}>
-            <p className={styles.heroSub}>
-              Built in Accra. Engineered for production.
-            </p>
-            <p className={styles.heroLead}>
-              Genie Dev Studios is a software design and engineering practice building custom web platforms,
-              mobile apps, and payment-ready systems. We skip the agency bloat—pairing you directly with
-              builders who scope honestly, write clean code, and ship on schedule.
-            </p>
-          </div>
+    <div className={styles.page}>
+      <header className={styles.hero}>
+        <span className="studio-eyebrow">The studio behind the magic</span>
+        <h1>Small team.<br /><span>Big imagination.</span></h1>
+        <p>We’re Genie Dev Studios. Curious minds, hands-on makers, and the people who turn “what if” into “here it is.”</p>
+        <a href="#studio-story" className={styles.storyLink}>Get to know us <ArrowDown size={16} aria-hidden /></a>
+      </header>
+
+      <section className={styles.values} aria-label="What makes us Genie">
+        {VALUES.map((value, index) => <article key={value.title} className={`${styles.valueCard} ${index === 1 ? styles.centerCard : ''}`}
+          style={{ '--card-color': value.color, '--card-end': value.end } as CSSProperties}>
+          <div className={styles.character} aria-hidden="true"><Image src={value.image} alt="" fill sizes="(max-width: 640px) 280px, 320px" /></div>
+          <div className={styles.valueCopy}><span>{value.label}</span><h2>{value.title}</h2><p>{value.copy}</p></div>
+        </article>)}
+      </section>
+
+      <section id="studio-story" className={styles.story} aria-labelledby="studio-story-heading">
+        <div className={styles.storyHeading}><span className="studio-eyebrow">Our little corner of the world</span><h2 id="studio-story-heading">From Accra.<br />With imagination.</h2>
+          <div className={styles.location}><MapPin size={16} aria-hidden /> Accra, Ghana <span aria-hidden>↗</span></div>
+        </div>
+        <div className={styles.storyBody}>
+          <p className={styles.storyLead}>Good software starts with people.<br />That’s where we start, too.</p>
+          <p>We’re the software studio of Genie Platforms. We bring design and engineering together to build websites, apps, and business systems around the way you work.</p>
+          <p>A first launch, a better customer experience, a tool that gives your team time back. Whatever brings you here, you work directly with the people making it happen.</p>
+          <Link href="/services" className={styles.textLink}>Find your specialist <ArrowUpRight size={17} aria-hidden /></Link>
         </div>
       </section>
 
-      <section className={styles.story} aria-label="Our story">
-        <div className={styles.storyInner}>
-          <div className={styles.storyGrid}>
-            <div className={styles.storyText}>
-              <p>
-                Most software projects fail in the gap between a flashy slide deck and actual engineering.
-                We started Genie Dev Studios to close that gap: every project begins with a concrete technical
-                scope, interactive prototypes, and architecture designed around your real business workflows.
-              </p>
-              <p>
-                Whether we are launching a custom storefront with Paystack checkout, building a cross-platform
-                mobile app, or hardening an existing backend, you get staging links you can test every week
-                and a codebase your business truly owns.
-              </p>
-            </div>
-            <div className={styles.storyMedia}>
-              <div className={styles.storyInfinityStage}>
-                {storyVideoOk ? (
-                  <>
-                  <video
-                    ref={storyVideoRef}
-                    className={`${styles.storyInfinityVideo} ${storyVideoReady ? styles.storyInfinityVideoReady : ''}`}
-                    src="/about-vid.mp4"
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
-                    preload="auto"
-                    aria-label="Ambient reel"
-                    onCanPlay={handleStoryReady}
-                    onPlaying={handleStoryReady}
-                    onTimeUpdate={(e) => {
-                      if (e.currentTarget.currentTime > 0.05) handleStoryReady();
-                    }}
-                    onError={() => setStoryVideoOk(false)}
-                  />
-                  {!storyVideoReady && (
-                    <div className={styles.storyVideoShimmer} aria-hidden />
-                  )}
-                  </>
-                ) : (
-                  <div className={styles.storyVideoPlaceholder} aria-hidden />
-                )}
-              </div>
-            </div>
+      <section className={styles.founder} aria-labelledby="founder-heading">
+        <div className={styles.portraitStage}>
+          <div className={styles.portraitBack} aria-hidden="true" />
+          <figure className={styles.portraitCard}>
+            <div className={styles.portrait}><Image src="/emil.jpeg" alt="Emil, founder of Genie Dev Studios" fill sizes="(max-width: 640px) 85vw, 420px" /></div>
+            <figcaption><span><strong>Emil</strong><small>Founder / Lead engineer</small></span><Code2 size={28} aria-hidden /></figcaption>
+          </figure>
+          <span className={styles.portraitTag}>A builder at heart.</span>
+        </div>
+        <div className={styles.founderCopy}>
+          <span className="studio-eyebrow">Meet your build team</span>
+          <h2 id="founder-heading">A real person.<br />In your corner.</h2>
+          <p className={styles.founderIntro}>Meet Emil, founder and lead full-stack engineer at Genie Dev Studios.</p>
+          <p>Emil leads the architecture and engineering behind our projects, from websites and apps to business systems, payments, and the tools that keep a team moving.</p>
+          <p>Bring the rough sketch. Ask the extra question. You’ll be speaking with someone who cares about the details as much as the idea.</p>
+          <div className={styles.socials} aria-label="Connect with Emil">
+            <a href={SOCIAL_LINKS.linkedin} aria-label="Emil on LinkedIn" target="_blank" rel="noopener noreferrer"><LinkedinIcon size={18} /></a>
+            <a href={SOCIAL_LINKS.github} aria-label="Emil on GitHub" target="_blank" rel="noopener noreferrer"><GithubIcon size={18} /></a>
+            <a href={SOCIAL_LINKS.instagram} aria-label="Emil on Instagram" target="_blank" rel="noopener noreferrer"><InstagramIcon size={18} /></a>
+            <a href={SOCIAL_LINKS.x} aria-label="Emil on X" target="_blank" rel="noopener noreferrer"><XIcon size={16} /></a>
           </div>
+          <Link href="/contact" className={styles.textLink}>Say hello <ArrowUpRight size={17} aria-hidden /></Link>
         </div>
       </section>
 
-      <section className={styles.metrics} aria-labelledby="about-metrics-heading">
-        <div className={styles.metricsInner}>
-          <div className={styles.metricsTop}>
-            <div>
-              <h2
-                id="about-metrics-heading"
-                className={styles.metricsHeadline}
-              >
-                Software Built for Real Operations
-              </h2>
-              <p className={styles.metricsLead}>
-                From customer-facing checkout flows to back-office inventory and reporting tools, we engineer systems
-                that eliminate manual bottlenecks and hold up under daily traffic.
-              </p>
-            </div>
-            <div
-              className={styles.trustCard}
-              role="group"
-              aria-label="What it is like to work with us"
-            >
-              <p className={styles.trustCardHeading}>What it&apos;s like to work with us</p>
-              <div className={styles.starsBlock}>
-                <div className={styles.stars} aria-hidden="true">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className={styles.star} size={18} fill="currentColor" strokeWidth={0} />
-                  ))}
-                </div>
-                <p className={styles.starsFootnote}>(5.0 client satisfaction across 30+ partnerships)</p>
-              </div>
-              <p className={styles.trustTitle}>Direct-to-engineer execution</p>
-              <p className={styles.trustCaption}>
-                Fixed Cedi milestones, weekly staging builds, and clean documentation—so you always know what is
-                shipping and when.
-              </p>
-            </div>
-          </div>
-          <div className={styles.statsRow}>
-            <div>
-              <div className={styles.statValue}>20+</div>
-              <p className={styles.statLabel}>Production systems &amp; releases shipped</p>
-            </div>
-            <div>
-              <div className={styles.statValue}>100%</div>
-              <p className={styles.statLabel}>Scoped with milestones before code</p>
-            </div>
-            <div>
-              <div className={styles.statValue}>30+</div>
-              <p className={styles.statLabel}>Brands &amp; businesses partnered with</p>
-            </div>
-            <div>
-              <div className={styles.statValue}>&lt; 24h</div>
-              <p className={styles.statLabel}>Direct response window</p>
-            </div>
-          </div>
-        </div>
+      <section className={styles.process} aria-labelledby="process-heading">
+        <header><div><span className="studio-eyebrow">A little structure behind the magic</span><h2 id="process-heading">Here’s how we get there.</h2></div><p>Clear steps. Open conversations.<br />Something to look forward to at every stage.</p></header>
+        <div className={styles.steps}>{STEPS.map((step, index) => <article key={step.title} className={styles.step}>
+          <span className={styles.stepNumber}>0{index + 1}<ArrowUpRight size={17} aria-hidden /></span>
+          <h3>{step.title}</h3><p>{step.copy}</p>
+        </article>)}</div>
       </section>
 
-      <section className={styles.team} aria-labelledby="about-team-heading">
-        <div className={styles.teamInner}>
-          <div className={styles.teamIntro}>
-            <h2
-              id="about-team-heading"
-              className={styles.teamHeading}
-              aria-label="Meet the Genie dev studios team"
-            >
-              <span className={styles.teamHeadingRow} aria-hidden="true">
-                <span>Meet the </span>
-                <span className={styles.teamHeadingBrand}>
-                  <GenieMark width={40} className={styles.teamHeadingMark} />
-                  <span className={styles.teamHeadingSuffix}>| dev studios</span>
-                </span>
-                <span> team</span>
-              </span>
-            </h2>
-            <p className={styles.teamLede}>
-              Senior product builders focused on clean architecture, sharp interfaces, and reliable delivery.
-            </p>
-          </div>
-
-          <div className={styles.teamPanel}>
-            <div className={styles.teamLayout}>
-              <div className={styles.teamCopy}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={member.id}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    <h3 className={styles.teamName}>{member.name}</h3>
-                    <p className={styles.teamRole}>{member.role}</p>
-                    <p className={styles.teamBio}>{member.bio}</p>
-                  </motion.div>
-                </AnimatePresence>
-
-                <div className={styles.socialRow}>
-                  {member.links.map((l) => (
-                    <a
-                      key={l.href + l.label}
-                      href={l.href}
-                      className={styles.socialBtn}
-                      aria-label={l.label}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <SocialIcon type={l.icon} />
-                    </a>
-                  ))}
-                </div>
-
-                <div
-                  className={styles.avatarRow}
-                  role={TEAM.length > 1 ? 'tablist' : undefined}
-                  aria-label={TEAM.length > 1 ? 'Team members' : undefined}
-                >
-                  {TEAM.map((m, i) => (
-                    <button
-                      key={m.id}
-                      type="button"
-                      role={TEAM.length > 1 ? 'tab' : undefined}
-                      aria-selected={TEAM.length > 1 ? i === memberIdx : undefined}
-                      className={`${styles.avatarBtn} ${i === memberIdx ? styles.avatarBtnActive : ''}`}
-                      onClick={() => TEAM.length > 1 && setMemberIdx(i)}
-                      aria-label={TEAM.length > 1 ? `Show ${m.name}` : `${m.name} profile`}
-                    >
-                      <img className={styles.avatarImg} src={m.thumbSrc} alt="" width={96} height={96} />
-                    </button>
-                  ))}
-                </div>
-
-                <p className={styles.teamCta}>
-                  <Link href="/contact" className={styles.teamCtaLink}>
-                    Start a project →
-                  </Link>
-                </p>
-              </div>
-
-              <div className={styles.teamVisual}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={member.id + '-img'}
-                    className={styles.teamVisualMotion}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img
-                      className={styles.teamPortraitImg}
-                      src={member.portraitSrc}
-                      alt=""
-                      decoding="async"
-                      fetchPriority={memberIdx === 0 ? 'high' : 'auto'}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-                <div className={styles.teamVisualFade} aria-hidden />
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className={styles.invite} aria-labelledby="about-invite-heading">
+        <MessageCircle size={32} strokeWidth={1.4} aria-hidden />
+        <span className="studio-eyebrow">Enough about us</span>
+        <h2 id="about-invite-heading">What are you dreaming up?</h2>
+        <p>We’d love to hear it. Let’s make your next great build happen.</p>
+        <Link href="/quote">Let’s build something <ArrowUpRight size={18} aria-hidden /></Link>
       </section>
-
-      <section className={styles.philosophy} aria-labelledby="about-philosophy-heading">
-        <div className={styles.philosophyInner}>
-          <h2
-            id="about-philosophy-heading"
-            className={styles.philosophySectionTitle}
-          >
-            Principles
-          </h2>
-          <div className={styles.philosophyCard}>
-            <div className={styles.philosophyGrid}>
-              <div className={styles.philItem}>
-                <div className={styles.philIcon}>
-                  <Target size={24} strokeWidth={2.25} aria-hidden />
-                </div>
-                <div>
-                  <h3>Bottleneck-first</h3>
-                  <p>
-                    We target the specific friction that kills conversion or slows operations—not trendy
-                    features that don&apos;t move your KPIs.
-                  </p>
-                </div>
-              </div>
-              <div className={styles.philItem}>
-                <div className={styles.philIcon}>
-                  <ShieldCheck size={24} strokeWidth={2.25} aria-hidden />
-                </div>
-                <div>
-                  <h3>Secure by default</h3>
-                  <p>
-                    Compliance, encryption, and least-privilege access are baked in from day one. Growth
-                    never introduces vulnerabilities we haven&apos;t already tested.
-                  </p>
-                </div>
-              </div>
-              <div className={styles.philItem}>
-                <div className={styles.philIcon}>
-                  <Activity size={24} strokeWidth={2.25} aria-hidden />
-                </div>
-                <div>
-                  <h3>Reliability as a habit</h3>
-                  <p>
-                    Every sprint includes load testing, automated rollbacks, and real-time monitoring. Your
-                    business won&apos;t be our learning experience.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      </div>
     </div>
   );
-};
+}

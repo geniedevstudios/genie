@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  padding: calc(var(--nav-height) + 4rem) 0 6rem;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 6rem;
 }
 
 .container {
@@ -103,6 +103,11 @@
 
 @media (max-width: 640px) {
   .page {
-    padding-top: calc(var(--nav-height) + 2rem);
+    padding-top: 2rem;
   }
 }
+
+.glassCard { background: #202024; backdrop-filter: none; -webkit-backdrop-filter: none; border: 0; border-radius: 28px; box-shadow: none; }
+.title { background: none; -webkit-text-fill-color: currentColor; color: var(--fg-primary); font-weight: 800; letter-spacing: -.05em; }
+.content { color: var(--fg-secondary); }
+.inlineLogo { display: inline; font-weight: 600; color: var(--fg-primary); filter: none; }

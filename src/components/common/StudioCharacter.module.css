@@ -1,0 +1,4 @@
+.character { width: 260px; max-width: 100%; margin: 1.5rem auto; pointer-events: none; }
+.character img { display: block; width: 100%; height: auto; }
+.start { margin-left: 0; }
+@media (max-width: 640px) { .character { width: 190px; } }

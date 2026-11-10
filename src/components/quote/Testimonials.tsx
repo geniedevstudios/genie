@@ -1,25 +1,25 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 import styles from './quote.module.css';
 
 const TESTIMONIALS = [
   {
     id: 1,
     name: 'JOEY The Brand · Storefront',
-    text: 'Genie Dev Studios took our e-commerce storefront from concept to launch ahead of schedule. Checkout is fast, mobile conversion jumped, and the site feels effortless.',
+    text: 'Genie Dev Studios built our storefront and checkout, and stayed with the work through launch.',
     avatar: '/joey logo.png',
   },
   {
     id: 2,
     name: 'JOEY The Brand · Admin & Ops',
-    text: 'The custom admin dashboard they built replaced our manual spreadsheets completely. Managing inventory, orders, and drops now takes minutes instead of hours.',
+    text: 'The admin they built is what we use for inventory, orders, and drops, instead of tracking that work in spreadsheets.',
     avatar: '/joey logo.png',
   },
   {
     id: 3,
     name: 'JOEY The Brand · Product UI/UX',
-    text: 'Every screen—from product discovery to back-office fulfillment—was prototyped clearly and engineered with zero friction. Communication was direct from day one.',
+    text: 'They designed the shop screens and the back-office screens as one product, and we could talk to the people building it.',
     avatar: '/joey logo.png',
   },
 ];
@@ -33,17 +33,12 @@ const StarIcon = () => (
 export function Testimonials() {
   return (
     <div className={styles.testimonialsContainer}>
-      <motion.div
-        className={styles.testimonialsGrid}
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      >
-        {/* Double the array for seamless marquee */}
-        {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
+      <div className={styles.testimonialsGrid}>
+        {TESTIMONIALS.map((t, idx) => (
           <div key={`${t.id}-${idx}`} className={styles.testimonialCard}>
             <p className={styles.testimonialText}>{t.text}</p>
             <div className={styles.testimonialAuthor}>
-              <img src={t.avatar} alt={t.name} className={styles.authorAvatar} />
+              <Image src={t.avatar} alt="" width={36} height={36} className={styles.authorAvatar} />
               <div className={styles.authorInfo}>
                 <span className={styles.authorName}>{t.name}</span>
                 <div className={styles.stars}>
@@ -53,7 +48,7 @@ export function Testimonials() {
             </div>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -6,14 +6,14 @@ import { QuoteContent } from '@/components/quote/QuoteContent';
 export const metadata: Metadata = {
   title: 'Get a Quote | Genie Dev Studios',
   description:
-    'Scope your web app, mobile app, UI/UX design, or security audit and get an instant ballpark estimate in Ghana Cedis from Genie Dev Studios.',
+    'Describe the software you need, or the problem if you are not sure yet. Genie Dev Studios replies with an approach and a price.',
   alternates: {
     canonical: '/quote',
   },
   openGraph: {
     title: 'Get a Quote | Genie Dev Studios',
     description:
-      'Scope your web app, mobile app, UI/UX design, or security audit and get an instant ballpark estimate in Ghana Cedis.',
+      'Describe the software you need, or the problem if you are not sure yet. We reply with an approach and a price.',
   },
 };
 

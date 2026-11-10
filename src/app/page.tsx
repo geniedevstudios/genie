@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navbar } from '@/components/common/Navbar';
 import { Hero } from '@/components/sections/Hero';
 import { Projects } from '@/components/sections/Projects';
 import { WhyChooseUs } from '@/components/sections/WhyChooseUs';
@@ -10,12 +9,11 @@ import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main className={`${styles.homeMain} home-main-surface`} data-theme="light">
-      <Navbar />
+    <main className={styles.homeMain} data-theme="dark">
       <Hero />
       <Projects />
-      <WhyChooseUs />
       <FeaturedProjects />
+      <WhyChooseUs />
       <HomeContactSection />
       <Footer />
     </main>

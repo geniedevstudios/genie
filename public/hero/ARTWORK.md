@@ -1,0 +1,8 @@
+# Hero service characters
+
+Created with the built-in image generation tool for the Genie Dev homepage.
+`service-characters.png` is a transparent 3-column by 2-row sprite atlas, used directly through CSS background positions. Reading order: Implement, Design, Code, Manage, SEO, Security.
+
+## Generation prompt
+
+Use case: stylized-concept. Asset type: one transparent sprite atlas for a software studio website, six original collectible 3D mascot characters. Canvas landscape 3:2, precisely 3 equal columns and 2 equal rows. Each cell contains ONE entire isolated character, centered, with generous transparent padding, no overlap across cells. Top left: violet small round astronaut with a little rocket backpack (launch). Top middle: coral-pink playful artist creature holding a large yellow pencil (design). Top right: friendly cyan rounded robot, dark glossy face with two bright eyes, small antenna, holding a tiny open laptop (code). Bottom left: mint-green round creature wearing headphones carrying small stacked server blocks (manage). Bottom middle: golden-yellow curious little creature with big glasses holding a magnifying glass (SEO). Bottom right: periwinkle-blue friendly armored knight creature holding a shield (security). All six in same premium playful 3D vinyl-toy art style, beautiful soft studio lighting, tactile clay/plastic surfaces, expressive large eyes, confident energetic poses, slight three-quarter views. Big heads and small bodies. Characters occupy 85% of each cell height. True transparent background, no scenery, no floor, no cards, NO text, NO labels, NO watermark. Strict equal 3x2 grid for CSS sprite use.

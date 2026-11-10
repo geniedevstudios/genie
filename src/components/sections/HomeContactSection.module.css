@@ -4,7 +4,7 @@
   overflow: hidden;
   background-color: transparent;
   background-image: none;
-  border-top: 1px solid hsla(0, 0%, 100%, 0.06);
+
 }
 
 .section::before {
@@ -29,13 +29,13 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  color: #1a202c;
+  color: var(--home-text, #1a202c);
   margin: 0 0 clamp(2rem, 4vw, 2.75rem);
   max-width: 22ch;
 }
 
 .titleAccent {
-  background: linear-gradient(135deg, hsl(210, 100%, 62%), hsl(226, 90%, 70%));
+  background: linear-gradient(135deg, #cbb0ee, #f1dcf1);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -67,7 +67,7 @@
   font-family: var(--font-jakarta), system-ui, sans-serif;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #4a5568;
+  color: var(--home-muted, #4a5568);
 }
 
 .field > input,
@@ -76,9 +76,9 @@
   box-sizing: border-box;
   padding: 0.75rem 0.9rem;
   border-radius: 0.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.7);
-  color: #1a202c;
+  border: 1px solid var(--home-line);
+  background: var(--home-panel);
+  color: var(--home-text, #1a202c);
   font-size: 1rem;
   transition:
     border-color 0.2s ease,
@@ -104,8 +104,8 @@
 .field > input:focus,
 .field > textarea:focus {
   outline: none;
-  border-color: hsla(210, 100%, 55%, 0.55);
-  box-shadow: 0 0 0 3px hsla(210, 100%, 50%, 0.15);
+  border-color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 18%, transparent);
 }
 
 .privacyBlock {
@@ -120,7 +120,7 @@
   font-family: var(--font-body);
   font-size: 0.8125rem;
   line-height: 1.45;
-  color: #4a5568;
+  color: var(--home-muted, #4a5568);
 }
 
 .privacyWrap input {
@@ -128,17 +128,17 @@
   width: 1rem;
   height: 1rem;
   flex-shrink: 0;
-  accent-color: hsl(210, 100%, 50%);
+  accent-color: var(--home-accent, var(--brand-primary));
 }
 
 .privacyLink {
-  color: #1a202c;
+  color: var(--home-text, #1a202c);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .privacyLink:hover {
-  color: #4a5568;
+  color: var(--home-muted, #4a5568);
 }
 
 .formActions {
@@ -157,9 +157,9 @@
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
-  color: #fff;
-  background: hsl(210, 100%, 48%);
-  box-shadow: 0 8px 28px hsla(210, 100%, 40%, 0.35);
+  color: var(--brand-on-primary);
+  background: var(--brand-primary);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--brand-primary) 35%, transparent);
   transition:
     transform 0.15s ease,
     background 0.2s ease,
@@ -167,7 +167,7 @@
 }
 
 .btnSend:hover:not(:disabled) {
-  background: hsl(210, 100%, 54%);
+  background: color-mix(in srgb, var(--brand-primary) 78%, var(--palette-violet));
   transform: translateY(-1px);
 }
 
@@ -180,13 +180,13 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
-  color: hsl(210, 100%, 62%);
+  color: var(--home-accent, var(--brand-primary));
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .fullPageLink:hover {
-  color: hsl(210, 100%, 72%);
+  color: var(--home-text, var(--brand-primary));
 }
 
 .statusPanel {
@@ -208,20 +208,20 @@
   font-family: var(--font-jakarta), sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #1a202c;
+  color: var(--home-text, #1a202c);
   margin: 1rem 0 0.5rem;
 }
 
 .statusCopy {
-  color: #4a5568;
+  color: var(--home-muted, #4a5568);
   margin: 0 0 1.25rem;
   line-height: 1.55;
 }
 
 .btnGhost {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: #1a202c;
+  background: var(--home-panel);
+  border: 1px solid var(--home-line);
+  color: var(--home-text, #1a202c);
   padding: 0.6rem 1.25rem;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -229,7 +229,7 @@
 }
 
 .btnGhost:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: #2c2b33;
 }
 
 .errorHint {

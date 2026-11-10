@@ -8,6 +8,7 @@ import { CheckCircle, RefreshCcw } from 'lucide-react';
 import { LinkedinIcon, InstagramIcon, XIcon, GithubIcon } from '@/components/common/BrandIcons';
 import { SOCIAL_LINKS } from '@/lib/socialLinks';
 import { PhoneCountrySelect } from '@/components/common/PhoneCountrySelect';
+import { StudioCharacter } from '@/components/common/StudioCharacter';
 import {
   DEFAULT_PHONE_COUNTRY_ID,
   findCountryById,
@@ -122,14 +123,13 @@ export const ContactPageForm: React.FC = () => {
         <aside className={styles.aside}>
           <div className={styles.mapBg} aria-hidden />
           <h1 id="contact-hero-heading" className={styles.heroTitle}>
-            Start a project
+            Let’s make something great.
           </h1>
           <p className={styles.headline}>
-            Tell us what you’re building. You’ll hear back from an engineer within 24 hours.
+            Every great build starts with a conversation.
           </p>
           <p className={styles.lede}>
-            Whether you have a full specification or a rough product idea, share your goals below and we’ll follow up
-            with concrete next steps, timeline options, and a clear scope.
+            Bring us an idea, a challenge, or a rough sketch. We’ll help you find the next step, with a clear plan and a price agreed before we begin.
           </p>
 
           <div className={styles.contactGrid}>
@@ -187,6 +187,7 @@ export const ContactPageForm: React.FC = () => {
               <GithubIcon size={18} />
             </a>
           </div>
+          <StudioCharacter character="care" align="start" />
         </aside>
 
         <div className={styles.formCard}>
@@ -229,7 +230,7 @@ export const ContactPageForm: React.FC = () => {
                 transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
               >
                 <h2 className={styles.formTitle} id="contact-form-heading">
-                  Send a brief
+                  What do you have in mind?
                 </h2>
                 <p className={styles.formSubtitle}>Share a few details and we’ll reply within one business day.</p>
 
@@ -310,7 +311,7 @@ export const ContactPageForm: React.FC = () => {
                       }}
                       inputId="cp-phone"
                       errorMessage={errors.phone}
-                      theme="light-box"
+                      theme="dark"
                     />
                   </div>
 
