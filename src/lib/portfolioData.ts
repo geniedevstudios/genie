@@ -28,10 +28,9 @@ export function getPortfolioThumbSources(item: PortfolioItem): string[] {
 
 /** Shared previews for JOEY The Brand (web + UI/UX listings) */
 const JOEY_THE_BRAND_THUMB_SRCS = [
-  '/joey-portfolio.png',
-  '/joey-app.png',
-  '/appsnap.png',
-  '/admin.png',
+  '/joey-storefront.webp',
+  '/joey-admin.png',
+  '/joey-portfolio-site.png',
 ] as const;
 
 export const PORTFOLIO_CATEGORY_IDS: PortfolioCategoryId[] = [

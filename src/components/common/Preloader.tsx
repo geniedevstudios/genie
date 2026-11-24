@@ -89,8 +89,11 @@ export const Preloader: React.FC = () => {
         <motion.div
           className={styles.preloaderOverlay}
           initial={{ opacity: 1 }}
-          exit={{ 
-            opacity: 0, 
+          exit={{
+            // Stop catching touches the moment the fade starts, so a slow or
+            // stalled exit animation can never block scrolling underneath.
+            pointerEvents: 'none',
+            opacity: 0,
             y: -30, 
             transition: { duration: 0.8, ease: [0.19, 1, 0.22, 1] } 
           }}

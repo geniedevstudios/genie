@@ -178,10 +178,19 @@
   .heroCtas { gap: 17px; margin-top: 23px; flex-wrap: wrap; }
   .primaryCta, .secondaryCta { font-size: 11px; gap: 7px; }
   .primaryCta { padding: 0 15px; }
-  .deck { position: relative; left: auto; bottom: auto; transform: none; width: 100%; height: 332px; margin-top: 35px; padding: 22px 27px 8px; display: flex; gap: 15px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; scroll-padding-inline: 27px; }
+  .deck {
+    position: relative; left: auto; bottom: auto; transform: none; width: 100%; height: 332px; margin-top: 35px; padding: 22px 27px 8px;
+    display: flex; gap: 15px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; scroll-padding-inline: 27px;
+    /* Desktop disables hits on the deck box; the mobile carousel must receive swipes everywhere, including gaps. */
+    pointer-events: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
+  }
+  .deck::after { content: ''; flex: 0 0 12px; }
   .serviceCard:nth-child(n) { position: relative; left: auto; bottom: auto; width: 225px; height: 300px; max-width: none; flex: 0 0 225px; transform: rotate(-3deg); border-radius: 23px; scroll-snap-align: center; }
   .serviceCard:nth-child(even) { transform: rotate(3deg); }
-  .cardSurface { border-radius: 23px; }
+  .cardSurface { border-radius: 23px; will-change: auto; }
   .serviceCard.cardActive .cardSurface, .serviceCard:has(:focus-visible) .cardSurface { transform: translate3d(0, -8px, 0); }
   .cardHeading { font-size: 25px; top: 22px; }
   .cardSubtitle { top: 60px; }
